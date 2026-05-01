@@ -2408,7 +2408,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
 .rpl-row { display:flex; gap:14px; padding:14px 16px; background:var(--bg-1); border:1px solid var(--line-1); border-radius:10px; transition:border-color 0.15s; }
 .rpl-row:hover { border-color:var(--line-2); }
 .rpl-row .rpl-av { flex-shrink:0; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color:#0b0b0e; }
-.rpl-row .rpl-cell { flex:1; min-width:0; }
+.rpl-row .rpl-rowbody { flex:1; min-width:0; }
+.rpl-row .rpl-rowright { flex-shrink:0; display:flex; align-items:center; }
+.rpl-row .rpl-rowright .rpl-btn { padding:8px 18px; font-size:12px; font-weight:600; }
+
+.rpl-row .rpl-row-meta { display:flex; gap:14px; margin-top:8px; padding-top:8px; border-top:1px dashed var(--line-1); font-size:11px; color:var(--t-3); align-items:center; }
+.rpl-row .rpl-row-meta a { color:var(--t-2); cursor:pointer; transition:color 0.12s; font-weight:500; }
+.rpl-row .rpl-row-meta a:hover { color:var(--t-1); }
+.rpl-row .rpl-row-meta .rpl-sep { color:var(--t-4); }
 .rpl-row .rpl-title { font-size:14px; font-weight:500; color:var(--t-1); margin-bottom:5px; }
 .rpl-row .rpl-why { font-size:12px; color:var(--t-2); margin-bottom:7px; line-height:1.5; }
 .rpl-row .rpl-channel { font-size:12px; color:var(--t-3); margin-bottom:11px; }
@@ -2424,21 +2431,80 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
 
 .rpl-conf { display:inline-block; margin-left:8px; padding:1px 6px; background:var(--ai-bg); color:var(--ai); font-size:10px; border-radius:3px; font-weight:500; }
 
-.rpl-grid-wrap { margin-top:22px; padding-top:22px; border-top:1px solid var(--line-1); }
-.rpl-grid-title { font-size:12px; font-weight:500; color:var(--t-2); margin:0 0 12px; text-transform:uppercase; letter-spacing:0.04em; }
-.rpl-grid-table { width:100%; border-collapse:collapse; font-size:11px; font-family:var(--mono); }
-.rpl-grid-table th, .rpl-grid-table td { padding:7px 6px; text-align:center; border:1px solid var(--line-1); }
-.rpl-grid-table th { background:var(--bg-2); font-weight:500; color:var(--t-3); text-transform:uppercase; letter-spacing:0.03em; font-size:10px; font-family:var(--sans); }
-.rpl-grid-table td.cell-cat { text-align:left; color:var(--t-1); font-weight:500; background:var(--bg-1); font-family:var(--sans); padding-left:10px; padding-right:10px; min-width:170px; }
-.rpl-grid-table td.cell-green { background:rgba(52,211,153,0.10); color:var(--ok); }
-.rpl-grid-table td.cell-amber { background:rgba(251,191,36,0.12); color:var(--warn); }
-.rpl-grid-table td.cell-red { background:rgba(248,113,113,0.16); color:var(--bad); cursor:pointer; font-weight:600; }
-.rpl-grid-table td.cell-red:hover { background:rgba(248,113,113,0.28); }
-.rpl-grid-table td.cell-stockout { background:#0b0b0e; color:#fff; font-weight:600; }
-.rpl-grid-table td.cell-purple { background:rgba(167,139,250,0.14); color:var(--ai); cursor:pointer; }
-.rpl-grid-table td.cell-purple:hover { background:rgba(167,139,250,0.26); }
-.rpl-grid-foot { margin-top:10px; font-size:11px; color:var(--t-3); padding:8px 12px; background:var(--bg-2); border:1px solid var(--line-1); border-radius:6px; display:flex; gap:18px; }
-.rpl-grid-foot strong { color:var(--t-1); font-weight:500; }
+/* Hero heatmap section */
+.rpl-hero-grid { background:var(--bg-1); border:1px solid var(--line-1); border-radius:10px; padding:18px 18px 14px; margin-top:8px; }
+.rpl-hero-head { margin-bottom:14px; }
+.rpl-hero-title { font-size:13px; font-weight:600; color:var(--t-1); margin-bottom:14px; letter-spacing:-0.005em; }
+.rpl-hero-sub { font-size:11px; font-weight:400; color:var(--t-3); margin-left:10px; letter-spacing:0; }
+.rpl-hero-toolbar { display:flex; flex-wrap:wrap; gap:18px; align-items:center; padding:8px 10px; background:var(--bg-2); border:1px solid var(--line-1); border-radius:8px; }
+.rpl-toolbar-grp { display:flex; align-items:center; gap:8px; }
+.rpl-toolbar-lbl { font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--t-3); font-weight:500; }
+.rpl-seg { display:flex; gap:0; background:var(--bg-3); border:1px solid var(--line-1); border-radius:6px; padding:2px; }
+.rpl-seg-btn { padding:5px 10px; font-size:11px; font-weight:500; border:none; background:transparent; color:var(--t-2); cursor:pointer; border-radius:4px; transition:all 0.12s; white-space:nowrap; }
+.rpl-seg-btn:hover { color:var(--t-1); }
+.rpl-seg-btn.on { background:var(--ai); color:#fff; }
+[data-theme="light"] .rpl-seg-btn.on { color:#fff; }
+
+/* Rich heatmap cells */
+.rpl-grid-table { width:100%; border-collapse:separate; border-spacing:2px; font-size:11px; font-family:var(--mono); margin-top:14px; }
+.rpl-grid-table th, .rpl-grid-table td { padding:0; text-align:center; border:none; }
+.rpl-grid-table th { background:var(--bg-2); font-weight:500; color:var(--t-3); text-transform:uppercase; letter-spacing:0.03em; font-size:10px; font-family:var(--sans); padding:8px 6px; border-radius:4px; }
+.rpl-grid-table td.cell-cat { text-align:left; color:var(--t-1); font-weight:500; background:var(--bg-1); font-family:var(--sans); padding:8px 12px; min-width:200px; font-size:12px; }
+.rpl-grid-table td.cell-cat .cat-meta { font-size:10px; color:var(--t-3); margin-top:1px; font-weight:400; }
+.rpl-grid-table td.cell-cat .cat-rowstats { font-size:10px; color:var(--t-3); margin-top:3px; font-family:var(--mono); }
+.rpl-grid-table td.cell-cat .cat-rowstats .cat-stat-red { color:var(--bad); }
+.rpl-grid-table td.cell-cat .cat-rowstats .cat-stat-purple { color:var(--ai); }
+
+.rpl-cell { padding:7px 4px; border-radius:4px; cursor:pointer; transition:transform 0.12s, box-shadow 0.12s; min-height:46px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; line-height:1.1; }
+.rpl-cell:hover { transform:scale(1.04); box-shadow:0 4px 10px -3px rgba(0,0,0,0.3); z-index:2; }
+.rpl-cell .cell-num { font-size:13px; font-weight:600; font-family:var(--mono); }
+.rpl-cell .cell-row2 { display:flex; gap:4px; align-items:center; font-size:10px; }
+.rpl-cell .cell-trend { font-size:11px; font-weight:600; }
+.rpl-cell .cell-trend.t-up { color:var(--ok); }
+.rpl-cell .cell-trend.t-dn { color:var(--bad); }
+.rpl-cell .cell-trend.t-flat { color:var(--t-3); }
+.rpl-cell .cell-vdots { letter-spacing:1px; font-size:9px; opacity:0.7; }
+.rpl-cell.b-green { background:rgba(52,211,153,0.10); color:var(--ok); }
+.rpl-cell.b-amber { background:rgba(251,191,36,0.14); color:var(--warn); }
+.rpl-cell.b-red { background:rgba(248,113,113,0.18); color:var(--bad); }
+.rpl-cell.b-red:hover { background:rgba(248,113,113,0.30); }
+.rpl-cell.b-stockout { background:#0b0b0e; color:#fff; }
+.rpl-cell.b-purple { background:rgba(167,139,250,0.16); color:var(--ai); }
+.rpl-cell.b-purple:hover { background:rgba(167,139,250,0.30); }
+.rpl-cell.dimmed { opacity:0.32; pointer-events:none; }
+
+.rpl-grid-foot { margin-top:14px; font-size:11px; color:var(--t-3); padding:10px 14px; background:var(--bg-2); border:1px solid var(--line-1); border-radius:6px; display:flex; gap:22px; flex-wrap:wrap; }
+.rpl-grid-foot strong { color:var(--t-1); font-weight:600; font-family:var(--mono); }
+.rpl-grid-foot .foot-bad { color:var(--bad); }
+.rpl-grid-foot .foot-purple { color:var(--ai); }
+
+/* Cell drill-in popover */
+.rpl-pop { position:fixed; z-index:200; min-width:280px; max-width:320px; background:var(--bg-1); border:1px solid var(--line-2); border-radius:10px; box-shadow:0 14px 40px -8px rgba(0,0,0,0.55); padding:14px; display:none; }
+.rpl-pop.on { display:block; }
+.rpl-pop-head { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; gap:10px; }
+.rpl-pop-title { font-size:13px; font-weight:600; color:var(--t-1); line-height:1.3; }
+.rpl-pop-sub { font-size:11px; color:var(--t-3); margin-top:2px; }
+.rpl-pop-close { background:none; border:none; color:var(--t-3); font-size:16px; cursor:pointer; line-height:1; padding:0 2px; }
+.rpl-pop-close:hover { color:var(--t-1); }
+.rpl-pop-bigrow { display:flex; gap:14px; align-items:center; padding:10px 0; border-top:1px solid var(--line-1); border-bottom:1px solid var(--line-1); margin-bottom:10px; }
+.rpl-pop-big { font-size:24px; font-weight:600; color:var(--t-1); font-family:var(--mono); }
+.rpl-pop-bigsub { font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--t-3); margin-top:2px; }
+.rpl-pop-spark { flex:1; min-width:0; }
+.rpl-pop-spark svg { width:100%; height:36px; display:block; }
+.rpl-pop-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 12px; padding:6px 0 12px; }
+.rpl-pop-kv { display:flex; flex-direction:column; gap:2px; }
+.rpl-pop-kv .k { font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--t-3); }
+.rpl-pop-kv .v { font-size:12px; color:var(--t-1); font-weight:500; font-family:var(--mono); }
+.rpl-pop-tara { display:flex; gap:10px; padding:10px; background:var(--ai-bg); border:1px solid var(--ai-line); border-radius:7px; margin-bottom:10px; }
+.rpl-pop-tara-av { flex-shrink:0; width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg, #a78bfa, #c4b1ff); color:#0b0b0e; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; }
+.rpl-pop-tara-text { font-size:11px; color:var(--t-1); line-height:1.45; }
+.rpl-pop-tara-text strong { color:var(--ai); font-weight:600; }
+.rpl-pop-actions { display:flex; gap:6px; }
+.rpl-pop-actions .rpl-btn { flex:1; }
+
+/* Queue downstream section */
+.rpl-queue-section { margin-top:24px; }
+.rpl-queue-h { font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--t-3); font-weight:500; margin-bottom:12px; padding:0 4px; }
 
 .rpl-xref { display:flex; gap:10px; padding:14px 16px; margin-top:22px; background:var(--bg-1); border:1px solid var(--line-1); border-radius:8px; font-size:12px; color:var(--t-2); }
 .rpl-xref-link { display:flex; align-items:center; gap:8px; cursor:pointer; flex:1; padding:6px 8px; border-radius:5px; transition:background 0.12s; }
@@ -2879,8 +2945,49 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
 
         <!-- Tab body containers -->
         <div class="rpl-pane" data-rpl-pane="cluster">
-          <div class="rpl-queue" id="rpl-queue-cluster"></div>
-          <div class="rpl-grid-wrap" id="rpl-velocity-grid"></div>
+          <!-- HERO: velocity heatmap with metric toggle + filters + popover -->
+          <div class="rpl-hero-grid">
+            <div class="rpl-hero-head">
+              <div class="rpl-hero-title">Days-of-cover · category × store<span class="rpl-hero-sub" id="rpl-grid-sub">where action is needed · click any cell to drill in</span></div>
+              <div class="rpl-hero-toolbar">
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">Metric</span>
+                  <div class="rpl-seg" id="rpl-metric-seg">
+                    <button class="rpl-seg-btn on" data-metric="doc">Days-of-cover</button>
+                    <button class="rpl-seg-btn" data-metric="value">Stock value</button>
+                    <button class="rpl-seg-btn" data-metric="st">Sell-through</button>
+                    <button class="rpl-seg-btn" data-metric="onorder">On-order cover</button>
+                    <button class="rpl-seg-btn" data-metric="velocity">Velocity 30d</button>
+                  </div>
+                </div>
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">Tier</span>
+                  <div class="rpl-seg" id="rpl-tier-seg">
+                    <button class="rpl-seg-btn on" data-tier="all">All</button>
+                    <button class="rpl-seg-btn" data-tier="t1">T1 · HQ + flagship</button>
+                    <button class="rpl-seg-btn" data-tier="t2">T2 · urban</button>
+                    <button class="rpl-seg-btn" data-tier="t3">T3 · district</button>
+                  </div>
+                </div>
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">Category</span>
+                  <div class="rpl-seg" id="rpl-catgrp-seg">
+                    <button class="rpl-seg-btn on" data-catgrp="all">All</button>
+                    <button class="rpl-seg-btn" data-catgrp="gold">Gold</button>
+                    <button class="rpl-seg-btn" data-catgrp="diamond">Diamond</button>
+                    <button class="rpl-seg-btn" data-catgrp="bridal">Bridal</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="rpl-velocity-grid"></div>
+          </div>
+
+          <!-- Cluster queue downstream of heatmap -->
+          <div class="rpl-queue-section">
+            <div class="rpl-queue-h">Tara's queue · derived from gaps above</div>
+            <div class="rpl-queue" id="rpl-queue-cluster"></div>
+          </div>
         </div>
         <div class="rpl-pane hidden" data-rpl-pane="sku">
           <div class="rpl-sku-wrap" id="rpl-queue-sku"></div>
@@ -4435,6 +4542,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
       </div>
       <div class="body" id="over-body"></div>
     </aside>
+
+    <!-- Velocity-cell drill-in popover -->
+    <div class="rpl-pop" id="rpl-pop"></div>
   </div>
 
   <div class="chat-shade" id="chat-shade">
@@ -5453,16 +5563,20 @@ function renderRplQueue() {
   host.innerHTML = replenishClusters.map(r => `
     <div class="rpl-row" data-rpl-id="${r.id}">
       <div class="rpl-av av-tara">T</div>
-      <div class="rpl-cell">
+      <div class="rpl-rowbody">
         <div class="rpl-title">${r.cluster}<span class="rpl-conf">Tara · ${r.taraConfidence}%</span></div>
         <div class="rpl-why">${r.why}</div>
         <div class="rpl-channel">→ <strong>${RPL_CHANNEL_LABEL[r.primary]}</strong> · ${r.channel}</div>
-        <div class="rpl-acts">
-          <button class="rpl-btn go" onclick="rplApprove('${r.id}')">Approve</button>
-          <button class="rpl-btn" onclick="rplModify('${r.id}')">Modify</button>
-          <button class="rpl-btn" onclick="rplDefer('${r.id}')">Defer</button>
-          <button class="rpl-btn ghost" onclick="rplExpand('${r.id}')">⤵ ${r.skuCount} SKUs</button>
+        <div class="rpl-row-meta">
+          <a onclick="rplModify('${r.id}')">Modify</a>
+          <span class="rpl-sep">·</span>
+          <a onclick="rplDefer('${r.id}')">Defer</a>
+          <span class="rpl-sep">·</span>
+          <a onclick="rplExpand('${r.id}')">⤵ ${r.skuCount} SKUs</a>
         </div>
+      </div>
+      <div class="rpl-rowright">
+        <button class="rpl-btn go" onclick="rplApprove('${r.id}')">Approve</button>
       </div>
     </div>
   `).join('');
@@ -5486,19 +5600,21 @@ document.addEventListener('click', e => {
   if (tab) switchRplTab(tab.dataset.rplTab);
 });
 
-/* ----- velocity grid ----- */
+/* ----- velocity grid (hero) ----- */
 const velocityCats = [
-  {id:'chains-light', name:'Daily-wear chains < 8g'},
-  {id:'chains-heavy', name:'Daily-wear chains ≥ 8g'},
-  {id:'bangles-22k',  name:'22k bangles'},
-  {id:'rings-dia',    name:'Diamond rings'},
-  {id:'pend-dia',     name:'Diamond pendants'},
-  {id:'bridal',       name:'Bridal sets'},
-  {id:'coins',        name:'Coins & bars'},
-  {id:'navratan',     name:'Heavy navratan'}
+  {id:'chains-light', name:'Daily-wear chains < 8g',  group:'gold',    weekVel:8.4, unitValue:18750,  baseSt:42, lastRecBase:'18 Apr'},
+  {id:'chains-heavy', name:'Daily-wear chains ≥ 8g',  group:'gold',    weekVel:4.1, unitValue:38400,  baseSt:28, lastRecBase:'21 Apr'},
+  {id:'bangles-22k',  name:'22k bangles',             group:'gold',    weekVel:3.2, unitValue:142000, baseSt:22, lastRecBase:'19 Apr'},
+  {id:'rings-dia',    name:'Diamond rings',           group:'diamond', weekVel:1.8, unitValue:92000,  baseSt:18, lastRecBase:'14 Apr'},
+  {id:'pend-dia',     name:'Diamond pendants',        group:'diamond', weekVel:2.4, unitValue:64000,  baseSt:24, lastRecBase:'17 Apr'},
+  {id:'bridal',       name:'Bridal sets',             group:'bridal',  weekVel:0.4, unitValue:842000, baseSt:8,  lastRecBase:'9 Apr'},
+  {id:'coins',        name:'Coins & bars',            group:'gold',    weekVel:12.6,unitValue:7800,   baseSt:96, lastRecBase:'24 Apr'},
+  {id:'navratan',     name:'Heavy navratan',          group:'bridal',  weekVel:0.3, unitValue:1240000,baseSt:4,  lastRecBase:'2 Mar'}
 ];
 const velocityStores = ['ratlam','indore','bhopal','ujjain','mhow','dewas','sehore','mandsaur','kota','udaipur'];
 const velocityStoresLabel = {ratlam:'Ratlam',indore:'Indore',bhopal:'Bhopal',ujjain:'Ujjain',mhow:'Mhow',dewas:'Dewas',sehore:'Sehore',mandsaur:'Mandsaur',kota:'Kota',udaipur:'Udaipur'};
+const velocityStoreTier = {ratlam:'t1', indore:'t1', bhopal:'t2', kota:'t2', udaipur:'t2', ujjain:'t3', mhow:'t3', dewas:'t3', sehore:'t3', mandsaur:'t3'};
+const velocityStoreWeight = {ratlam:1.4, indore:1.6, bhopal:1.3, kota:0.95, udaipur:1.05, ujjain:0.7, mhow:0.5, dewas:0.55, sehore:0.55, mandsaur:0.6};
 const velocityCells = {
   'chains-light': { ratlam:24, indore:9,  bhopal:6,  ujjain:18, mhow:32, dewas:21, sehore:14, mandsaur:28, kota:22, udaipur:19 },
   'chains-heavy': { ratlam:31, indore:22, bhopal:15, ujjain:27, mhow:34, dewas:29, sehore:25, mandsaur:33, kota:30, udaipur:28 },
@@ -5510,51 +5626,321 @@ const velocityCells = {
   'navratan':     { ratlam:64, indore:78, bhopal:82, ujjain:71, mhow:96, dewas:68, sehore:74, mandsaur:88, kota:62, udaipur:73 }
 };
 function velocityBand(d) {
-  if (d === 0) return 'cell-stockout';
-  if (d >= 60) return 'cell-purple';
-  if (d < 14)  return 'cell-red';
-  if (d < 28)  return 'cell-amber';
-  return 'cell-green';
+  if (d === 0) return 'b-stockout';
+  if (d >= 60) return 'b-purple';
+  if (d < 14)  return 'b-red';
+  if (d < 28)  return 'b-amber';
+  return 'b-green';
 }
+
+// Pseudo-random but stable trend per cell — biased toward signal
+function cellTrend(catId, store) {
+  const k = (catId.charCodeAt(0) * 17 + store.charCodeAt(0) * 13 + catId.length * 5 + store.length * 3) % 7;
+  const doc = velocityCells[catId][store];
+  if (doc < 14) return k < 5 ? 'dn' : 'flat';
+  if (doc >= 60) return k < 4 ? 'up' : 'flat';
+  if (k === 0) return 'dn';
+  if (k === 1 || k === 2) return 'up';
+  return 'flat';
+}
+
+// Derive all metrics for a single cell
+function cellMetrics(catId, store) {
+  const doc = velocityCells[catId][store];
+  const cat = velocityCats.find(c => c.id === catId);
+  const w = velocityStoreWeight[store];
+  const stockUnits = Math.max(0, Math.round((doc / 7) * cat.weekVel * w));
+  const stockValue = stockUnits * cat.unitValue;
+  const stMod = doc < 14 ? 1.45 : doc > 60 ? 0.35 : doc > 30 ? 0.85 : 1.05;
+  const sellThru = Math.max(2, Math.round(cat.baseSt * stMod * (0.85 + ((catId.length + store.length) % 4) * 0.08)));
+  const onOrderUnits = doc === 0 ? Math.round(cat.weekVel * w * 1.5) : doc < 14 ? Math.round(cat.weekVel * w * 1.1) : Math.round(cat.weekVel * w * 0.3);
+  const onOrderDays = onOrderUnits > 0 ? Math.round((onOrderUnits / Math.max(0.1, cat.weekVel * w)) * 7) : 0;
+  const velocity = +(cat.weekVel * w).toFixed(1);
+  const trend = cellTrend(catId, store);
+  return { doc, stockUnits, stockValue, sellThru, onOrderUnits, onOrderDays, velocity, trend, cat, store };
+}
+
+// ₹-tier dots — relative to each category row
+function valueTier(stockValue, catId) {
+  const all = velocityStores.map(s => cellMetrics(catId, s).stockValue);
+  const max = Math.max(...all);
+  const ratio = max === 0 ? 0 : stockValue / max;
+  if (ratio > 0.66) return '●●●';
+  if (ratio > 0.33) return '●●○';
+  if (ratio > 0.10) return '●○○';
+  return '○○○';
+}
+
+// 30-day velocity sparkline — pseudo-deterministic per cell
+function cellSparkline(catId, store) {
+  const cat = velocityCats.find(c => c.id === catId);
+  const w = velocityStoreWeight[store];
+  const base = cat.weekVel * w / 7; // daily
+  const trend = cellTrend(catId, store);
+  const out = [];
+  for (let i = 0; i < 30; i++) {
+    const seed = (catId.charCodeAt(0) + store.charCodeAt(0) * 3 + i * 7) % 11;
+    const noise = (seed - 5) * 0.06;
+    const drift = trend === 'up' ? (i / 30) * 0.4 : trend === 'dn' ? -(i / 30) * 0.4 : 0;
+    out.push(Math.max(0, base * (1 + drift + noise)));
+  }
+  return out;
+}
+
+function sparklinePath(values, w, h) {
+  if (!values.length) return '';
+  const max = Math.max(...values, 0.001);
+  const step = w / (values.length - 1);
+  return values.map((v, i) => {
+    const x = (i * step).toFixed(1);
+    const y = (h - (v / max) * h).toFixed(1);
+    return (i === 0 ? 'M' : 'L') + x + ',' + y;
+  }).join(' ');
+}
+
+// ----- state -----
+let rplGridState = { metric:'doc', tier:'all', catgrp:'all' };
+
+// Cell content per metric
+function cellContent(m, metric) {
+  if (metric === 'doc') {
+    const tArr = { up:'↑', dn:'↓', flat:'→' };
+    return `<div class="cell-num">${m.doc}<span style="font-size:9px; opacity:0.7; margin-left:1px;">d</span></div>
+            <div class="cell-row2"><span class="cell-trend t-${m.trend}">${tArr[m.trend]}</span><span class="cell-vdots">${valueTier(m.stockValue, m.cat.id)}</span></div>`;
+  }
+  if (metric === 'value') {
+    const v = m.stockValue;
+    const display = v >= 10000000 ? '₹' + (v/10000000).toFixed(1) + 'Cr' : v >= 100000 ? '₹' + (v/100000).toFixed(1) + 'L' : v > 0 ? '₹' + (v/1000).toFixed(0) + 'k' : '—';
+    return `<div class="cell-num" style="font-size:11px;">${display}</div><div class="cell-row2"><span class="cell-vdots">${m.stockUnits} pcs</span></div>`;
+  }
+  if (metric === 'st') {
+    return `<div class="cell-num">${m.sellThru}<span style="font-size:9px; opacity:0.7;">%</span></div><div class="cell-row2"><span class="cell-vdots">30d</span></div>`;
+  }
+  if (metric === 'onorder') {
+    return `<div class="cell-num">${m.onOrderDays}<span style="font-size:9px; opacity:0.7; margin-left:1px;">d</span></div><div class="cell-row2"><span class="cell-vdots">${m.onOrderUnits} on PO</span></div>`;
+  }
+  if (metric === 'velocity') {
+    return `<div class="cell-num">${m.velocity}</div><div class="cell-row2"><span class="cell-vdots">/wk</span></div>`;
+  }
+  return m.doc + 'd';
+}
+
+// Cell band — for non-DOC metrics, recompute band from the relevant value
+function cellBand(m, metric) {
+  if (metric === 'doc') return velocityBand(m.doc);
+  if (metric === 'st') {
+    if (m.sellThru < 10) return 'b-purple';
+    if (m.sellThru < 20) return 'b-amber';
+    if (m.sellThru >= 60) return 'b-red';
+    return 'b-green';
+  }
+  if (metric === 'onorder') {
+    if (m.onOrderDays === 0 && m.doc < 14) return 'b-red';
+    if (m.onOrderDays === 0) return 'b-amber';
+    if (m.onOrderDays > 14) return 'b-green';
+    return 'b-amber';
+  }
+  if (metric === 'value') {
+    const all = [];
+    velocityCats.forEach(c => velocityStores.forEach(s => all.push(cellMetrics(c.id, s).stockValue)));
+    const max = Math.max(...all);
+    const r = m.stockValue / max;
+    if (r > 0.5) return 'b-purple';
+    if (r > 0.2) return 'b-green';
+    if (r > 0.05) return 'b-amber';
+    return 'b-red';
+  }
+  if (metric === 'velocity') {
+    if (m.velocity > 8) return 'b-purple';
+    if (m.velocity > 3) return 'b-green';
+    if (m.velocity > 1) return 'b-amber';
+    return 'b-red';
+  }
+  return 'b-green';
+}
+
 function renderVelocityGrid() {
   const host = document.getElementById('rpl-velocity-grid');
   if (!host) return;
-  let html = '<div class="rpl-grid-title">Days-of-cover · category × store</div>';
-  html += '<table class="rpl-grid-table"><thead><tr><th class="cell-cat">Category</th>';
-  velocityStores.forEach(s => { html += `<th>${velocityStoresLabel[s]}</th>`; });
+  const { metric, tier, catgrp } = rplGridState;
+
+  // sub-line tweak
+  const subEl = document.getElementById('rpl-grid-sub');
+  if (subEl) {
+    const labels = { doc:'days-of-cover', value:'stock value', st:'30-day sell-through', onorder:'on-order coverage', velocity:'units / week' };
+    subEl.textContent = `· viewing ${labels[metric]} · click any cell to drill in`;
+  }
+
+  let html = '<table class="rpl-grid-table"><thead><tr><th class="cell-cat">Category</th>';
+  velocityStores.forEach(s => {
+    const dim = (tier !== 'all' && velocityStoreTier[s] !== tier);
+    html += `<th${dim ? ' style="opacity:0.32"' : ''}>${velocityStoresLabel[s]}</th>`;
+  });
   html += '</tr></thead><tbody>';
+
+  let totalRed=0, totalPurple=0, totalStockout=0, totalAtRisk=0, totalValue=0, totalPotentialValue=0;
+
   velocityCats.forEach(c => {
-    html += `<tr><td class="cell-cat">${c.name}</td>`;
+    const catDim = (catgrp !== 'all' && c.group !== catgrp);
+    let rowRed=0, rowPurple=0, rowAtRisk=0;
+    let rowCells = '';
     velocityStores.forEach(s => {
-      const v = velocityCells[c.id][s];
-      const band = velocityBand(v);
-      const click = (band === 'cell-red' || band === 'cell-purple' || band === 'cell-stockout') ? `onclick="velocityCellClick('${c.id}','${s}')"` : '';
-      html += `<td class="${band}" ${click} title="${c.name} · ${velocityStoresLabel[s]} · ${v}d">${v}</td>`;
+      const tierDim = (tier !== 'all' && velocityStoreTier[s] !== tier);
+      const dimmed = catDim || tierDim;
+      const m = cellMetrics(c.id, s);
+      const band = cellBand(m, metric);
+      if (!dimmed) {
+        if (band === 'b-red') { rowRed++; rowAtRisk += m.stockValue * 0.6 + 200000; }
+        if (band === 'b-stockout') { rowAtRisk += c.weekVel * c.unitValue * 1.4; totalStockout++; }
+        if (band === 'b-purple') rowPurple++;
+        totalValue += m.stockValue;
+      }
+      rowCells += `<td><div class="rpl-cell ${band}${dimmed ? ' dimmed' : ''}" data-cat="${c.id}" data-store="${s}" onclick="velocityCellClick('${c.id}','${s}',event)">${cellContent(m, metric)}</div></td>`;
     });
-    html += '</tr>';
+    if (!catDim) { totalRed += rowRed; totalPurple += rowPurple; totalAtRisk += rowAtRisk; }
+    const rowMeta = (rowRed > 0 || rowPurple > 0)
+      ? `<div class="cat-rowstats">${rowRed > 0 ? '<span class="cat-stat-red">' + rowRed + ' red</span>' : ''}${rowRed > 0 && rowPurple > 0 ? ' · ' : ''}${rowPurple > 0 ? '<span class="cat-stat-purple">' + rowPurple + ' over-stock</span>' : ''}</div>`
+      : '<div class="cat-rowstats" style="opacity:0.5">balanced</div>';
+    html += `<tr><td class="cell-cat${catDim ? ' dimmed' : ''}"${catDim ? ' style="opacity:0.45"' : ''}>${c.name}<div class="cat-meta">${c.group} · ${c.weekVel}/wk · ₹${(c.unitValue/1000).toFixed(0)}k avg</div>${rowMeta}</td>${rowCells}</tr>`;
   });
   html += '</tbody></table>';
-  let red=0, purple=0, stockout=0, atRisk=0;
-  velocityCats.forEach(c => velocityStores.forEach(s => {
-    const b = velocityBand(velocityCells[c.id][s]);
-    if (b==='cell-red') { red++; atRisk += 1840000; }
-    if (b==='cell-stockout') { stockout++; atRisk += 2200000; }
-    if (b==='cell-purple') purple++;
-  }));
-  html += `<div class="rpl-grid-foot"><span><strong>${red}</strong> gap cells</span><span><strong>${stockout}</strong> stockout</span><span><strong>${purple}</strong> over-stock cells</span><span><strong>₹${(atRisk/10000000).toFixed(1)} Cr</strong> at risk</span></div>`;
+
+  html += `<div class="rpl-grid-foot">
+    <span><strong class="foot-bad">${totalRed}</strong> gap cells</span>
+    <span><strong class="foot-bad">${totalStockout}</strong> stockout</span>
+    <span><strong class="foot-purple">${totalPurple}</strong> over-stock</span>
+    <span><strong>₹${(totalAtRisk/10000000).toFixed(2)} Cr</strong> at risk</span>
+    <span><strong>₹${(totalValue/10000000).toFixed(1)} Cr</strong> stock value (visible)</span>
+  </div>`;
+
   host.innerHTML = html;
 }
-function velocityCellClick(cat, store) {
-  const v = velocityCells[cat][store];
-  const band = velocityBand(v);
-  const catName = velocityCats.find(c=>c.id===cat).name;
-  if (band === 'cell-red' || band === 'cell-stockout') {
-    toast('Linked to queued action · ' + catName + ' @ ' + velocityStoresLabel[store] + ' · scrolling to queue');
-    document.querySelector('#ws-replenish .rpl-queue')?.scrollIntoView({behavior:'smooth', block:'start'});
-  } else if (band === 'cell-purple') {
-    toast('Move or melt? · ' + catName + ' @ ' + velocityStoresLabel[store] + ' · DOC ' + v + 'd');
+
+// ----- cell drill-in popover -----
+function velocityCellClick(catId, store, ev) {
+  const m = cellMetrics(catId, store);
+  const cat = m.cat;
+  const band = cellBand(m, rplGridState.metric);
+
+  // Tara recommendation
+  let taraText = '';
+  if (band === 'b-red' || band === 'b-stockout') {
+    const reorderQty = Math.max(1, Math.round(cat.weekVel * velocityStoreWeight[store] * 4)); // 4-week cover
+    taraText = `<strong>Reorder ${reorderQty} units</strong> for ${velocityStoresLabel[store]} via ${cat.weekVel > 5 ? 'Karigar WO K-01' : 'Vendor PO Karan&Co'} · est ₹${((reorderQty * cat.unitValue)/100000).toFixed(1)}L · LT ${cat.weekVel > 5 ? '8d' : '12d'}`;
+  } else if (band === 'b-purple') {
+    taraText = `<strong>Move or melt</strong> · ${m.stockUnits} pcs sitting · ${cat.weekVel < 1 ? 'recommend Melt + remake (slow mover)' : 'recommend transfer to weakest store'}`;
+  } else if (band === 'b-amber') {
+    taraText = `<strong>Watch</strong> · ${m.doc}d cover acceptable · keep monitoring weekly trend (${m.trend === 'dn' ? 'dropping' : m.trend === 'up' ? 'recovering' : 'stable'})`;
+  } else {
+    taraText = `<strong>Healthy</strong> · ${m.doc}d cover · no action needed`;
   }
+
+  const spark = cellSparkline(catId, store);
+  const sparkPath = sparklinePath(spark, 100, 30);
+  const sparkColor = m.trend === 'up' ? 'var(--ok)' : m.trend === 'dn' ? 'var(--bad)' : 'var(--t-3)';
+
+  const lastRec = cat.lastRecBase + ((store.length % 3) ? '' : '');
+  const popHtml = `
+    <div class="rpl-pop-head">
+      <div>
+        <div class="rpl-pop-title">${cat.name}</div>
+        <div class="rpl-pop-sub">${velocityStoresLabel[store]} · ${velocityStoreTier[store].toUpperCase()} · ${cat.group}</div>
+      </div>
+      <button class="rpl-pop-close" onclick="closeRplPop()">×</button>
+    </div>
+    <div class="rpl-pop-bigrow">
+      <div>
+        <div class="rpl-pop-big">${m.doc}<span style="font-size:14px; color:var(--t-3); margin-left:2px;">d</span></div>
+        <div class="rpl-pop-bigsub">days-of-cover</div>
+      </div>
+      <div class="rpl-pop-spark">
+        <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+          <path d="${sparkPath}" stroke="${sparkColor}" stroke-width="1.4" fill="none" />
+          <path d="${sparkPath} L 100,30 L 0,30 Z" fill="${sparkColor}" opacity="0.12" />
+        </svg>
+        <div style="font-size:10px; color:var(--t-3); text-align:right; margin-top:1px; font-family:var(--mono);">30-day velocity · ${m.trend === 'up' ? '↑ rising' : m.trend === 'dn' ? '↓ falling' : '→ stable'}</div>
+      </div>
+    </div>
+    <div class="rpl-pop-grid">
+      <div class="rpl-pop-kv"><span class="k">Stock value</span><span class="v">₹${m.stockValue >= 100000 ? (m.stockValue/100000).toFixed(1) + 'L' : (m.stockValue/1000).toFixed(0) + 'k'}</span></div>
+      <div class="rpl-pop-kv"><span class="k">Stock units</span><span class="v">${m.stockUnits}</span></div>
+      <div class="rpl-pop-kv"><span class="k">Sell-through · 30d</span><span class="v">${m.sellThru}%</span></div>
+      <div class="rpl-pop-kv"><span class="k">Velocity</span><span class="v">${m.velocity}/wk</span></div>
+      <div class="rpl-pop-kv"><span class="k">On order</span><span class="v">${m.onOrderUnits} pcs · ${m.onOrderDays}d cover</span></div>
+      <div class="rpl-pop-kv"><span class="k">Last received</span><span class="v">${lastRec}</span></div>
+    </div>
+    <div class="rpl-pop-tara">
+      <div class="rpl-pop-tara-av">T</div>
+      <div class="rpl-pop-tara-text">${taraText}</div>
+    </div>
+    <div class="rpl-pop-actions">
+      ${(band === 'b-red' || band === 'b-stockout') ? '<button class="rpl-btn go" onclick="cellPopApprove(\''+catId+'\',\''+store+'\')">Approve Tara&apos;s plan</button>' : ''}
+      ${band === 'b-purple' ? '<button class="rpl-btn go" onclick="cellPopMoveMelt(\''+catId+'\',\''+store+'\')">Move or melt</button>' : ''}
+      <button class="rpl-btn" onclick="cellPopOpenInQueue(\''+catId+'\',\''+store+'\')">Open in queue</button>
+    </div>
+  `;
+
+  const pop = document.getElementById('rpl-pop');
+  pop.innerHTML = popHtml;
+  pop.classList.add('on');
+
+  // position near click, clamped to viewport
+  const padding = 12;
+  const popW = 320;
+  const popH = pop.offsetHeight || 360;
+  let x = (ev?.clientX ?? window.innerWidth/2) + 12;
+  let y = (ev?.clientY ?? window.innerHeight/2) + 12;
+  if (x + popW + padding > window.innerWidth) x = window.innerWidth - popW - padding;
+  if (y + popH + padding > window.innerHeight) y = (ev?.clientY ?? window.innerHeight/2) - popH - 12;
+  if (y < padding) y = padding;
+  if (x < padding) x = padding;
+  pop.style.left = x + 'px';
+  pop.style.top = y + 'px';
 }
+function closeRplPop() {
+  document.getElementById('rpl-pop')?.classList.remove('on');
+}
+function cellPopApprove(cat, store) {
+  closeRplPop();
+  toast('Tara&apos;s plan approved · ' + (velocityCats.find(c=>c.id===cat)?.name || cat) + ' @ ' + velocityStoresLabel[store] + ' · routing to approver chain');
+}
+function cellPopMoveMelt(cat, store) {
+  closeRplPop();
+  toast('Move or melt · ' + velocityCats.find(c=>c.id===cat)?.name + ' @ ' + velocityStoresLabel[store] + ' · opening Melt workspace');
+  setTimeout(() => switchWorkspace('melt'), 600);
+}
+function cellPopOpenInQueue(cat, store) {
+  closeRplPop();
+  toast('Scrolling to matching queue row');
+  document.querySelector('#ws-replenish .rpl-queue')?.scrollIntoView({behavior:'smooth', block:'start'});
+}
+// dismiss popover on outside click + Escape
+document.addEventListener('click', e => {
+  const pop = document.getElementById('rpl-pop');
+  if (!pop || !pop.classList.contains('on')) return;
+  if (pop.contains(e.target)) return;
+  if (e.target.closest('.rpl-cell')) return;
+  closeRplPop();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRplPop(); });
+
+// toolbar wiring
+document.addEventListener('click', e => {
+  const seg = e.target.closest('.rpl-seg-btn');
+  if (!seg) return;
+  if (seg.dataset.metric) {
+    rplGridState.metric = seg.dataset.metric;
+    document.querySelectorAll('#rpl-metric-seg .rpl-seg-btn').forEach(b => b.classList.toggle('on', b === seg));
+  } else if (seg.dataset.tier) {
+    rplGridState.tier = seg.dataset.tier;
+    document.querySelectorAll('#rpl-tier-seg .rpl-seg-btn').forEach(b => b.classList.toggle('on', b === seg));
+  } else if (seg.dataset.catgrp) {
+    rplGridState.catgrp = seg.dataset.catgrp;
+    document.querySelectorAll('#rpl-catgrp-seg .rpl-seg-btn').forEach(b => b.classList.toggle('on', b === seg));
+  } else return;
+  closeRplPop();
+  renderVelocityGrid();
+});
 
 /* ----- approve/modify slide-over (reuses #over container) ----- */
 function openRplApproveSlideOver(id, opts) {
