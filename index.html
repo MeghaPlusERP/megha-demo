@@ -2385,6 +2385,133 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
   .qrow { grid-template-columns: 26px 1fr 90px 50px; }
   .qrow .qctrl { display: none; }
 }
+
+/* ============================================================== */
+/* Replenishment workspace                                         */
+/* ============================================================== */
+.rpl-fest-ribbon { display:flex; gap:18px; padding:12px 16px; background:var(--bg-1); border:1px solid var(--line-1); border-radius:8px; margin:14px 0 16px; }
+.rpl-fest-seg { display:flex; align-items:center; gap:10px; flex:1; min-width:0; }
+.rpl-fest-name { font-size:12px; color:var(--t-2); font-weight:500; white-space:nowrap; }
+.rpl-fest-eta { font-size:11px; color:var(--t-3); padding:2px 7px; background:var(--bg-2); border-radius:3px; }
+.rpl-fest-bar { flex:1; height:4px; background:var(--bg-3); border-radius:2px; overflow:hidden; min-width:40px; }
+.rpl-fest-fill { height:100%; background:linear-gradient(90deg, var(--gold), var(--ai)); }
+.rpl-fest-pct { font-size:11px; color:var(--t-3); width:32px; text-align:right; }
+
+.rpl-tabs { display:flex; gap:2px; border-bottom:1px solid var(--line-1); margin:18px 0 16px; }
+.rpl-tab { padding:10px 18px; font-size:13px; color:var(--t-2); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color 0.12s; font-weight:500; }
+.rpl-tab:hover { color:var(--t-1); }
+.rpl-tab.on { color:var(--t-1); border-bottom-color:var(--ai); }
+
+.rpl-pane.hidden { display:none; }
+
+.rpl-queue { display:flex; flex-direction:column; gap:8px; }
+.rpl-row { display:flex; gap:14px; padding:14px 16px; background:var(--bg-1); border:1px solid var(--line-1); border-radius:10px; transition:border-color 0.15s; }
+.rpl-row:hover { border-color:var(--line-2); }
+.rpl-row .rpl-av { flex-shrink:0; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color:#0b0b0e; }
+.rpl-row .rpl-cell { flex:1; min-width:0; }
+.rpl-row .rpl-title { font-size:14px; font-weight:500; color:var(--t-1); margin-bottom:5px; }
+.rpl-row .rpl-why { font-size:12px; color:var(--t-2); margin-bottom:7px; line-height:1.5; }
+.rpl-row .rpl-channel { font-size:12px; color:var(--t-3); margin-bottom:11px; }
+.rpl-row .rpl-channel strong { color:var(--t-1); font-weight:500; }
+.rpl-row .rpl-acts { display:flex; gap:6px; flex-wrap:wrap; }
+.rpl-btn { padding:6px 12px; font-size:12px; font-weight:500; border-radius:5px; border:1px solid var(--line-2); color:var(--t-2); background:var(--bg-2); cursor:pointer; transition:all 0.12s; }
+.rpl-btn:hover { background:var(--bg-3); color:var(--t-1); }
+.rpl-btn.go { background:var(--ai); color:#0b0b0e; border-color:var(--ai); }
+.rpl-btn.go:hover { background:#b599ff; }
+.rpl-btn.ghost { border-color:transparent; background:transparent; color:var(--t-3); }
+.rpl-btn.ghost:hover { color:var(--t-1); background:var(--bg-2); }
+
+.rpl-conf { display:inline-block; margin-left:8px; padding:1px 6px; background:var(--ai-bg); color:var(--ai); font-size:10px; border-radius:3px; font-weight:500; }
+
+.rpl-grid-wrap { margin-top:22px; padding-top:22px; border-top:1px solid var(--line-1); }
+.rpl-grid-title { font-size:12px; font-weight:500; color:var(--t-2); margin:0 0 12px; text-transform:uppercase; letter-spacing:0.04em; }
+.rpl-grid-table { width:100%; border-collapse:collapse; font-size:11px; font-family:var(--mono); }
+.rpl-grid-table th, .rpl-grid-table td { padding:7px 6px; text-align:center; border:1px solid var(--line-1); }
+.rpl-grid-table th { background:var(--bg-2); font-weight:500; color:var(--t-3); text-transform:uppercase; letter-spacing:0.03em; font-size:10px; font-family:var(--sans); }
+.rpl-grid-table td.cell-cat { text-align:left; color:var(--t-1); font-weight:500; background:var(--bg-1); font-family:var(--sans); padding-left:10px; padding-right:10px; min-width:170px; }
+.rpl-grid-table td.cell-green { background:rgba(52,211,153,0.10); color:var(--ok); }
+.rpl-grid-table td.cell-amber { background:rgba(251,191,36,0.12); color:var(--warn); }
+.rpl-grid-table td.cell-red { background:rgba(248,113,113,0.16); color:var(--bad); cursor:pointer; font-weight:600; }
+.rpl-grid-table td.cell-red:hover { background:rgba(248,113,113,0.28); }
+.rpl-grid-table td.cell-stockout { background:#0b0b0e; color:#fff; font-weight:600; }
+.rpl-grid-table td.cell-purple { background:rgba(167,139,250,0.14); color:var(--ai); cursor:pointer; }
+.rpl-grid-table td.cell-purple:hover { background:rgba(167,139,250,0.26); }
+.rpl-grid-foot { margin-top:10px; font-size:11px; color:var(--t-3); padding:8px 12px; background:var(--bg-2); border:1px solid var(--line-1); border-radius:6px; display:flex; gap:18px; }
+.rpl-grid-foot strong { color:var(--t-1); font-weight:500; }
+
+.rpl-xref { display:flex; gap:10px; padding:14px 16px; margin-top:22px; background:var(--bg-1); border:1px solid var(--line-1); border-radius:8px; font-size:12px; color:var(--t-2); }
+.rpl-xref-link { display:flex; align-items:center; gap:8px; cursor:pointer; flex:1; padding:6px 8px; border-radius:5px; transition:background 0.12s; }
+.rpl-xref-link:hover { background:var(--bg-2); color:var(--t-1); }
+.rpl-xref-icon { color:var(--ai); font-size:14px; flex-shrink:0; }
+.rpl-xref-link strong { color:var(--t-1); font-weight:500; }
+
+/* Karigar table */
+.rpl-kpi-row-second { margin-top:8px; }
+.kar-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:14px; }
+.kar-table th, .kar-table td { padding:11px 12px; text-align:left; border-bottom:1px solid var(--line-1); }
+.kar-table th { font-size:10px; text-transform:uppercase; letter-spacing:0.04em; color:var(--t-3); background:var(--bg-2); font-weight:500; }
+.kar-table tbody tr { cursor:pointer; transition:background 0.12s; }
+.kar-table tbody tr:hover { background:var(--bg-1); }
+.kar-name { font-weight:500; color:var(--t-1); }
+.kar-loc { font-size:11px; color:var(--t-3); margin-top:2px; }
+.kar-trust { font-weight:500; color:var(--t-1); cursor:help; }
+.kar-trust .stars { font-size:10px; color:var(--gold); margin-top:2px; }
+.kar-overdue { color:var(--bad); font-weight:600; }
+.kar-status-red { color:var(--bad); font-weight:500; }
+.kar-status-green { color:var(--ok); }
+.kar-photo { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#444,#222); color:#fff; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; flex-shrink:0; }
+.ledger-strip { display:flex; flex-wrap:wrap; gap:8px; }
+.ledger-evt { padding:5px 10px; border-radius:4px; font-size:11px; font-family:var(--mono); }
+.evt-issue { background:var(--ai-bg); color:var(--ai); }
+.evt-return { background:var(--ok-bg); color:var(--ok); }
+.evt-overdue { background:var(--bad-bg); color:var(--bad); font-weight:500; }
+
+/* Vendor PO table */
+.vendor-table { width:100%; border-collapse:collapse; font-size:12px; }
+.vendor-table th, .vendor-table td { padding:11px 12px; text-align:left; border-bottom:1px solid var(--line-1); }
+.vendor-table th { font-size:10px; text-transform:uppercase; letter-spacing:0.04em; color:var(--t-3); background:var(--bg-2); font-weight:500; }
+.lt-badge { padding:3px 8px; border-radius:4px; font-size:11px; font-weight:600; font-family:var(--mono); }
+.lt-good { background:var(--ok-bg); color:var(--ok); }
+.lt-watch { background:var(--warn-bg); color:var(--warn); }
+.lt-risk { background:var(--bad-bg); color:var(--bad); }
+.rate-locked { color:var(--ok); font-weight:500; font-size:11px; }
+.rate-floating { color:var(--t-3); font-size:11px; }
+
+/* SKU table */
+.sku-table { width:100%; border-collapse:collapse; font-size:12px; }
+.sku-table th, .sku-table td { padding:9px 10px; text-align:left; border-bottom:1px solid var(--line-1); white-space:nowrap; }
+.sku-table th { font-size:10px; text-transform:uppercase; letter-spacing:0.04em; color:var(--t-3); background:var(--bg-2); font-weight:500; }
+.sku-table .mono { font-family:var(--mono); color:var(--t-1); }
+.doc-red { color:var(--bad); font-weight:600; }
+.doc-amber { color:var(--warn); font-weight:500; }
+.doc-green { color:var(--ok); }
+.chan-pill { padding:2px 7px; border-radius:3px; font-size:10px; font-weight:600; font-family:var(--mono); display:inline-block; }
+.chan-vendor-po { background:rgba(167,139,250,0.16); color:var(--ai); }
+.chan-karigar-wo { background:var(--gold-bg); color:var(--gold); }
+.chan-in-house { background:rgba(167,139,250,0.16); color:var(--ai); }
+.chan-transfer-first { background:var(--ok-bg); color:var(--ok); }
+.chan-melt-feed { background:var(--warn-bg); color:var(--warn); }
+.chan-defer { background:var(--bg-3); color:var(--t-3); }
+.chan-split { background:rgba(167,139,250,0.16); color:var(--ai); }
+
+/* Slide-over inner blocks for Replenishment */
+.rpl-slide-section { margin-bottom:20px; }
+.rpl-slide-h { font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--t-3); margin-bottom:9px; font-weight:500; }
+.rpl-slide-kv { display:flex; justify-content:space-between; padding:7px 0; font-size:13px; border-bottom:1px solid var(--line-1); gap:10px; }
+.rpl-slide-kv span { color:var(--t-2); }
+.rpl-slide-kv strong { color:var(--t-1); font-weight:500; text-align:right; }
+.rpl-artefact { display:flex; align-items:center; gap:10px; padding:9px 11px; background:var(--bg-2); border:1px solid var(--line-1); border-radius:6px; margin-bottom:6px; font-size:12px; }
+.rpl-artefact-icon { width:20px; text-align:center; color:var(--gold); font-size:14px; }
+.rpl-artefact-link { margin-left:auto; color:var(--ai); cursor:pointer; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; font-weight:500; }
+.rpl-approver-chain { display:flex; flex-direction:column; gap:9px; padding:10px 0; }
+.rpl-approver { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--t-1); }
+.rpl-approver-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.rpl-approver-dot.done { background:var(--ok); }
+.rpl-approver-dot.pending { background:var(--warn); }
+.rpl-approver-dot.auto { background:var(--t-3); }
+.rpl-approver-meta { color:var(--t-3); font-size:11px; margin-left:auto; }
+.rpl-slide-note { font-size:11px; color:var(--t-3); font-style:italic; margin-top:6px; }
+.rpl-audit-preview { padding:10px 12px; background:var(--bg-2); border:1px solid var(--line-1); border-radius:6px; font-size:11px; color:var(--t-2); font-family:var(--mono); line-height:1.6; }
 </style>
 </head>
 <body>
@@ -2432,7 +2559,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
         <div class="grp-l">Workspaces</div>
         <div class="nav"><span class="ico">⊞</span>Buying Plan</div>
         <div class="nav" data-ws="allocation"><span class="ico">⇪</span>Allocation<span class="ct alert">4</span></div>
-        <div class="nav"><span class="ico">↻</span>Replenishment</div>
+        <div class="nav" data-ws="replenish"><span class="ico">↻</span>Replenishment<span class="ct alert">10</span></div>
         <div class="nav" data-ws="melt"><span class="ico">◉</span>Melt &amp; Remake<span class="ct alert">4</span></div>
         <div class="nav" data-ws="waiver"><span class="ico">%</span>Discount &amp; Waiver<span class="ct alert">5</span></div>
         <div class="nav"><span class="ico">⌬</span>Karigar &amp; Vendor</div>
@@ -2684,6 +2811,89 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
           </div>
         </div>
       </div><!-- /ws-allocation -->
+
+      <!-- ============================================================== -->
+      <!-- Replenishment workspace -->
+      <!-- ============================================================== -->
+      <div class="ws" id="ws-replenish">
+        <div class="ws-head">
+          <h1>Replenishment</h1>
+          <p class="ws-sub"><span class="ag">Tara</span> 38 decisions queued · Akshaya Tritiya in 9d · gold rate +0.4% w/w</p>
+        </div>
+
+        <section class="kpis">
+          <div class="kpi">
+            <div class="lbl">Open replenishment value</div>
+            <div class="v"><span class="big">6.4</span><span class="unit">Cr</span></div>
+            <div class="row"><span class="delta up">↑ ₹0.8 Cr w/w</span><span class="vs">38 decisions</span></div>
+            <svg class="spark" viewBox="0 0 76 28" fill="none">
+              <polyline class="ln-up" points="0,21 9,20 18,18 27,17 36,15 45,14 54,12 63,11 70,9 76,7" />
+              <polyline class="fl-up" points="0,21 9,20 18,18 27,17 36,15 45,14 54,12 63,11 70,9 76,7 76,28 0,28" />
+            </svg>
+          </div>
+          <div class="kpi">
+            <div class="lbl">Days-of-cover · weakest</div>
+            <div class="v"><span class="big">11</span><span class="unit">d</span></div>
+            <div class="row"><span class="delta dn">red</span><span class="vs">Diamond rings · Bhopal · target 28d</span></div>
+            <svg class="spark" viewBox="0 0 76 28" fill="none">
+              <rect x="0" y="20" width="22" height="6" fill="var(--bad)" rx="1"/>
+              <rect class="spark-empty" x="23" y="20" width="53" height="6" rx="1"/>
+            </svg>
+          </div>
+          <div class="kpi">
+            <div class="lbl">Akshaya Tritiya gap</div>
+            <div class="v"><span class="big">42</span><span class="unit">L ₹</span></div>
+            <div class="row"><span class="delta">amber</span><span class="vs">9 days to peak · 78% committed</span></div>
+            <svg class="spark" viewBox="0 0 76 28" fill="none">
+              <rect x="0" y="20" width="59" height="6" fill="var(--gold)" rx="1"/>
+              <rect class="spark-empty" x="60" y="20" width="16" height="6" rx="1"/>
+            </svg>
+          </div>
+          <div class="kpi">
+            <div class="lbl">Karigar gold-out · CARO</div>
+            <div class="v"><span class="big">18.4</span><span class="unit">kg</span></div>
+            <div class="row"><span class="delta dn">3 overdue</span><span class="vs">5 ledgers 30–45d · ₹17.2 Cr at risk</span></div>
+            <svg class="spark" viewBox="0 0 76 28" fill="none">
+              <rect x="0" y="20" width="14" height="6" fill="var(--bad)" rx="1"/>
+              <rect x="15" y="20" width="22" height="6" fill="var(--warn)" rx="1"/>
+              <rect x="38" y="20" width="38" height="6" fill="var(--ok)" rx="1"/>
+            </svg>
+          </div>
+        </section>
+
+        <!-- Festival pulse ribbon -->
+        <div class="rpl-fest-ribbon">
+          <div class="rpl-fest-seg"><span class="rpl-fest-name">Akshaya Tritiya</span><span class="rpl-fest-eta">9d</span><div class="rpl-fest-bar"><div class="rpl-fest-fill" style="width:78%"></div></div><span class="rpl-fest-pct">78%</span></div>
+          <div class="rpl-fest-seg"><span class="rpl-fest-name">Wedding · MP-East</span><span class="rpl-fest-eta">23d</span><div class="rpl-fest-bar"><div class="rpl-fest-fill" style="width:41%"></div></div><span class="rpl-fest-pct">41%</span></div>
+          <div class="rpl-fest-seg"><span class="rpl-fest-name">Dhanteras</span><span class="rpl-fest-eta">162d</span><div class="rpl-fest-bar"><div class="rpl-fest-fill" style="width:12%"></div></div><span class="rpl-fest-pct">12%</span></div>
+        </div>
+
+        <!-- Tab strip -->
+        <div class="rpl-tabs" id="rpl-tabs">
+          <div class="rpl-tab on" data-rpl-tab="cluster">By Cluster</div>
+          <div class="rpl-tab" data-rpl-tab="sku">By SKU</div>
+          <div class="rpl-tab" data-rpl-tab="karigar">Karigar Ledger</div>
+          <div class="rpl-tab" data-rpl-tab="vendor">Vendor PO</div>
+        </div>
+
+        <!-- Tab body containers -->
+        <div class="rpl-pane" data-rpl-pane="cluster">
+          <div class="rpl-queue" id="rpl-queue-cluster"></div>
+          <div class="rpl-grid-wrap" id="rpl-velocity-grid"></div>
+        </div>
+        <div class="rpl-pane hidden" data-rpl-pane="sku">
+          <div class="rpl-sku-wrap" id="rpl-queue-sku"></div>
+        </div>
+        <div class="rpl-pane hidden" data-rpl-pane="karigar">
+          <div id="rpl-karigar-pane"></div>
+        </div>
+        <div class="rpl-pane hidden" data-rpl-pane="vendor">
+          <div id="rpl-vendor-pane"></div>
+        </div>
+
+        <!-- Cross-workspace ribbon -->
+        <div class="rpl-xref" id="rpl-xref"></div>
+      </div>
 
       <div class="ws" id="ws-waiver">
         <div class="ws-head">
@@ -5032,6 +5242,7 @@ const wsCrumbs = {
   brief: { prefix: 'Today', title: 'Morning Brief' },
   stores: { prefix: 'Network', title: 'Stores · Network View' },
   allocation: { prefix: 'Stock Flow', title: 'Allocation' },
+  replenish: { prefix: 'Stock Flow', title: 'Replenishment' },
   melt: { prefix: 'Stock Flow', title: 'Melt & Remake' },
   waiver: { prefix: 'Margin', title: 'Discount & Waiver' },
   schemes: { prefix: 'Schemes', title: 'Schemes & Plans' },
@@ -5173,6 +5384,513 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 60000);
+
+/* ============================================================== */
+/* Replenishment workspace                                         */
+/* ============================================================== */
+
+const RPL_CHANNEL_LABEL = {
+  'split':'Split channel',
+  'vendor-po':'Vendor PO',
+  'karigar-wo':'Karigar WO',
+  'in-house':'In-house workshop',
+  'transfer-first':'Transfer-first',
+  'melt-feed':'Melt-feed',
+  'defer':'Defer'
+};
+
+const replenishClusters = [
+  { id:'rpl-001', cluster:'Daily-wear gold chains < 8g · Bhopal + Indore',
+    why:'Gap ₹42L vs Akshaya pull · 9 days to peak · gold rate +0.4% w/w',
+    channel:'Karigar WO ₹28L (K-01) + Vendor PO Karan&Co ₹14L', value:4200000,
+    skuCount:7, taraConfidence:92, primary:'split' },
+  { id:'rpl-002', cluster:'Diamond solitaire rings · Indore + Sehore',
+    why:'DOC 11d at Bhopal · Akshaya pull rising · vendor LT 12d cuts it close',
+    channel:'Vendor PO · Karan&Co · ₹38L · LT 12d (rate-locked till 6 May)', value:3800000,
+    skuCount:4, taraConfidence:88, primary:'vendor-po' },
+  { id:'rpl-003', cluster:'Bridal sets · MP-East wedding cluster',
+    why:'23 days to peak · 14 confirmed bookings · in-house karigari panel idle',
+    channel:'In-house workshop · ₹62L · 14 sets · LT 18d', value:6200000,
+    skuCount:14, taraConfidence:84, primary:'in-house' },
+  { id:'rpl-004', cluster:'22k bangles · Mhow → Ujjain',
+    why:'Mhow surplus +180g · Ujjain DOC 9d · transfer cheaper than reorder',
+    channel:'Inter-store transfer-first · ₹0 spend · 1d in transit', value:0,
+    skuCount:6, taraConfidence:96, primary:'transfer-first' },
+  { id:'rpl-005', cluster:'Daily-wear chains feed · 14 aged 18k pendants',
+    why:'Pendants > 240d at 4 stores · refining yield 312g · feeds K-01 chain WO',
+    channel:'Melt-feed → Karigar WO K-01 · est ₹19L value created', value:1900000,
+    skuCount:14, taraConfidence:91, primary:'melt-feed' },
+  { id:'rpl-006', cluster:'Heavy navratan necklace · all stores',
+    why:'Velocity 0.3/wk → 0.1/wk over 60d · 6 units carried · margin trap',
+    channel:'Defer · revisit after Dhanteras · capital better deployed in Akshaya pull', value:0,
+    skuCount:6, taraConfidence:79, primary:'defer' },
+  { id:'rpl-007', cluster:'22k bangles · Karigar K-04 (trust-flagged)',
+    why:'K-04 ledger overdue 47d · cap exposure · suggest defaulting to K-01',
+    channel:'Karigar WO K-04 · capped at ₹2L · default route K-01 (trust 94)', value:200000,
+    skuCount:2, taraConfidence:73, primary:'karigar-wo' },
+  { id:'rpl-008', cluster:'Diamond pendants · rate-window',
+    why:'Gold rate forecast +1.2% in 5d · lock today saves ₹84k · vendor confirmed',
+    channel:'Vendor PO · Goldiam · ₹26L · rate locked till EOD', value:2600000,
+    skuCount:5, taraConfidence:90, primary:'vendor-po' },
+  { id:'rpl-009', cluster:'Diamond pull · Akshaya scheme maturity',
+    why:'162 schemes maturing 8-12 May · forecast pull +₹18L vs prior year',
+    channel:'Vendor PO · Karan&Co · ₹18L sized to forecast · LT 9d', value:1800000,
+    skuCount:8, taraConfidence:86, primary:'vendor-po' },
+  { id:'rpl-010', cluster:'Coins & bars · Akshaya day-of impulse',
+    why:'1g-10g coins · prior Akshaya impulse pull ₹14L · stock at 38% target',
+    channel:'Vendor PO · MMTC-PAMP · ₹22L · LT 4d · rate-floating', value:2200000,
+    skuCount:9, taraConfidence:94, primary:'vendor-po' }
+];
+
+function rplAvLetter(primary) {
+  return 'T'; // Tara owns all replenishment proposals in this version
+}
+
+function renderRplQueue() {
+  const host = document.getElementById('rpl-queue-cluster');
+  if (!host) return;
+  host.innerHTML = replenishClusters.map(r => `
+    <div class="rpl-row" data-rpl-id="${r.id}">
+      <div class="rpl-av av-tara">T</div>
+      <div class="rpl-cell">
+        <div class="rpl-title">${r.cluster}<span class="rpl-conf">Tara · ${r.taraConfidence}%</span></div>
+        <div class="rpl-why">${r.why}</div>
+        <div class="rpl-channel">→ <strong>${RPL_CHANNEL_LABEL[r.primary]}</strong> · ${r.channel}</div>
+        <div class="rpl-acts">
+          <button class="rpl-btn go" onclick="rplApprove('${r.id}')">Approve</button>
+          <button class="rpl-btn" onclick="rplModify('${r.id}')">Modify</button>
+          <button class="rpl-btn" onclick="rplDefer('${r.id}')">Defer</button>
+          <button class="rpl-btn ghost" onclick="rplExpand('${r.id}')">⤵ ${r.skuCount} SKUs</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function rplApprove(id) { openRplApproveSlideOver(id, {modify:false}); }
+function rplModify(id)  { openRplApproveSlideOver(id, {modify:true}); }
+function rplDefer(id)   { toast('Deferred · Tara will re-propose tomorrow if signal persists'); }
+function rplExpand(id)  {
+  const r = replenishClusters.find(x => x.id === id);
+  toast((r ? r.cluster.split(' · ')[0] : id) + ' · SKU breakdown · expanding to ' + (r ? r.skuCount : 0) + ' design codes');
+}
+
+/* ----- tab switching ----- */
+function switchRplTab(tabName) {
+  document.querySelectorAll('#rpl-tabs .rpl-tab').forEach(t => t.classList.toggle('on', t.dataset.rplTab === tabName));
+  document.querySelectorAll('#ws-replenish .rpl-pane').forEach(p => p.classList.toggle('hidden', p.dataset.rplPane !== tabName));
+}
+document.addEventListener('click', e => {
+  const tab = e.target.closest('#rpl-tabs .rpl-tab');
+  if (tab) switchRplTab(tab.dataset.rplTab);
+});
+
+/* ----- velocity grid ----- */
+const velocityCats = [
+  {id:'chains-light', name:'Daily-wear chains < 8g'},
+  {id:'chains-heavy', name:'Daily-wear chains ≥ 8g'},
+  {id:'bangles-22k',  name:'22k bangles'},
+  {id:'rings-dia',    name:'Diamond rings'},
+  {id:'pend-dia',     name:'Diamond pendants'},
+  {id:'bridal',       name:'Bridal sets'},
+  {id:'coins',        name:'Coins & bars'},
+  {id:'navratan',     name:'Heavy navratan'}
+];
+const velocityStores = ['ratlam','indore','bhopal','ujjain','mhow','dewas','sehore','mandsaur','kota','udaipur'];
+const velocityStoresLabel = {ratlam:'Ratlam',indore:'Indore',bhopal:'Bhopal',ujjain:'Ujjain',mhow:'Mhow',dewas:'Dewas',sehore:'Sehore',mandsaur:'Mandsaur',kota:'Kota',udaipur:'Udaipur'};
+const velocityCells = {
+  'chains-light': { ratlam:24, indore:9,  bhopal:6,  ujjain:18, mhow:32, dewas:21, sehore:14, mandsaur:28, kota:22, udaipur:19 },
+  'chains-heavy': { ratlam:31, indore:22, bhopal:15, ujjain:27, mhow:34, dewas:29, sehore:25, mandsaur:33, kota:30, udaipur:28 },
+  'bangles-22k':  { ratlam:28, indore:34, bhopal:21, ujjain:8,  mhow:72, dewas:24, sehore:19, mandsaur:26, kota:31, udaipur:27 },
+  'rings-dia':    { ratlam:22, indore:14, bhopal:11, ujjain:18, mhow:24, dewas:21, sehore:12, mandsaur:25, kota:0,  udaipur:17 },
+  'pend-dia':     { ratlam:32, indore:24, bhopal:17, ujjain:28, mhow:26, dewas:31, sehore:21, mandsaur:34, kota:24, udaipur:29 },
+  'bridal':       { ratlam:38, indore:29, bhopal:34, ujjain:42, mhow:31, dewas:36, sehore:28, mandsaur:46, kota:33, udaipur:31 },
+  'coins':        { ratlam:14, indore:11, bhopal:8,  ujjain:13, mhow:18, dewas:12, sehore:9,  mandsaur:16, kota:10, udaipur:11 },
+  'navratan':     { ratlam:64, indore:78, bhopal:82, ujjain:71, mhow:96, dewas:68, sehore:74, mandsaur:88, kota:62, udaipur:73 }
+};
+function velocityBand(d) {
+  if (d === 0) return 'cell-stockout';
+  if (d >= 60) return 'cell-purple';
+  if (d < 14)  return 'cell-red';
+  if (d < 28)  return 'cell-amber';
+  return 'cell-green';
+}
+function renderVelocityGrid() {
+  const host = document.getElementById('rpl-velocity-grid');
+  if (!host) return;
+  let html = '<div class="rpl-grid-title">Days-of-cover · category × store</div>';
+  html += '<table class="rpl-grid-table"><thead><tr><th class="cell-cat">Category</th>';
+  velocityStores.forEach(s => { html += `<th>${velocityStoresLabel[s]}</th>`; });
+  html += '</tr></thead><tbody>';
+  velocityCats.forEach(c => {
+    html += `<tr><td class="cell-cat">${c.name}</td>`;
+    velocityStores.forEach(s => {
+      const v = velocityCells[c.id][s];
+      const band = velocityBand(v);
+      const click = (band === 'cell-red' || band === 'cell-purple' || band === 'cell-stockout') ? `onclick="velocityCellClick('${c.id}','${s}')"` : '';
+      html += `<td class="${band}" ${click} title="${c.name} · ${velocityStoresLabel[s]} · ${v}d">${v}</td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  let red=0, purple=0, stockout=0, atRisk=0;
+  velocityCats.forEach(c => velocityStores.forEach(s => {
+    const b = velocityBand(velocityCells[c.id][s]);
+    if (b==='cell-red') { red++; atRisk += 1840000; }
+    if (b==='cell-stockout') { stockout++; atRisk += 2200000; }
+    if (b==='cell-purple') purple++;
+  }));
+  html += `<div class="rpl-grid-foot"><span><strong>${red}</strong> gap cells</span><span><strong>${stockout}</strong> stockout</span><span><strong>${purple}</strong> over-stock cells</span><span><strong>₹${(atRisk/10000000).toFixed(1)} Cr</strong> at risk</span></div>`;
+  host.innerHTML = html;
+}
+function velocityCellClick(cat, store) {
+  const v = velocityCells[cat][store];
+  const band = velocityBand(v);
+  const catName = velocityCats.find(c=>c.id===cat).name;
+  if (band === 'cell-red' || band === 'cell-stockout') {
+    toast('Linked to queued action · ' + catName + ' @ ' + velocityStoresLabel[store] + ' · scrolling to queue');
+    document.querySelector('#ws-replenish .rpl-queue')?.scrollIntoView({behavior:'smooth', block:'start'});
+  } else if (band === 'cell-purple') {
+    toast('Move or melt? · ' + catName + ' @ ' + velocityStoresLabel[store] + ' · DOC ' + v + 'd');
+  }
+}
+
+/* ----- approve/modify slide-over (reuses #over container) ----- */
+function openRplApproveSlideOver(id, opts) {
+  const r = replenishClusters.find(x => x.id === id);
+  if (!r) { toast('Action ' + id + ' · stub for SKU rows'); return; }
+  const isModify = !!(opts && opts.modify);
+  const headSub = isModify ? 'Modify replenishment action' : 'Issuing this action on your behalf';
+  const valueDisplay = r.value > 0 ? '₹' + (r.value/100000).toFixed(1) + 'L' : '—';
+  const isHighValue = r.value >= 5000000;
+
+  document.getElementById('over-head').innerHTML = `<span class="av av-tara">T</span>Tara · ${headSub}`;
+
+  const artefactsHtml = (() => {
+    if (r.primary === 'transfer-first') {
+      return `
+        <div class="rpl-artefact"><span class="rpl-artefact-icon">⇪</span><span>Inter-store transfer voucher (Mhow → Ujjain · 6 SKUs)</span><span class="rpl-artefact-link">preview</span></div>
+        <div class="rpl-artefact"><span class="rpl-artefact-icon">⚖</span><span>Stock-in-transit GL preview · ₹0 spend</span><span class="rpl-artefact-link">preview</span></div>
+        <div class="rpl-artefact"><span class="rpl-artefact-icon">✓</span><span>Audit trail · LODR Reg 30 evidenced</span><span class="rpl-artefact-link">preview</span></div>`;
+    }
+    if (r.primary === 'defer') {
+      return `<div class="rpl-artefact"><span class="rpl-artefact-icon">⏸</span><span>Defer note posted · revisit calendar 14d out</span><span class="rpl-artefact-link">preview</span></div>`;
+    }
+    if (r.primary === 'melt-feed') {
+      return `
+        <div class="rpl-artefact"><span class="rpl-artefact-icon">◉</span><span>Melt cycle voucher · 14 pieces, refining yield 312g</span><span class="rpl-artefact-link">preview</span></div>
+        <div class="rpl-artefact"><span class="rpl-artefact-icon">⚖</span><span>Karigar K-01 issue voucher · refined gold 312g</span><span class="rpl-artefact-link">preview</span></div>
+        <div class="rpl-artefact"><span class="rpl-artefact-icon">₹</span><span>GL entry · WIP-inventory adjusted</span><span class="rpl-artefact-link">preview</span></div>
+        <div class="rpl-artefact"><span class="rpl-artefact-icon">✓</span><span>BIS hallmark batch booking</span><span class="rpl-artefact-link">preview</span></div>`;
+    }
+    let rows = '';
+    if (r.primary === 'split') {
+      rows += `<div class="rpl-artefact"><span class="rpl-artefact-icon">📄</span><span>Vendor PO PDF · Karan&amp;Co · ₹14L portion</span><span class="rpl-artefact-link">preview</span></div>`;
+      rows += `<div class="rpl-artefact"><span class="rpl-artefact-icon">⚖</span><span>Karigar issue voucher · K-01 Soni · ₹28L portion</span><span class="rpl-artefact-link">preview</span></div>`;
+    } else {
+      if (r.primary === 'vendor-po') {
+        rows += `<div class="rpl-artefact"><span class="rpl-artefact-icon">📄</span><span>Vendor PO PDF · ${r.channel.split('·')[0].trim()}</span><span class="rpl-artefact-link">preview</span></div>`;
+      }
+      if (r.primary === 'karigar-wo') {
+        rows += `<div class="rpl-artefact"><span class="rpl-artefact-icon">⚖</span><span>Karigar issue voucher · gold-out + design spec</span><span class="rpl-artefact-link">preview</span></div>`;
+      }
+    }
+    if (r.primary === 'in-house') {
+      rows += `<div class="rpl-artefact"><span class="rpl-artefact-icon">⌬</span><span>In-house work order · 14 bridal sets · panel allocation</span><span class="rpl-artefact-link">preview</span></div>`;
+    }
+    rows += `<div class="rpl-artefact"><span class="rpl-artefact-icon">₹</span><span>GL entry preview · Inventory in-transit</span><span class="rpl-artefact-link">preview</span></div>`;
+    rows += `<div class="rpl-artefact"><span class="rpl-artefact-icon">✓</span><span>IFC approval routing slip · BIS hallmark batch booking</span><span class="rpl-artefact-link">preview</span></div>`;
+    return rows;
+  })();
+
+  const approverChain = isHighValue
+    ? `<div class="rpl-approver"><span class="rpl-approver-dot done"></span>Merchandiser (you)<span class="rpl-approver-meta">approved · just now</span></div>
+       <div class="rpl-approver"><span class="rpl-approver-dot pending"></span>CFO<span class="rpl-approver-meta">awaiting</span></div>
+       <div class="rpl-approver"><span class="rpl-approver-dot pending"></span>MD<span class="rpl-approver-meta">awaiting (≥ ₹50L threshold)</span></div>`
+    : `<div class="rpl-approver"><span class="rpl-approver-dot done"></span>Merchandiser (you)<span class="rpl-approver-meta">approved · just now</span></div>
+       <div class="rpl-approver"><span class="rpl-approver-dot auto"></span>CFO<span class="rpl-approver-meta">auto-approve · &lt; ₹50L</span></div>`;
+
+  const auditPreview = `Approved by [merchandiser] · ${new Date().toLocaleString('en-IN', {dateStyle:'medium', timeStyle:'short'})} · Tara confidence ${r.taraConfidence}% · prior 30d hit-rate 87% · auto-posts to Audit Trail · LODR Reg 30 evidenced · IFC ledger ref ${r.id}`;
+
+  const html = `
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Order summary</div>
+      <div class="rpl-slide-kv"><span>Cluster</span><strong>${r.cluster}</strong></div>
+      <div class="rpl-slide-kv"><span>Channel</span><strong>${RPL_CHANNEL_LABEL[r.primary]}</strong></div>
+      <div class="rpl-slide-kv"><span>Detail</span><strong>${r.channel}</strong></div>
+      <div class="rpl-slide-kv"><span>Value</span><strong>${valueDisplay}</strong></div>
+      <div class="rpl-slide-kv"><span>SKUs covered</span><strong>${r.skuCount}</strong></div>
+      <div class="rpl-slide-kv"><span>Tara confidence</span><strong>${r.taraConfidence}% · 30d hit-rate 87%</strong></div>
+    </div>
+
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Auto-generated artefacts</div>
+      ${artefactsHtml}
+    </div>
+
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Approver chain</div>
+      <div class="rpl-approver-chain">${approverChain}</div>
+      <div class="rpl-slide-note">Thresholds illustrative · &lt; ₹50L auto-CFO, ≥ ₹50L MD route</div>
+    </div>
+
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Audit trail entry preview</div>
+      <div class="rpl-audit-preview">${auditPreview}</div>
+    </div>
+
+    <div class="actions">
+      <button class="go" onclick="rplConfirm('${r.id}', ${isModify})">${isModify ? 'Save changes' : 'Confirm & issue'}</button>
+      <button onclick="closeOver()">Cancel</button>
+    </div>
+  `;
+  document.getElementById('over-body').innerHTML = html;
+  document.getElementById('over').classList.add('open');
+  document.getElementById('over').dataset.currentKey = 'rpl-' + r.id;
+}
+function rplConfirm(id, isModify) {
+  document.getElementById('over').classList.remove('open');
+  if (isModify) {
+    toast('Saved · Tara is recalculating downstream impact');
+  } else {
+    toast('Approved · artefacts issued · audit trail posted to Governance');
+  }
+}
+
+/* ----- karigar ledger ----- */
+const karigars = [
+  { code:'K-01', name:'Rajesh Soni', loc:'Sarafa Bazaar, Indore', years:14, trustScore:94,
+    goldOutKg:1.8, valueAtRisk:17000000, issuedDate:'18 Apr', daysOut:13, expectedReturn:'9 May',
+    return90Pct:99.2, status:'on-track',
+    inputs:{ onTime:99, wastage:0.18, repeatUse:'5y consecutive', ledgerAge:'13d', purity:'99.7% assay'} },
+  { code:'K-04', name:'Mahesh Verma', loc:'Bada Sarafa, Indore', years:7, trustScore:62,
+    goldOutKg:0.9, valueAtRisk:8400000, issuedDate:'14 Mar', daysOut:47, expectedReturn:'4 Apr (overdue)',
+    return90Pct:91.4, status:'caro-flag',
+    inputs:{ onTime:91, wastage:0.34, repeatUse:'2y intermittent', ledgerAge:'47d', purity:'99.5% assay'} },
+  { code:'K-09', name:'Lakshmi Bai', loc:'Sarafa Bazaar, Indore', years:11, trustScore:88,
+    goldOutKg:2.4, valueAtRisk:23000000, issuedDate:'22 Apr', daysOut:9, expectedReturn:'13 May',
+    return90Pct:98.8, status:'on-track',
+    inputs:{ onTime:98, wastage:0.21, repeatUse:'4y consecutive', ledgerAge:'9d', purity:'99.7% assay'} },
+  { code:'K-12', name:'Suresh Kumar', loc:'Pipliyahana, Indore', years:5, trustScore:81,
+    goldOutKg:1.2, valueAtRisk:11500000, issuedDate:'20 Apr', daysOut:11, expectedReturn:'11 May',
+    return90Pct:96.4, status:'on-track',
+    inputs:{ onTime:96, wastage:0.24, repeatUse:'3y consecutive', ledgerAge:'11d', purity:'99.6% assay'} },
+  { code:'K-17', name:'Anita Mehra', loc:'Sarafa, Bhopal', years:9, trustScore:90,
+    goldOutKg:1.5, valueAtRisk:14400000, issuedDate:'24 Apr', daysOut:7, expectedReturn:'15 May',
+    return90Pct:98.1, status:'on-track',
+    inputs:{ onTime:98, wastage:0.19, repeatUse:'4y consecutive', ledgerAge:'7d', purity:'99.7% assay'} },
+  { code:'K-21', name:'Vikram Singh', loc:'Chanderi Bazaar, Mandsaur', years:6, trustScore:55,
+    goldOutKg:0.6, valueAtRisk:5700000, issuedDate:'12 Mar', daysOut:50, expectedReturn:'2 Apr (overdue)',
+    return90Pct:88.2, status:'caro-flag',
+    inputs:{ onTime:88, wastage:0.41, repeatUse:'2y intermittent', ledgerAge:'50d', purity:'99.4% assay'} },
+  { code:'K-25', name:'Meena Sharma', loc:'Sarafa, Ujjain', years:8, trustScore:86,
+    goldOutKg:1.1, valueAtRisk:10500000, issuedDate:'25 Apr', daysOut:6, expectedReturn:'16 May',
+    return90Pct:97.3, status:'on-track',
+    inputs:{ onTime:97, wastage:0.22, repeatUse:'3y consecutive', ledgerAge:'6d', purity:'99.6% assay'} },
+  { code:'K-28', name:'Pooja Devi', loc:'Sarafa Bazaar, Kota', years:4, trustScore:58,
+    goldOutKg:0.5, valueAtRisk:4800000, issuedDate:'16 Mar', daysOut:46, expectedReturn:'6 Apr (overdue)',
+    return90Pct:89.0, status:'caro-flag',
+    inputs:{ onTime:89, wastage:0.38, repeatUse:'2y intermittent', ledgerAge:'46d', purity:'99.5% assay'} },
+  { code:'K-31', name:'Ramesh Tank', loc:'Sarafa, Udaipur', years:12, trustScore:91,
+    goldOutKg:1.7, valueAtRisk:16300000, issuedDate:'21 Apr', daysOut:10, expectedReturn:'12 May',
+    return90Pct:98.5, status:'on-track',
+    inputs:{ onTime:98, wastage:0.20, repeatUse:'4y consecutive', ledgerAge:'10d', purity:'99.7% assay'} }
+];
+function renderKarigarPane() {
+  const host = document.getElementById('rpl-karigar-pane');
+  if (!host) return;
+  const totalKg = karigars.reduce((s,k)=>s+k.goldOutKg,0).toFixed(1);
+  const totalValue = karigars.reduce((s,k)=>s+k.valueAtRisk,0);
+  const overdue = karigars.filter(k=>k.daysOut>=45).length;
+  const watch = karigars.filter(k=>k.daysOut>=30 && k.daysOut<45).length;
+  const avgCycle = (karigars.reduce((s,k)=>s+k.daysOut,0) / karigars.length).toFixed(1);
+
+  let html = `
+    <section class="kpis rpl-kpi-row-second">
+      <div class="kpi"><div class="lbl">Gold issued (open)</div><div class="v"><span class="big">${totalKg}</span><span class="unit">kg</span></div><div class="row"><span class="vs">across ${karigars.length} active karigars</span></div></div>
+      <div class="kpi"><div class="lbl">Value-at-risk</div><div class="v"><span class="big">${(totalValue/10000000).toFixed(1)}</span><span class="unit">Cr ₹</span></div><div class="row"><span class="vs">at today's gold rate</span></div></div>
+      <div class="kpi"><div class="lbl">Avg return cycle</div><div class="v"><span class="big">${avgCycle}</span><span class="unit">d</span></div><div class="row"><span class="vs">target 21d</span></div></div>
+      <div class="kpi"><div class="lbl">Overdue · CARO</div><div class="v"><span class="big">${overdue}</span><span class="unit">ledgers</span></div><div class="row"><span class="delta dn">&gt; 45d</span><span class="vs">${watch} ledgers 30-45d</span></div></div>
+    </section>
+    <table class="kar-table">
+      <thead><tr>
+        <th>Karigar</th><th>Trust</th><th>Gold out</th><th>Value</th><th>Issued</th><th>Days out</th><th>Expected back</th><th>90d return</th><th>Status</th>
+      </tr></thead><tbody>`;
+  karigars.forEach(k => {
+    const filled = Math.round(k.trustScore/20);
+    const stars = '★'.repeat(filled) + '☆'.repeat(5-filled);
+    const statusClass = k.status === 'caro-flag' ? 'kar-status-red' : 'kar-status-green';
+    const statusLabel = k.status === 'caro-flag' ? '🔴 CARO-flag' : '🟢 on track';
+    const tip = `On-time ${k.inputs.onTime}% · wastage ${k.inputs.wastage}% · ${k.inputs.repeatUse} · ledger ${k.inputs.ledgerAge} · ${k.inputs.purity}`;
+    html += `
+      <tr onclick="openKarigarSlide('${k.code}')">
+        <td><div class="kar-name">${k.code} · ${k.name}</div><div class="kar-loc">${k.loc} · ${k.years}y</div></td>
+        <td><div class="kar-trust" title="${tip}">${k.trustScore}<div class="stars">${stars}</div></div></td>
+        <td>${k.goldOutKg} kg</td>
+        <td>₹${(k.valueAtRisk/100000).toFixed(0)}L</td>
+        <td>${k.issuedDate}</td>
+        <td class="${k.daysOut>=45?'kar-overdue':''}">${k.daysOut}d</td>
+        <td>${k.expectedReturn}</td>
+        <td>${k.return90Pct}%</td>
+        <td class="${statusClass}">${statusLabel}</td>
+      </tr>`;
+  });
+  html += '</tbody></table>';
+  host.innerHTML = html;
+}
+function openKarigarSlide(code) {
+  const k = karigars.find(x => x.code === code);
+  if (!k) return;
+  document.getElementById('over-head').innerHTML = `<span class="kar-photo">${k.code}</span>${k.name} · ${k.loc}`;
+  const html = `
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Profile</div>
+      <div class="rpl-slide-kv"><span>Years active</span><strong>${k.years}y</strong></div>
+      <div class="rpl-slide-kv"><span>Trust score</span><strong>${k.trustScore} / 100</strong></div>
+      <div class="rpl-slide-kv"><span>Status</span><strong>${k.status === 'caro-flag' ? '🔴 CARO-flag · overdue ledger' : '🟢 on track'}</strong></div>
+    </div>
+
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Trust score breakdown</div>
+      <div class="rpl-slide-kv"><span>On-time return %</span><strong>${k.inputs.onTime}%</strong></div>
+      <div class="rpl-slide-kv"><span>Wastage discipline</span><strong>${k.inputs.wastage}% (target &lt; 0.30)</strong></div>
+      <div class="rpl-slide-kv"><span>Repeat use</span><strong>${k.inputs.repeatUse}</strong></div>
+      <div class="rpl-slide-kv"><span>Current ledger age</span><strong>${k.inputs.ledgerAge}</strong></div>
+      <div class="rpl-slide-kv"><span>Last assay purity</span><strong>${k.inputs.purity}</strong></div>
+    </div>
+
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Open issues · gold out</div>
+      <div class="rpl-slide-kv"><span>DR-1842 · 0.5ct round solitaire</span><strong>×4 · 0.18 kg</strong></div>
+      <div class="rpl-slide-kv"><span>BG-227 · 22k bangle pair</span><strong>×6 · 0.42 kg</strong></div>
+      <div class="rpl-slide-kv"><span>GC-0418 · 4g rope chain</span><strong>×24 · 0.28 kg</strong></div>
+      <div class="rpl-slide-kv"><span>Total open</span><strong>${k.goldOutKg} kg · ₹${(k.valueAtRisk/100000).toFixed(0)}L</strong></div>
+    </div>
+
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Ledger timeline · last 90 days</div>
+      <div class="ledger-strip">
+        <span class="ledger-evt evt-issue">↗ 4 Mar · issue 0.84 kg</span>
+        <span class="ledger-evt evt-return">↘ 18 Mar · return 0.81 kg (wastage 0.21%)</span>
+        <span class="ledger-evt evt-issue">↗ ${k.issuedDate} · issue ${k.goldOutKg} kg</span>
+        ${k.status === 'caro-flag' ? '<span class="ledger-evt evt-overdue">⚠ overdue · expected ' + k.expectedReturn + '</span>' : '<span class="ledger-evt evt-issue">⏳ in cycle · due ' + k.expectedReturn + '</span>'}
+      </div>
+    </div>
+
+    <div class="rpl-slide-section">
+      <div class="rpl-slide-h">Audit trail · BIS hallmark batches</div>
+      <div class="rpl-audit-preview">${k.issuedDate} · Issued ${k.goldOutKg}kg by [employee] · BIS batch IND-Q2-04812 · approver: branch head ${k.loc.split(',').pop().trim()} · IFC ledger ref karigar-${k.code} · LODR Reg 30 evidenced</div>
+    </div>
+
+    <div class="actions">
+      ${k.status === 'caro-flag' ? '<button class="go" onclick="closeOver(); toast(\'K-' + k.code.split('-')[1] + ' escalation routed to CFO + auditor\')">Escalate</button>' : '<button class="go" onclick="closeOver(); toast(\'New issue voucher prep · ' + k.code + '\')">New issue</button>'}
+      <button onclick="closeOver()">Close</button>
+    </div>`;
+  document.getElementById('over-body').innerHTML = html;
+  document.getElementById('over').classList.add('open');
+  document.getElementById('over').dataset.currentKey = 'karigar-' + k.code;
+}
+
+/* ----- vendor PO tab ----- */
+function renderVendorPOPane() {
+  const host = document.getElementById('rpl-vendor-pane');
+  if (!host) return;
+  const vendorRows = replenishClusters.filter(r => r.primary === 'vendor-po' || r.primary === 'split');
+  const vendors = {
+    'rpl-001': { name:'Karan&Co', onTime:96, leadDays:8,  rateLocked:false, rateNote:'Floating · gold +0.4% w/w' },
+    'rpl-002': { name:'Karan&Co', onTime:96, leadDays:12, rateLocked:true,  rateNote:'Locked till 6 May' },
+    'rpl-008': { name:'Goldiam',  onTime:94, leadDays:6,  rateLocked:true,  rateNote:'Lock today · gold +1.2% in 5d' },
+    'rpl-009': { name:'Karan&Co', onTime:96, leadDays:9,  rateLocked:false, rateNote:'Floating' },
+    'rpl-010': { name:'MMTC-PAMP',onTime:99, leadDays:4,  rateLocked:false, rateNote:'Floating · day-of pickup' }
+  };
+  let html = '<table class="vendor-table"><thead><tr><th>Cluster</th><th>Vendor</th><th>On-time</th><th>Lead time</th><th>Rate window</th><th>Value</th><th></th></tr></thead><tbody>';
+  vendorRows.forEach(r => {
+    const v = vendors[r.id] || {name:'—', onTime:0, leadDays:0, rateLocked:false, rateNote:''};
+    const ltBand = v.leadDays <= 7 ? 'lt-good' : v.leadDays <= 14 ? 'lt-watch' : 'lt-risk';
+    html += `
+      <tr>
+        <td><div class="kar-name">${r.cluster}</div></td>
+        <td><div class="kar-name">${v.name}</div><div class="kar-loc">on-time ${v.onTime}%</div></td>
+        <td>${v.onTime}%</td>
+        <td><span class="lt-badge ${ltBand}">${v.leadDays}d</span></td>
+        <td>${v.rateLocked ? '<span class="rate-locked">🔒 ' + v.rateNote + '</span>' : '<span class="rate-floating">' + v.rateNote + '</span>'}</td>
+        <td><strong>₹${(r.value/100000).toFixed(1)}L</strong></td>
+        <td><button class="rpl-btn go" onclick="rplApprove('${r.id}')">Approve</button></td>
+      </tr>`;
+  });
+  html += '</tbody></table>';
+  const totalValue = vendorRows.reduce((s,r)=>s+r.value,0);
+  const concentration = vendorRows.filter(r => (vendors[r.id]||{}).name === 'Karan&Co').length;
+  html += `<div class="rpl-grid-foot"><span>Open vendor-PO value <strong>₹${(totalValue/100000).toFixed(1)}L</strong></span><span><strong>${concentration}</strong> POs with Karan&Co · concentration risk</span><span>Avg lead-time variance <strong>+1.4d</strong></span></div>`;
+  host.innerHTML = html;
+}
+
+/* ----- by SKU tab ----- */
+const replenishSKUs = [
+  { id:'sku-1',  code:'GC-0418', desc:'4g rope chain',                velocity:1.8,  doc:9,  qty:24,  unit:18750,  partner:'K-01 Soni',  lt:'8d',  value:450000,  channel:'karigar-wo' },
+  { id:'sku-2',  code:'GC-0612', desc:'6g rope chain',                velocity:1.2,  doc:11, qty:18,  unit:28200,  partner:'K-09 Bai',   lt:'9d',  value:507600,  channel:'karigar-wo' },
+  { id:'sku-3',  code:'DR-1842', desc:'Round solitaire 0.5ct VVS',    velocity:0.4,  doc:11, qty:12,  unit:85000,  partner:'Karan&Co',   lt:'12d', value:1020000, channel:'vendor-po' },
+  { id:'sku-4',  code:'DR-2104', desc:'Halo solitaire 0.7ct',         velocity:0.3,  doc:14, qty:8,   unit:118000, partner:'Karan&Co',   lt:'12d', value:944000,  channel:'vendor-po' },
+  { id:'sku-5',  code:'BS-3401', desc:'Bridal · navratan + polki',    velocity:0.1,  doc:23, qty:4,   unit:842000, partner:'In-house',   lt:'18d', value:3368000, channel:'in-house' },
+  { id:'sku-6',  code:'BG-2201', desc:'22k filigree bangle · 18g',    velocity:1.6,  doc:8,  qty:14,  unit:148000, partner:'Mhow→Ujjain',lt:'1d',  value:0,       channel:'transfer-first' },
+  { id:'sku-7',  code:'PD-0894', desc:'Diamond cluster pendant 0.4ct',velocity:0.6,  doc:17, qty:9,   unit:64000,  partner:'Goldiam',    lt:'6d',  value:576000,  channel:'vendor-po' },
+  { id:'sku-8',  code:'CN-1G',   desc:'1g 24k coin · MMTC',           velocity:14.2, doc:9,  qty:200, unit:7100,   partner:'MMTC-PAMP',  lt:'4d',  value:1420000, channel:'vendor-po' },
+  { id:'sku-9',  code:'CN-10G',  desc:'10g 24k bar · MMTC',           velocity:1.4,  doc:11, qty:30,  unit:71000,  partner:'MMTC-PAMP',  lt:'4d',  value:2130000, channel:'vendor-po' },
+  { id:'sku-10', code:'NV-0021', desc:'Heavy navratan · 88g',         velocity:0.04, doc:82, qty:0,   unit:1240000,partner:'—',          lt:'—',   value:0,       channel:'defer' }
+];
+function renderSKUQueue() {
+  const host = document.getElementById('rpl-queue-sku');
+  if (!host) return;
+  let html = '<table class="sku-table"><thead><tr><th></th><th>Code</th><th>Description</th><th>Velocity</th><th>DOC</th><th>Qty</th><th>Channel</th><th>Partner</th><th>LT</th><th>Value</th><th></th></tr></thead><tbody>';
+  replenishSKUs.forEach(s => {
+    const docBand = s.doc < 14 ? 'doc-red' : s.doc < 28 ? 'doc-amber' : 'doc-green';
+    const valDisplay = s.value > 0 ? '₹' + (s.value/100000).toFixed(1) + 'L' : '—';
+    html += `
+      <tr data-rpl-sku-id="${s.id}">
+        <td><span class="rpl-av av-tara" style="width:24px;height:24px;font-size:11px;">T</span></td>
+        <td class="mono">${s.code}</td>
+        <td>${s.desc}</td>
+        <td>${s.velocity}/wk</td>
+        <td class="${docBand}">${s.doc}d</td>
+        <td>${s.qty}</td>
+        <td><span class="chan-pill chan-${s.channel}">${RPL_CHANNEL_LABEL[s.channel]}</span></td>
+        <td>${s.partner}</td>
+        <td>${s.lt}</td>
+        <td><strong>${valDisplay}</strong></td>
+        <td><button class="rpl-btn go" onclick="toast('SKU ${s.code} · approve flow opens cluster slide-over in v1')">Approve</button></td>
+      </tr>`;
+  });
+  html += '</tbody></table>';
+  host.innerHTML = html;
+}
+
+/* ----- cross-workspace ribbon ----- */
+function renderRplXref() {
+  const host = document.getElementById('rpl-xref');
+  if (!host) return;
+  host.innerHTML = `
+    <div class="rpl-xref-link" onclick="switchWorkspace('melt')">
+      <span class="rpl-xref-icon">◉</span>
+      <span><strong>From Melt:</strong> 3.2 kg refined gold available this week — earmarked for Daily-wear chains WO →</span>
+    </div>
+    <div class="rpl-xref-link" onclick="switchWorkspace('allocation')">
+      <span class="rpl-xref-icon">⇪</span>
+      <span><strong>From Allocation:</strong> 5 transfer-first opportunities found before reordering →</span>
+    </div>
+    <div class="rpl-xref-link" onclick="switchWorkspace('schemes')">
+      <span class="rpl-xref-icon">◈</span>
+      <span><strong>To Schemes:</strong> Akshaya redemption forecast +₹18L diamond pull · adjust replenishment? →</span>
+    </div>
+  `;
+}
+
+/* ----- boot ----- */
+renderRplQueue();
+renderVelocityGrid();
+renderKarigarPane();
+renderVendorPOPane();
+renderSKUQueue();
+renderRplXref();
 </script>
 </body>
 </html>
