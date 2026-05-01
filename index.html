@@ -2545,10 +2545,31 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
 .rate-floating { color:var(--t-3); font-size:11px; }
 
 /* SKU table */
-.sku-table { width:100%; border-collapse:collapse; font-size:12px; }
+.rpl-search { padding:5px 10px; font-size:11px; background:var(--bg-3); border:1px solid var(--line-1); border-radius:5px; color:var(--t-1); width:200px; font-family:var(--sans); }
+.rpl-search:focus { outline:none; border-color:var(--ai); }
+.rpl-search::placeholder { color:var(--t-3); }
+
+.rpl-sku-kpis { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-bottom:14px; }
+.rpl-sku-kpi { padding:10px 14px; background:var(--bg-2); border:1px solid var(--line-1); border-radius:8px; }
+.rpl-sku-kpi .k { font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--t-3); margin-bottom:4px; }
+.rpl-sku-kpi .v { font-size:18px; font-weight:600; color:var(--t-1); font-family:var(--mono); letter-spacing:-0.01em; }
+.rpl-sku-kpi .v .unit { font-size:11px; font-weight:400; color:var(--t-3); margin-left:3px; }
+.rpl-sku-kpi.kpi-bad .v { color:var(--bad); }
+.rpl-sku-kpi.kpi-purple .v { color:var(--ai); }
+
+.sku-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:14px; }
 .sku-table th, .sku-table td { padding:9px 10px; text-align:left; border-bottom:1px solid var(--line-1); white-space:nowrap; }
 .sku-table th { font-size:10px; text-transform:uppercase; letter-spacing:0.04em; color:var(--t-3); background:var(--bg-2); font-weight:500; }
+.sku-table tbody tr { cursor:pointer; transition:background 0.12s; }
+.sku-table tbody tr:hover { background:var(--bg-2); }
+.sku-table tbody tr.sku-flash { background:var(--ai-bg); }
 .sku-table .mono { font-family:var(--mono); color:var(--t-1); }
+.sku-table .sku-doc-cell { display:flex; align-items:center; gap:5px; }
+.sku-table .sku-doc-cell .cell-trend { font-size:11px; font-weight:600; }
+.sku-table .sku-spark { width:50px; height:18px; display:inline-block; vertical-align:middle; }
+.sku-table .sku-val-cell { display:flex; align-items:center; gap:6px; justify-content:flex-start; }
+.sku-table .sku-val-cell .cell-vdots { font-size:9px; opacity:0.7; letter-spacing:1px; color:var(--t-3); }
+.sku-empty { padding:30px 16px; text-align:center; font-size:12px; color:var(--t-3); }
 .doc-red { color:var(--bad); font-weight:600; }
 .doc-amber { color:var(--warn); font-weight:500; }
 .doc-green { color:var(--ok); }
@@ -2990,7 +3011,57 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
           </div>
         </div>
         <div class="rpl-pane hidden" data-rpl-pane="sku">
-          <div class="rpl-sku-wrap" id="rpl-queue-sku"></div>
+          <div class="rpl-hero-grid">
+            <div class="rpl-hero-head">
+              <div class="rpl-hero-title">SKU-level decisions<span class="rpl-hero-sub" id="rpl-sku-sub">· click any row to drill in</span></div>
+              <div class="rpl-sku-kpis" id="rpl-sku-kpis"></div>
+              <div class="rpl-hero-toolbar">
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">Search</span>
+                  <input type="text" class="rpl-search" id="rpl-sku-search" placeholder="code or description…" />
+                </div>
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">Category</span>
+                  <div class="rpl-seg" id="rpl-sku-cat-seg">
+                    <button class="rpl-seg-btn on" data-skucat="all">All</button>
+                    <button class="rpl-seg-btn" data-skucat="gold">Gold</button>
+                    <button class="rpl-seg-btn" data-skucat="diamond">Diamond</button>
+                    <button class="rpl-seg-btn" data-skucat="bridal">Bridal</button>
+                  </div>
+                </div>
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">Channel</span>
+                  <div class="rpl-seg" id="rpl-sku-chan-seg">
+                    <button class="rpl-seg-btn on" data-skuchan="all">All</button>
+                    <button class="rpl-seg-btn" data-skuchan="vendor-po">Vendor PO</button>
+                    <button class="rpl-seg-btn" data-skuchan="karigar-wo">Karigar WO</button>
+                    <button class="rpl-seg-btn" data-skuchan="in-house">In-house</button>
+                    <button class="rpl-seg-btn" data-skuchan="transfer-first">Transfer</button>
+                    <button class="rpl-seg-btn" data-skuchan="defer">Defer</button>
+                  </div>
+                </div>
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">DOC band</span>
+                  <div class="rpl-seg" id="rpl-sku-band-seg">
+                    <button class="rpl-seg-btn on" data-skuband="all">All</button>
+                    <button class="rpl-seg-btn" data-skuband="red">Gap (&lt; 14d)</button>
+                    <button class="rpl-seg-btn" data-skuband="amber">Watch</button>
+                    <button class="rpl-seg-btn" data-skuband="purple">Over-stock</button>
+                  </div>
+                </div>
+                <div class="rpl-toolbar-grp">
+                  <span class="rpl-toolbar-lbl">Sort</span>
+                  <div class="rpl-seg" id="rpl-sku-sort-seg">
+                    <button class="rpl-seg-btn on" data-skusort="doc-asc">DOC ↑</button>
+                    <button class="rpl-seg-btn" data-skusort="vel-desc">Velocity ↓</button>
+                    <button class="rpl-seg-btn" data-skusort="val-desc">Value ↓</button>
+                    <button class="rpl-seg-btn" data-skusort="code">Code</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rpl-sku-wrap" id="rpl-queue-sku"></div>
+          </div>
         </div>
         <div class="rpl-pane hidden" data-rpl-pane="karigar">
           <div id="rpl-karigar-pane"></div>
@@ -5920,6 +5991,7 @@ document.addEventListener('click', e => {
   if (!pop || !pop.classList.contains('on')) return;
   if (pop.contains(e.target)) return;
   if (e.target.closest('.rpl-cell')) return;
+  if (e.target.closest('tr[data-rpl-sku-id]')) return;
   closeRplPop();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRplPop(); });
@@ -6214,42 +6286,259 @@ function renderVendorPOPane() {
 
 /* ----- by SKU tab ----- */
 const replenishSKUs = [
-  { id:'sku-1',  code:'GC-0418', desc:'4g rope chain',                velocity:1.8,  doc:9,  qty:24,  unit:18750,  partner:'K-01 Soni',  lt:'8d',  value:450000,  channel:'karigar-wo' },
-  { id:'sku-2',  code:'GC-0612', desc:'6g rope chain',                velocity:1.2,  doc:11, qty:18,  unit:28200,  partner:'K-09 Bai',   lt:'9d',  value:507600,  channel:'karigar-wo' },
-  { id:'sku-3',  code:'DR-1842', desc:'Round solitaire 0.5ct VVS',    velocity:0.4,  doc:11, qty:12,  unit:85000,  partner:'Karan&Co',   lt:'12d', value:1020000, channel:'vendor-po' },
-  { id:'sku-4',  code:'DR-2104', desc:'Halo solitaire 0.7ct',         velocity:0.3,  doc:14, qty:8,   unit:118000, partner:'Karan&Co',   lt:'12d', value:944000,  channel:'vendor-po' },
-  { id:'sku-5',  code:'BS-3401', desc:'Bridal · navratan + polki',    velocity:0.1,  doc:23, qty:4,   unit:842000, partner:'In-house',   lt:'18d', value:3368000, channel:'in-house' },
-  { id:'sku-6',  code:'BG-2201', desc:'22k filigree bangle · 18g',    velocity:1.6,  doc:8,  qty:14,  unit:148000, partner:'Mhow→Ujjain',lt:'1d',  value:0,       channel:'transfer-first' },
-  { id:'sku-7',  code:'PD-0894', desc:'Diamond cluster pendant 0.4ct',velocity:0.6,  doc:17, qty:9,   unit:64000,  partner:'Goldiam',    lt:'6d',  value:576000,  channel:'vendor-po' },
-  { id:'sku-8',  code:'CN-1G',   desc:'1g 24k coin · MMTC',           velocity:14.2, doc:9,  qty:200, unit:7100,   partner:'MMTC-PAMP',  lt:'4d',  value:1420000, channel:'vendor-po' },
-  { id:'sku-9',  code:'CN-10G',  desc:'10g 24k bar · MMTC',           velocity:1.4,  doc:11, qty:30,  unit:71000,  partner:'MMTC-PAMP',  lt:'4d',  value:2130000, channel:'vendor-po' },
-  { id:'sku-10', code:'NV-0021', desc:'Heavy navratan · 88g',         velocity:0.04, doc:82, qty:0,   unit:1240000,partner:'—',          lt:'—',   value:0,       channel:'defer' }
+  // Gold — chains
+  { id:'sku-01', code:'GC-0418', desc:'4g rope chain · daily-wear',          group:'gold',    velocity:1.8,  doc:9,   qty:24, unit:18750,  partner:'K-01 Soni',   lt:'8d',  value:450000,  channel:'karigar-wo', trend:'up'   },
+  { id:'sku-02', code:'GC-0612', desc:'6g rope chain · daily-wear',          group:'gold',    velocity:1.2,  doc:11,  qty:18, unit:28200,  partner:'K-09 Bai',    lt:'9d',  value:507600,  channel:'karigar-wo', trend:'up'   },
+  { id:'sku-03', code:'GC-0814', desc:'8g curb chain · evening',             group:'gold',    velocity:0.7,  doc:18,  qty:9,  unit:38400,  partner:'K-01 Soni',   lt:'9d',  value:345600,  channel:'karigar-wo', trend:'flat' },
+  { id:'sku-04', code:'GC-1218', desc:'12g figaro chain · gents',            group:'gold',    velocity:0.5,  doc:34,  qty:14, unit:56400,  partner:'K-12 Kumar',  lt:'10d', value:789600,  channel:'karigar-wo', trend:'flat' },
+  { id:'sku-05', code:'GC-2424', desc:'24g rope chain · 22k',                group:'gold',    velocity:0.2,  doc:71,  qty:8,  unit:112800, partner:'—',           lt:'—',   value:0,       channel:'defer',      trend:'dn'   },
+  // Gold — bangles
+  { id:'sku-06', code:'BG-2201', desc:'22k filigree bangle pair · 18g',      group:'gold',    velocity:1.6,  doc:8,   qty:14, unit:148000, partner:'Mhow→Ujjain', lt:'1d',  value:0,       channel:'transfer-first', trend:'up'   },
+  { id:'sku-07', code:'BG-2418', desc:'22k plain bangle pair · 22g',         group:'gold',    velocity:1.1,  doc:13,  qty:10, unit:170400, partner:'K-17 Mehra',  lt:'9d',  value:1704000, channel:'karigar-wo', trend:'up'   },
+  { id:'sku-08', code:'BG-3022', desc:'22k antique kada · 30g',              group:'gold',    velocity:0.3,  doc:46,  qty:6,  unit:236400, partner:'—',           lt:'—',   value:0,       channel:'defer',      trend:'flat' },
+  // Diamond — rings
+  { id:'sku-09', code:'DR-1842', desc:'Round solitaire 0.5ct VVS',           group:'diamond', velocity:0.4,  doc:11,  qty:12, unit:85000,  partner:'Karan&Co',    lt:'12d', value:1020000, channel:'vendor-po',  trend:'up'   },
+  { id:'sku-10', code:'DR-2104', desc:'Halo solitaire 0.7ct VS1',            group:'diamond', velocity:0.3,  doc:14,  qty:8,  unit:118000, partner:'Karan&Co',    lt:'12d', value:944000,  channel:'vendor-po',  trend:'up'   },
+  { id:'sku-11', code:'DR-2484', desc:'Three-stone trilogy 1.0ct',           group:'diamond', velocity:0.18, doc:22,  qty:5,  unit:280000, partner:'Karan&Co',    lt:'15d', value:1400000, channel:'vendor-po',  trend:'flat' },
+  { id:'sku-12', code:'DR-3210', desc:'Cocktail cluster 0.8ct',              group:'diamond', velocity:0.12, doc:31,  qty:6,  unit:185000, partner:'Goldiam',     lt:'10d', value:1110000, channel:'vendor-po',  trend:'flat' },
+  { id:'sku-13', code:'DR-4501', desc:'Mens band 0.4ct VS',                  group:'diamond', velocity:0.08, doc:62,  qty:4,  unit:142000, partner:'—',           lt:'—',   value:0,       channel:'defer',      trend:'dn'   },
+  // Diamond — pendants
+  { id:'sku-14', code:'PD-0894', desc:'Diamond cluster pendant 0.4ct',       group:'diamond', velocity:0.6,  doc:17,  qty:9,  unit:64000,  partner:'Goldiam',     lt:'6d',  value:576000,  channel:'vendor-po',  trend:'up'   },
+  { id:'sku-15', code:'PD-1212', desc:'Solitaire pendant 0.3ct',             group:'diamond', velocity:0.9,  doc:12,  qty:11, unit:48000,  partner:'Goldiam',     lt:'6d',  value:528000,  channel:'vendor-po',  trend:'up'   },
+  { id:'sku-16', code:'PD-1818', desc:'Halo pendant 0.5ct',                  group:'diamond', velocity:0.4,  doc:24,  qty:8,  unit:78000,  partner:'Goldiam',     lt:'7d',  value:624000,  channel:'vendor-po',  trend:'flat' },
+  // Bridal
+  { id:'sku-17', code:'BS-3401', desc:'Bridal · navratan + polki',           group:'bridal',  velocity:0.10, doc:23,  qty:4,  unit:842000, partner:'In-house',    lt:'18d', value:3368000, channel:'in-house',   trend:'up'   },
+  { id:'sku-18', code:'BS-3812', desc:'Bridal · kundan choker set',          group:'bridal',  velocity:0.08, doc:28,  qty:3,  unit:1140000,partner:'In-house',    lt:'21d', value:3420000, channel:'in-house',   trend:'up'   },
+  { id:'sku-19', code:'BS-4220', desc:'Bridal · temple polki long-haar',     group:'bridal',  velocity:0.04, doc:54,  qty:2,  unit:1860000,partner:'In-house',    lt:'28d', value:3720000, channel:'in-house',   trend:'flat' },
+  { id:'sku-20', code:'NV-0021', desc:'Heavy navratan necklace · 88g',       group:'bridal',  velocity:0.04, doc:82,  qty:0,  unit:1240000,partner:'—',           lt:'—',   value:0,       channel:'defer',      trend:'dn'   },
+  { id:'sku-21', code:'NV-0084', desc:'Polki rani-haar · 124g',              group:'bridal',  velocity:0.03, doc:96,  qty:0,  unit:1640000,partner:'—',           lt:'—',   value:0,       channel:'defer',      trend:'dn'   },
+  // Coins & bars
+  { id:'sku-22', code:'CN-1G',   desc:'1g 24k coin · MMTC',                  group:'gold',    velocity:14.2, doc:9,   qty:200,unit:7100,   partner:'MMTC-PAMP',   lt:'4d',  value:1420000, channel:'vendor-po',  trend:'up'   },
+  { id:'sku-23', code:'CN-5G',   desc:'5g 24k coin · MMTC',                  group:'gold',    velocity:6.8,  doc:11,  qty:60, unit:35500,  partner:'MMTC-PAMP',   lt:'4d',  value:2130000, channel:'vendor-po',  trend:'up'   },
+  { id:'sku-24', code:'CN-10G',  desc:'10g 24k bar · MMTC',                  group:'gold',    velocity:1.4,  doc:11,  qty:30, unit:71000,  partner:'MMTC-PAMP',   lt:'4d',  value:2130000, channel:'vendor-po',  trend:'up'   },
+  { id:'sku-25', code:'CN-50G',  desc:'50g 24k bar · MMTC',                  group:'gold',    velocity:0.4,  doc:38,  qty:8,  unit:355000, partner:'MMTC-PAMP',   lt:'5d',  value:2840000, channel:'vendor-po',  trend:'flat' }
 ];
+
+let rplSkuState = { search:'', cat:'all', chan:'all', band:'all', sort:'doc-asc' };
+
+function skuBand(s) {
+  if (s.doc < 14) return 'red';
+  if (s.doc >= 60) return 'purple';
+  if (s.doc < 28) return 'amber';
+  return 'green';
+}
+function skuSparklineData(s) {
+  const base = s.velocity / 7;
+  const out = [];
+  for (let i = 0; i < 30; i++) {
+    const seed = (s.id.charCodeAt(s.id.length-1) + i * 11) % 13;
+    const noise = (seed - 6) * 0.05;
+    const drift = s.trend === 'up' ? (i / 30) * 0.35 : s.trend === 'dn' ? -(i / 30) * 0.35 : 0;
+    out.push(Math.max(0, base * (1 + drift + noise)));
+  }
+  return out;
+}
+function skuSparkSvg(s, color) {
+  const data = skuSparklineData(s);
+  const path = sparklinePath(data, 50, 18);
+  return `<svg class="sku-spark" viewBox="0 0 50 18" preserveAspectRatio="none"><path d="${path}" stroke="${color}" stroke-width="1.2" fill="none" /></svg>`;
+}
+function skuValueTier(s) {
+  const max = Math.max(...replenishSKUs.map(x => x.unit * x.qty));
+  const v = s.unit * s.qty;
+  const r = max === 0 ? 0 : v / max;
+  if (r > 0.66) return '●●●';
+  if (r > 0.33) return '●●○';
+  if (r > 0.10) return '●○○';
+  return '○○○';
+}
+
 function renderSKUQueue() {
   const host = document.getElementById('rpl-queue-sku');
   if (!host) return;
-  let html = '<table class="sku-table"><thead><tr><th></th><th>Code</th><th>Description</th><th>Velocity</th><th>DOC</th><th>Qty</th><th>Channel</th><th>Partner</th><th>LT</th><th>Value</th><th></th></tr></thead><tbody>';
-  replenishSKUs.forEach(s => {
-    const docBand = s.doc < 14 ? 'doc-red' : s.doc < 28 ? 'doc-amber' : 'doc-green';
-    const valDisplay = s.value > 0 ? '₹' + (s.value/100000).toFixed(1) + 'L' : '—';
+
+  // Filtered + sorted set
+  const q = (rplSkuState.search || '').trim().toLowerCase();
+  let rows = replenishSKUs.filter(s => {
+    if (rplSkuState.cat  !== 'all' && s.group   !== rplSkuState.cat)  return false;
+    if (rplSkuState.chan !== 'all' && s.channel !== rplSkuState.chan) return false;
+    if (rplSkuState.band !== 'all' && skuBand(s) !== rplSkuState.band) return false;
+    if (q && !(s.code.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q))) return false;
+    return true;
+  });
+  rows.sort((a, b) => {
+    switch (rplSkuState.sort) {
+      case 'doc-asc':  return a.doc - b.doc;
+      case 'vel-desc': return b.velocity - a.velocity;
+      case 'val-desc': return (b.unit * b.qty) - (a.unit * a.qty);
+      case 'code':     return a.code.localeCompare(b.code);
+    }
+    return 0;
+  });
+
+  // KPIs
+  const kpiHost = document.getElementById('rpl-sku-kpis');
+  if (kpiHost) {
+    const total = rows.length;
+    const totalValue = rows.reduce((s,r) => s + r.unit * r.qty, 0);
+    const gap = rows.filter(r => skuBand(r) === 'red').length;
+    const overstock = rows.filter(r => skuBand(r) === 'purple').length;
+    kpiHost.innerHTML = `
+      <div class="rpl-sku-kpi"><div class="k">SKUs in view</div><div class="v">${total}<span class="unit">of ${replenishSKUs.length}</span></div></div>
+      <div class="rpl-sku-kpi"><div class="k">Stock value · in view</div><div class="v">₹${(totalValue/10000000).toFixed(2)}<span class="unit">Cr</span></div></div>
+      <div class="rpl-sku-kpi kpi-bad"><div class="k">Gap SKUs · DOC < 14d</div><div class="v">${gap}</div></div>
+      <div class="rpl-sku-kpi kpi-purple"><div class="k">Over-stock · DOC ≥ 60d</div><div class="v">${overstock}</div></div>
+    `;
+  }
+  const subEl = document.getElementById('rpl-sku-sub');
+  if (subEl) subEl.textContent = '· ' + rows.length + ' of ' + replenishSKUs.length + ' SKUs · click any row to drill in';
+
+  // Table
+  if (rows.length === 0) {
+    host.innerHTML = '<div class="sku-empty">No SKUs match the current filters · clear filters to see all ' + replenishSKUs.length + ' rows</div>';
+    return;
+  }
+  let html = '<table class="sku-table"><thead><tr><th>Code</th><th>Description</th><th>Velocity · 30d</th><th>DOC</th><th>Qty</th><th>Channel · partner</th><th>LT</th><th>Stock value</th><th></th></tr></thead><tbody>';
+  rows.forEach(s => {
+    const band = skuBand(s);
+    const docCls = band === 'red' ? 'doc-red' : band === 'purple' ? 'doc-amber' : band === 'amber' ? 'doc-amber' : 'doc-green';
+    const docTArr = { up:'↑', dn:'↓', flat:'→' };
+    const trendCol = s.trend === 'up' ? 'var(--ok)' : s.trend === 'dn' ? 'var(--bad)' : 'var(--t-3)';
+    const stockValue = s.unit * s.qty;
+    const valDisplay = stockValue >= 10000000 ? '₹' + (stockValue/10000000).toFixed(1) + 'Cr' : stockValue >= 100000 ? '₹' + (stockValue/100000).toFixed(1) + 'L' : stockValue > 0 ? '₹' + (stockValue/1000).toFixed(0) + 'k' : '—';
     html += `
-      <tr data-rpl-sku-id="${s.id}">
-        <td><span class="rpl-av av-tara" style="width:24px;height:24px;font-size:11px;">T</span></td>
+      <tr data-rpl-sku-id="${s.id}" onclick="openSkuPop('${s.id}', event)">
         <td class="mono">${s.code}</td>
         <td>${s.desc}</td>
-        <td>${s.velocity}/wk</td>
-        <td class="${docBand}">${s.doc}d</td>
+        <td>${skuSparkSvg(s, trendCol)}<span style="margin-left:6px; font-family:var(--mono); color:var(--t-2); font-size:11px;">${s.velocity}/wk</span></td>
+        <td><div class="sku-doc-cell"><span class="${docCls}" style="font-family:var(--mono); font-weight:600;">${s.doc}d</span><span class="cell-trend t-${s.trend}" style="color:${trendCol};">${docTArr[s.trend]}</span></div></td>
         <td>${s.qty}</td>
-        <td><span class="chan-pill chan-${s.channel}">${RPL_CHANNEL_LABEL[s.channel]}</span></td>
-        <td>${s.partner}</td>
+        <td><span class="chan-pill chan-${s.channel}">${RPL_CHANNEL_LABEL[s.channel]}</span><div style="font-size:10px; color:var(--t-3); margin-top:2px;">${s.partner}</div></td>
         <td>${s.lt}</td>
-        <td><strong>${valDisplay}</strong></td>
-        <td><button class="rpl-btn go" onclick="toast('SKU ${s.code} · approve flow opens cluster slide-over in v1')">Approve</button></td>
+        <td><div class="sku-val-cell"><strong>${valDisplay}</strong><span class="cell-vdots">${skuValueTier(s)}</span></div></td>
+        <td><button class="rpl-btn go" onclick="event.stopPropagation(); openSkuPop('${s.id}', event)">Approve</button></td>
       </tr>`;
   });
   html += '</tbody></table>';
   host.innerHTML = html;
 }
+
+function openSkuPop(skuId, ev) {
+  const s = replenishSKUs.find(x => x.id === skuId);
+  if (!s) return;
+  const band = skuBand(s);
+  const stockValue = s.unit * s.qty;
+
+  let taraText = '';
+  if (band === 'red') {
+    const reorderQty = Math.max(2, Math.round(s.velocity * 4));
+    taraText = `<strong>Reorder ${reorderQty} units</strong> via ${RPL_CHANNEL_LABEL[s.channel]} (${s.partner}) · est ₹${((reorderQty * s.unit)/100000).toFixed(1)}L · LT ${s.lt}`;
+  } else if (band === 'purple') {
+    taraText = `<strong>Move or melt</strong> · ${s.qty} pcs sitting · ${s.velocity < 0.2 ? 'recommend Melt + remake (slow mover)' : 'recommend transfer to high-velocity store'}`;
+  } else if (band === 'amber') {
+    taraText = `<strong>Watch</strong> · ${s.doc}d cover acceptable · trend ${s.trend === 'dn' ? 'dropping — pre-order in 7d' : s.trend === 'up' ? 'recovering' : 'stable'}`;
+  } else {
+    taraText = `<strong>Healthy</strong> · ${s.doc}d cover · no action needed`;
+  }
+
+  const spark = skuSparklineData(s);
+  const sparkPath = sparklinePath(spark, 100, 30);
+  const sparkColor = s.trend === 'up' ? 'var(--ok)' : s.trend === 'dn' ? 'var(--bad)' : 'var(--t-3)';
+
+  const popHtml = `
+    <div class="rpl-pop-head">
+      <div>
+        <div class="rpl-pop-title">${s.desc}</div>
+        <div class="rpl-pop-sub" style="font-family:var(--mono);">${s.code} · ${s.group}</div>
+      </div>
+      <button class="rpl-pop-close" onclick="closeRplPop()">×</button>
+    </div>
+    <div class="rpl-pop-bigrow">
+      <div>
+        <div class="rpl-pop-big">${s.doc}<span style="font-size:14px; color:var(--t-3); margin-left:2px;">d</span></div>
+        <div class="rpl-pop-bigsub">days-of-cover</div>
+      </div>
+      <div class="rpl-pop-spark">
+        <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+          <path d="${sparkPath}" stroke="${sparkColor}" stroke-width="1.4" fill="none" />
+          <path d="${sparkPath} L 100,30 L 0,30 Z" fill="${sparkColor}" opacity="0.12" />
+        </svg>
+        <div style="font-size:10px; color:var(--t-3); text-align:right; margin-top:1px; font-family:var(--mono);">30-day velocity · ${s.trend === 'up' ? '↑ rising' : s.trend === 'dn' ? '↓ falling' : '→ stable'}</div>
+      </div>
+    </div>
+    <div class="rpl-pop-grid">
+      <div class="rpl-pop-kv"><span class="k">Velocity</span><span class="v">${s.velocity}/wk</span></div>
+      <div class="rpl-pop-kv"><span class="k">On hand</span><span class="v">${s.qty} pcs</span></div>
+      <div class="rpl-pop-kv"><span class="k">Unit value</span><span class="v">₹${s.unit >= 100000 ? (s.unit/100000).toFixed(1) + 'L' : (s.unit/1000).toFixed(0) + 'k'}</span></div>
+      <div class="rpl-pop-kv"><span class="k">Stock value</span><span class="v">₹${stockValue >= 10000000 ? (stockValue/10000000).toFixed(1) + 'Cr' : stockValue >= 100000 ? (stockValue/100000).toFixed(1) + 'L' : (stockValue/1000).toFixed(0) + 'k'}</span></div>
+      <div class="rpl-pop-kv"><span class="k">Channel</span><span class="v" style="font-size:11px;">${RPL_CHANNEL_LABEL[s.channel]}</span></div>
+      <div class="rpl-pop-kv"><span class="k">Partner · LT</span><span class="v" style="font-size:11px;">${s.partner} · ${s.lt}</span></div>
+    </div>
+    <div class="rpl-pop-tara">
+      <div class="rpl-pop-tara-av">T</div>
+      <div class="rpl-pop-tara-text">${taraText}</div>
+    </div>
+    <div class="rpl-pop-actions">
+      ${(band === 'red') ? '<button class="rpl-btn go" onclick="skuPopApprove(\''+s.id+'\')">Approve Tara&apos;s plan</button>' : ''}
+      ${band === 'purple' ? '<button class="rpl-btn go" onclick="skuPopMoveMelt(\''+s.id+'\')">Move or melt</button>' : ''}
+      <button class="rpl-btn" onclick="closeRplPop()">Close</button>
+    </div>
+  `;
+  const pop = document.getElementById('rpl-pop');
+  pop.innerHTML = popHtml;
+  pop.classList.add('on');
+
+  const padding = 12, popW = 320;
+  const popH = pop.offsetHeight || 380;
+  let x = (ev?.clientX ?? window.innerWidth/2) + 12;
+  let y = (ev?.clientY ?? window.innerHeight/2) + 12;
+  if (x + popW + padding > window.innerWidth) x = window.innerWidth - popW - padding;
+  if (y + popH + padding > window.innerHeight) y = (ev?.clientY ?? window.innerHeight/2) - popH - 12;
+  if (y < padding) y = padding;
+  if (x < padding) x = padding;
+  pop.style.left = x + 'px';
+  pop.style.top = y + 'px';
+}
+function skuPopApprove(id) {
+  closeRplPop();
+  const s = replenishSKUs.find(x => x.id === id);
+  toast('Tara&apos;s plan approved · ' + s.code + ' · routing to approver chain');
+}
+function skuPopMoveMelt(id) {
+  closeRplPop();
+  const s = replenishSKUs.find(x => x.id === id);
+  toast('Move or melt · ' + s.code + ' · opening Melt workspace');
+  setTimeout(() => switchWorkspace('melt'), 600);
+}
+
+// SKU toolbar wiring (separate from heatmap toolbar)
+document.addEventListener('click', e => {
+  const seg = e.target.closest('.rpl-seg-btn');
+  if (!seg) return;
+  if (seg.dataset.skucat) {
+    rplSkuState.cat = seg.dataset.skucat;
+    document.querySelectorAll('#rpl-sku-cat-seg .rpl-seg-btn').forEach(b => b.classList.toggle('on', b === seg));
+    renderSKUQueue();
+  } else if (seg.dataset.skuchan) {
+    rplSkuState.chan = seg.dataset.skuchan;
+    document.querySelectorAll('#rpl-sku-chan-seg .rpl-seg-btn').forEach(b => b.classList.toggle('on', b === seg));
+    renderSKUQueue();
+  } else if (seg.dataset.skuband) {
+    rplSkuState.band = seg.dataset.skuband;
+    document.querySelectorAll('#rpl-sku-band-seg .rpl-seg-btn').forEach(b => b.classList.toggle('on', b === seg));
+    renderSKUQueue();
+  } else if (seg.dataset.skusort) {
+    rplSkuState.sort = seg.dataset.skusort;
+    document.querySelectorAll('#rpl-sku-sort-seg .rpl-seg-btn').forEach(b => b.classList.toggle('on', b === seg));
+    renderSKUQueue();
+  }
+});
+document.addEventListener('input', e => {
+  if (e.target.id === 'rpl-sku-search') {
+    rplSkuState.search = e.target.value;
+    renderSKUQueue();
+  }
+});
 
 /* ----- cross-workspace ribbon ----- */
 function renderRplXref() {
