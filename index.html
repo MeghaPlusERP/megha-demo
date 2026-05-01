@@ -2416,8 +2416,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
 .rpl-row .rpl-acts { display:flex; gap:6px; flex-wrap:wrap; }
 .rpl-btn { padding:6px 12px; font-size:12px; font-weight:500; border-radius:5px; border:1px solid var(--line-2); color:var(--t-2); background:var(--bg-2); cursor:pointer; transition:all 0.12s; }
 .rpl-btn:hover { background:var(--bg-3); color:var(--t-1); }
-.rpl-btn.go { background:var(--ai); color:#0b0b0e; border-color:var(--ai); }
-.rpl-btn.go:hover { background:#b599ff; }
+.rpl-btn.go { background:var(--ai); color:#fff; border-color:var(--ai); }
+.rpl-btn.go:hover { background:#b599ff; color:#fff; }
+[data-theme="light"] .rpl-btn.go { color:#fff; }
 .rpl-btn.ghost { border-color:transparent; background:transparent; color:var(--t-3); }
 .rpl-btn.ghost:hover { color:var(--t-1); background:var(--bg-2); }
 
