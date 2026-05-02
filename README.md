@@ -8,11 +8,13 @@ AI-first, jewellery-native ERP demo · merchandiser-facing daily workspace.
 
 A single-page HTML preview of the **Megha Retail** merchandiser console — built around 11 named AI agents that propose specific actions and execute after approval.
 
-8 workspaces are wired:
+10 workspaces are wired:
 
-- **Morning Brief** — today's actions across all agents
+- **Morning Brief** — today's actions across all agents (Lakshmi's K-04 escalation, Tara's waiver, Megha's transfer, Surya's melt, Neel's WO, Riya's commission, Daksh's scheme)
 - **Stores · Network View** — bird's-eye over all stores with matrix view + per-store slide-over
+- **Inventory** — Lakshmi's canonical asset register; ₹ Asset View (aging × category heatmap, karigar WIP exposure, memos, BIS HUID gaps, capital flow) + Units · Stock View (store × category grid, goods-in-transit, cycle counts); cross-workspace handoffs to Tara / Megha / Surya / Vidya
 - **Allocation** — pending decisions + 10-store inventory health grid
+- **Replenishment** — Tara's gap-to-order hub; cluster + SKU views, channel auto-pick across vendor PO / karigar WO / in-house, ₹50L approver threshold
 - **Discount & Waiver** — making-charge waiver pool, discipline by category, audit trail
 - **Melt & Remake** — jewellery-only slow-mover cycle (the differentiator)
 - **Schemes & Plans** — Gold / Diamond / Swarn Plus customer schemes
