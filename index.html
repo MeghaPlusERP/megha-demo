@@ -2582,6 +2582,113 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
 .chan-defer { background:var(--bg-3); color:var(--t-3); }
 .chan-split { background:rgba(167,139,250,0.16); color:var(--ai); }
 
+/* Inventory · structural classes assumed but not previously defined */
+.hidden { display:none !important; }
+.rpl-tab-pane.hidden { display:none !important; }
+
+.kpi-strip { display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:10px; margin:18px 0 24px; }
+.kpi-strip .kpi { padding:14px 16px; min-height:auto; overflow:visible; }
+.kpi-strip .kpi .lbl { font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--t-3); font-weight:500; }
+.kpi-strip .kpi .val { font-size:18px; font-weight:600; color:var(--t-1); margin-top:6px; font-family:var(--mono); line-height:1.2; }
+.kpi-strip .kpi .sub { font-size:11px; color:var(--t-3); margin-top:4px; }
+.kpi-strip .kpi .sub.muted { color:var(--t-4); }
+
+.rpl-grid { display:grid; align-items:stretch; }
+.rpl-cell-label { padding:10px 12px; font-size:12px; font-weight:500; color:var(--t-1); display:flex; flex-direction:column; justify-content:center; }
+.rpl-cell-head { padding:8px 6px; font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--t-3); font-weight:500; text-align:center; background:var(--bg-2); border-radius:4px; }
+
+.rpl-pill { display:inline-block; padding:2px 8px; font-size:11px; font-weight:500; border-radius:10px; white-space:nowrap; }
+.rpl-pill.ok { background:var(--ok-bg); color:var(--ok); }
+.rpl-pill.warn { background:var(--warn-bg); color:var(--warn); }
+.rpl-pill.bad { background:var(--bad-bg); color:var(--bad); }
+
+.rpl-conf-high { background:rgba(52,211,153,.20); color:#10b981; }
+.rpl-conf-mid  { background:var(--ai-bg); color:var(--ai); }
+.rpl-conf-low  { background:rgba(251,191,36,.20); color:#d97706; }
+
+.rpl-pop-h { font-size:13px; font-weight:600; color:var(--t-1); padding-bottom:8px; border-bottom:1px solid var(--line-1); margin-bottom:10px; }
+.rpl-pop-body { font-size:12px; color:var(--t-2); }
+
+.muted { color:var(--t-3); }
+.muted code { color:var(--t-2); background:var(--bg-2); padding:1px 5px; border-radius:3px; font-family:var(--mono); font-size:11px; }
+
+/* Inventory · aging heatmap                                       */
+.inv-aging-cell { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px 6px; gap:2px; min-height:64px; cursor:pointer; border-radius:6px; transition:transform .12s; }
+.inv-aging-cell:hover { transform:translateY(-1px); }
+.inv-aging-cell .v   { font-weight:600; font-size:13px; }
+.inv-aging-cell .u   { font-size:11px; opacity:.78; }
+.inv-aging-cell.b-green { background:rgba(52,211,153,.14); color:#10b981; }
+.inv-aging-cell.b-amber { background:rgba(251,191,36,.18); color:#d97706; }
+.inv-aging-cell.b-red   { background:rgba(248,113,113,.20); color:#ef4444; }
+.inv-aging-cell.b-cyan  { background:rgba(94,234,212,.16); color:#0d9488; }
+.inv-aging-cell.dim     { opacity:.32; }
+[data-theme="light"] .inv-aging-cell.b-green { background:rgba(16,185,129,.18); color:#047857; }
+[data-theme="light"] .inv-aging-cell.b-amber { background:rgba(217,119,6,.20); color:#b45309; }
+[data-theme="light"] .inv-aging-cell.b-red   { background:rgba(239,68,68,.22); color:#b91c1c; }
+[data-theme="light"] .inv-aging-cell.b-cyan  { background:rgba(13,148,136,.18); color:#0f766e; }
+
+/* Inventory · capital flow + table tweaks                         */
+.inv-flow-row { display:grid; grid-template-columns: 220px 1fr 110px 80px; align-items:center; gap:12px; padding:8px 12px; border-bottom:1px solid var(--line-1); }
+.inv-flow-bar { height:14px; border-radius:4px; background:linear-gradient(90deg, rgba(167,139,250,.45), rgba(167,139,250,.15)); }
+.inv-flow-row.dir-out  .inv-flow-bar { background:linear-gradient(90deg, rgba(248,113,113,.55), rgba(248,113,113,.20)); }
+.inv-flow-row.dir-risk .inv-flow-bar { background:linear-gradient(90deg, rgba(251,191,36,.55), rgba(251,191,36,.20)); }
+.inv-flow-row.dir-sub  .inv-flow-bar { background:linear-gradient(90deg, rgba(96,165,250,.55), rgba(96,165,250,.20)); }
+.inv-flow-row.dir-net  { font-weight:600; border-top:2px solid var(--line-1); border-bottom:none; }
+.inv-flow-val { font-weight:600; text-align:right; }
+.inv-flow-delta { text-align:right; font-size:12px; }
+.inv-flow-delta.up { color:#10b981; } .inv-flow-delta.dn { color:#ef4444; }
+.inv-section-h { font-weight:600; padding:18px 0 8px; font-size:15px; }
+.inv-section-sub { font-size:12px; opacity:.72; padding-bottom:10px; }
+.inv-table { width:100%; border-collapse:collapse; }
+.inv-table th { text-align:left; font-weight:500; font-size:12px; opacity:.72; padding:8px 10px; border-bottom:1px solid var(--line-1); }
+.inv-table td { padding:10px; border-bottom:1px solid var(--line-1); font-size:13px; }
+.inv-table tr.risk-CARO td { background:rgba(248,113,113,.08); }
+.inv-table tr.status-overdue td { background:rgba(248,113,113,.08); }
+.inv-table tr:hover td { background:rgba(167,139,250,.06); cursor:pointer; }
+
+/* Inventory · stock grid (Units view)                             */
+.inv-stock-cell { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px 6px; gap:2px; min-height:64px; cursor:pointer; border-radius:6px; transition:transform .12s; }
+.inv-stock-cell:hover { transform:translateY(-1px); }
+.inv-stock-cell .v   { font-weight:600; font-size:13px; }
+.inv-stock-cell .u   { font-size:11px; opacity:.78; }
+.inv-stock-cell.s-red    { background:rgba(248,113,113,.20); color:#ef4444; }
+.inv-stock-cell.s-amber  { background:rgba(251,191,36,.18); color:#d97706; }
+.inv-stock-cell.s-green  { background:rgba(52,211,153,.14); color:#10b981; }
+.inv-stock-cell.s-grey   { background:rgba(148,163,184,.18); color:#64748b; }
+.inv-stock-cell.dim      { opacity:.32; }
+[data-theme="light"] .inv-stock-cell.s-red    { background:rgba(239,68,68,.22);  color:#b91c1c; }
+[data-theme="light"] .inv-stock-cell.s-amber  { background:rgba(217,119,6,.20);  color:#b45309; }
+[data-theme="light"] .inv-stock-cell.s-green  { background:rgba(16,185,129,.18); color:#047857; }
+[data-theme="light"] .inv-stock-cell.s-grey   { background:rgba(100,116,139,.20);color:#475569; }
+
+/* Inventory · GIT timeline                                         */
+.inv-transit-lane { display:grid; grid-template-columns: 110px 1fr 110px 90px 80px; gap:12px; align-items:center; padding:10px 12px; border-bottom:1px solid var(--line-1); }
+.inv-transit-lane:hover { background:rgba(167,139,250,.06); cursor:pointer; }
+.inv-transit-pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:500; }
+.inv-transit-pill.ch-vendor      { background:rgba(96,165,250,.20); color:#3b82f6; }
+.inv-transit-pill.ch-karigar     { background:rgba(251,146,60,.20); color:#ea580c; }
+.inv-transit-pill.ch-transfer    { background:rgba(167,139,250,.20); color:#8b5cf6; }
+.inv-transit-pill.ch-memo-recall { background:rgba(248,113,113,.20); color:#ef4444; }
+.inv-transit-bar { height:10px; border-radius:3px; background:linear-gradient(90deg, rgba(167,139,250,.50), rgba(167,139,250,.18)); margin-top:6px; }
+.inv-transit-bar.late { background:linear-gradient(90deg, rgba(248,113,113,.55), rgba(248,113,113,.20)); }
+.inv-transit-eta   { font-size:12px; opacity:.78; }
+.inv-transit-late  { font-weight:600; color:#ef4444; font-size:12px; }
+.inv-transit-ontime{ color:#10b981; font-size:12px; }
+
+/* Inventory · cross-workspace ribbon                              */
+.inv-xref { display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; padding:18px 0; border-top:1px solid var(--line-1); margin-top:24px; }
+.inv-xref-h-row { grid-column:1/-1; padding:8px 0; font-size:12px; opacity:.72; }
+.inv-xref-card { padding:16px; border-radius:10px; background:rgba(167,139,250,.08); cursor:pointer; transition:transform .12s, background .12s; border:1px solid var(--line-1); }
+.inv-xref-card:hover { transform:translateY(-2px); background:rgba(167,139,250,.14); }
+.inv-xref-h { font-weight:600; font-size:14px; margin-bottom:6px; }
+.inv-xref-context { font-size:12px; opacity:.78; line-height:1.5; }
+.inv-xref-arrow { font-size:13px; color:#a78bfa; margin-top:8px; }
+
+/* Inventory · approve slide-over artefacts                        */
+.inv-slide-section { margin:18px 0; padding:14px; border-radius:8px; background:rgba(167,139,250,.06); border:1px solid var(--line-1); }
+.inv-slide-h { font-weight:600; font-size:13px; margin-bottom:6px; }
+.inv-slide-meta { font-size:12px; opacity:.78; line-height:1.5; }
+
 /* Slide-over inner blocks for Replenishment */
 .rpl-slide-section { margin-bottom:20px; }
 .rpl-slide-h { font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--t-3); margin-bottom:9px; font-weight:500; }
@@ -2637,11 +2744,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
     <aside class="rail">
       <div class="grp">
         <div class="grp-l">Today</div>
-        <div class="nav on" data-ws="brief"><span class="ico">◇</span>Morning Brief<span class="ct alert">6</span></div>
+        <div class="nav on" data-ws="brief"><span class="ico">◇</span>Morning Brief<span class="ct alert">7</span></div>
       </div>
       <div class="grp">
         <div class="grp-l">Network</div>
         <div class="nav" data-ws="stores"><span class="ico">▦</span>Stores · Network View</div>
+        <div class="nav" data-ws="inventory"><span class="ico">◊</span>Inventory<span class="ct alert">7</span></div>
       </div>
       <div class="grp">
         <div class="grp-l">Workspaces</div>
@@ -2675,7 +2783,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
       <div class="ws ws-active" id="ws-brief">
       <div class="greet">
         <h1>Good morning, Arun.</h1>
-        <div class="lead"><span class="lead-st">6 actions waiting</span> — <span class="lead-imp">₹1.4 Cr</span> in margin and unlocked stock + <span class="lead-imp">₹2.1 Cr</span> scheme redemptions this week.</div>
+        <div class="lead"><span class="lead-st">7 actions waiting</span> — <span class="lead-imp">₹1.4 Cr</span> in margin and unlocked stock + <span class="lead-imp">₹2.1 Cr</span> scheme redemptions this week.</div>
         <div class="sub">Tuesday · 1 May · <span class="fest-tag">Akshaya Tritiya in 8 days</span></div>
       </div>
 
@@ -2727,6 +2835,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
       <div class="aq">
         <div class="aq-h">Today's actions · waiting on you</div>
         <div class="aq-list" id="aq-list">
+          <div class="aq-row" data-key="lakshmi1">
+            <div class="aq-av av-lakshmi">L</div>
+            <div class="aq-body">
+              <div class="aq-t1"><span class="ag">Lakshmi</span>Escalate <strong>K-04 ₹64L gold on deposit</strong> · 47d outstanding · MD route</div>
+              <div class="aq-t2">CARO 2020 inventory clause trigger · last 3 deliveries on time · process gap, not vendor risk</div>
+            </div>
+            <div class="aq-imp">₹64 L<small>CARO disclosure</small></div>
+          </div>
           <div class="aq-row" data-key="tara1">
             <div class="aq-av av-tara">T</div>
             <div class="aq-body">
@@ -2779,6 +2895,42 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
         <div class="aq-foot"><a href="#">View all 47 actions →</a></div>
       </div>
       </div><!-- /ws-brief -->
+
+      <!-- Inventory workspace -->
+      <div class="ws" id="ws-inventory">
+        <div class="ws-head">
+          <h1>Inventory</h1>
+          <p class="ws-sub"><span class="ag">Lakshmi</span> stewardship of <strong>₹14.8 Cr</strong> in stock + WIP · BIS HUID <strong>97.4%</strong> · stock count due at <strong>3 stores</strong></p>
+        </div>
+
+        <div class="kpi-strip" id="inv-kpi-strip"><!-- renderInvKpiStrip() --></div>
+
+        <div class="rpl-queue-section">
+          <div class="rpl-queue-h">Lakshmi's queue · stewardship + cross-agent handoffs</div>
+          <div class="rpl-queue" id="inv-queue"><!-- renderInvQueue() --></div>
+        </div>
+
+        <div class="rpl-tabs">
+          <button class="rpl-tab on" data-inv-tab="asset">By ₹ · Asset View</button>
+          <button class="rpl-tab"    data-inv-tab="units">By Units · Stock View</button>
+        </div>
+
+        <div class="rpl-tab-pane" data-inv-pane="asset">
+          <div class="rpl-hero-grid" id="inv-aging-section"><!-- renderAgingHeatmap() --></div>
+          <div id="inv-karigar-section"><!-- renderKarigarExposure() --></div>
+          <div id="inv-memos-section"><!-- renderMemosLedger() --></div>
+          <div id="inv-bis-section"><!-- renderBISGaps() --></div>
+          <div id="inv-flow-section"><!-- renderCapitalFlow() --></div>
+        </div>
+
+        <div class="rpl-tab-pane hidden" data-inv-pane="units">
+          <div class="rpl-hero-grid" id="inv-stock-section"><!-- renderStockGrid() --></div>
+          <div id="inv-transit-section"><!-- renderGoodsInTransit() --></div>
+          <div id="inv-cycle-section"><!-- renderCycleCounts() --></div>
+        </div>
+
+        <div class="rpl-xref" id="inv-xref"><!-- renderInvXref() --></div>
+      </div><!-- /ws-inventory -->
 
       <div class="ws" id="ws-allocation">
         <div class="ws-head">
@@ -3470,6 +3622,27 @@ button { font-family: inherit; cursor: pointer; border: none; background: transp
             <div>Event</div>
             <div class="feed-status">Decision · identity</div>
             <div>Tag</div>
+          </div>
+          <div class="feed-row">
+            <div class="feed-time">09:48</div>
+            <div class="feed-agent"><span class="av av-lakshmi">L</span>Lakshmi</div>
+            <div class="feed-event">Escalated <strong>K-04 ₹64L gold on deposit</strong> · 47d outstanding · MD route + Vidya disclosure pack</div>
+            <div class="feed-status">Auto · CARO 2020 inventory clause<small>ref inv-001 · 09:48:02 IST</small></div>
+            <div><span class="feed-tag override">Inventory</span></div>
+          </div>
+          <div class="feed-row">
+            <div class="feed-time">09:46</div>
+            <div class="feed-agent"><span class="av av-lakshmi">L</span>Lakshmi</div>
+            <div class="feed-event">Auto-recall draft for <strong>memo M-2024-118</strong> · Mrs. Banerjee · ₹14L bridal · 45d out</div>
+            <div class="feed-status">Auto · 30d band breach<small>ref inv-002 · Veda handoff attached</small></div>
+            <div><span class="feed-tag override">Inventory</span></div>
+          </div>
+          <div class="feed-row">
+            <div class="feed-time">09:44</div>
+            <div class="feed-agent"><span class="av av-lakshmi">L</span>Lakshmi</div>
+            <div class="feed-event">BIS HUID tagging session scheduled · <strong>Indore · 23 pieces</strong> · May 3 floor-staff slot</div>
+            <div class="feed-status">Auto · within compliance band<small>ref inv-003 · pre-Akshaya</small></div>
+            <div><span class="feed-tag bis">BIS HUID</span></div>
           </div>
           <div class="feed-row">
             <div class="feed-time">09:42</div>
@@ -5423,6 +5596,7 @@ document.body.addEventListener('click', e => {
 const wsCrumbs = {
   brief: { prefix: 'Today', title: 'Morning Brief' },
   stores: { prefix: 'Network', title: 'Stores · Network View' },
+  inventory: { prefix: 'Network', title: 'Inventory' },
   allocation: { prefix: 'Stock Flow', title: 'Allocation' },
   replenish: { prefix: 'Stock Flow', title: 'Replenishment' },
   melt: { prefix: 'Stock Flow', title: 'Melt & Remake' },
@@ -5627,6 +5801,216 @@ const replenishClusters = [
 function rplAvLetter(primary) {
   return 'T'; // Tara owns all replenishment proposals in this version
 }
+
+/* ===================== Inventory · Lakshmi · data ===================== */
+
+const INV_TARGET_LABEL = {
+  'cfo-escalate':   'CFO escalate',
+  'md-route':       'MD route',
+  'self-execute':   'self-execute',
+  'to-surya':       '→ Surya · Melt',
+  'to-megha':       '→ Megha · Allocation',
+  'to-tara':        '→ Tara · Replenishment',
+  'to-vidya':       '→ Vidya · Audit',
+  'to-veda':        '→ Veda · Customer'
+};
+
+const inventoryActions = [
+  { id:'inv-001', title:"K-04 has ₹64L gold on deposit, 47 days outstanding — escalate",
+    why:"Threshold breached (>30d AND >₹50L) · CARO 2020 inventory clause trigger · last 3 deliveries on time so it's a process gap, not vendor risk",
+    target:'md-route', extra:'+ Vidya audit', primary:'caro-escalate', confidence:92, value:6400000, threshold:'md', skuCount:1 },
+  { id:'inv-002', title:"Auto-recall memo M-2024-118 — Mrs. Banerjee, ₹14L bridal set, 45 days out",
+    why:"Beyond 30-day band · 3 customer reminders sent · no response · BIS HUID exposure on unbilled piece in customer's possession",
+    target:'to-veda', extra:'+ Vidya audit', primary:'memo-recall', confidence:88, value:1400000, threshold:'cfo', skuCount:1 },
+  { id:'inv-003', title:"BIS HUID tag-out at Indore · 23 pieces · before Akshaya in 9 days",
+    why:"Pre-festival enforcement window · last batch tagged Mar 28 · floor-staff slot available May 3 · self-executable within compliance band",
+    target:'self-execute', extra:'tagging session May 3', primary:'bis-tag', confidence:95, value:2280000, threshold:'cfo', skuCount:23 },
+  { id:'inv-004', title:"Send ₹47L aged 365+ at Ratlam to Surya for melt review",
+    why:"12 heavyweight bridal pieces, 0 sales last 90 days · gold rate +0.4% w/w favorable · Surya cycle slot M-198 open",
+    target:'to-surya', extra:'cycle M-198', primary:'aged-handoff', confidence:90, value:4700000, threshold:'cfo', skuCount:12 },
+  { id:'inv-005', title:"Schedule cycle count at Bhopal-flagship · 91 days since last",
+    why:"Industry standard 60d · last count 0.18% variance · Akshaya footfall increases shrinkage risk · audit slot Apr 30 free",
+    target:'self-execute', extra:'audit Apr 30', primary:'cycle-schedule', confidence:87, value:0, threshold:'cfo', skuCount:1247 },
+  { id:'inv-006', title:"AVL shortfall at Udaipur-BB · 28 daily-wear chains · flag to Megha",
+    why:"AVL = 6 vs safety 34 · transfer faster than commission (3-day vs 7-day Karigar lead) · Indore has 47 idle units of same SKU group",
+    target:'to-megha', extra:'transfer', primary:'avl-shortfall', confidence:86, value:1820000, threshold:'cfo', skuCount:28 },
+  { id:'inv-007', title:"Assemble Q1 governance pack for Vidya · WIP + memos + BIS",
+    why:"Quarter close May 15 · LODR Reg 30 disclosure window · CARO 2020 Schedule III items · auto-aggregable from current ledgers",
+    target:'to-vidya', extra:'May 15 close', primary:'audit-pack', confidence:91, value:0, threshold:'cfo', skuCount:0 }
+];
+
+const invCats = [
+  { key:'gold-chain',  label:'Gold-22k chains',   group:'gold' },
+  { key:'gold-bangle', label:'Gold-22k bangles',  group:'gold' },
+  { key:'gold-ear',    label:'Gold-22k earrings', group:'gold' },
+  { key:'dia-ring',    label:'Diamond rings',     group:'diamond' },
+  { key:'dia-pend',    label:'Diamond pendants',  group:'diamond' },
+  { key:'bridal',      label:'Bridal sets',       group:'bridal' },
+  { key:'solitaire',   label:'Solitaires',        group:'diamond' },
+  { key:'silver',      label:'Silver + coins',    group:'silver' }
+];
+
+const invBuckets = [
+  { key:'b1', label:'0–90d',    band:'green' },
+  { key:'b2', label:'90–180d',  band:'green' },
+  { key:'b3', label:'180–365d', band:'amber' },
+  { key:'b4', label:'365+',     band:'red'   },
+  { key:'b5', label:'In motion',band:'cyan'  }
+];
+
+const agingMatrix = [
+  { cat:'gold-chain',  bucket:'b1', rupees: 14200000, units:218 },
+  { cat:'gold-chain',  bucket:'b2', rupees:  6800000, units: 92 },
+  { cat:'gold-chain',  bucket:'b3', rupees:  1800000, units: 24 },
+  { cat:'gold-chain',  bucket:'b4', rupees:   620000, units:  8 },
+  { cat:'gold-chain',  bucket:'b5', rupees:  3400000, units: 48 },
+  { cat:'gold-bangle', bucket:'b1', rupees: 18600000, units:142 },
+  { cat:'gold-bangle', bucket:'b2', rupees: 12400000, units: 88 },
+  { cat:'gold-bangle', bucket:'b3', rupees:  4800000, units: 32 },
+  { cat:'gold-bangle', bucket:'b4', rupees:  3900000, units: 22 },
+  { cat:'gold-bangle', bucket:'b5', rupees:  2100000, units: 16 },
+  { cat:'gold-ear',    bucket:'b1', rupees:  8400000, units:184 },
+  { cat:'gold-ear',    bucket:'b2', rupees:  4200000, units: 92 },
+  { cat:'gold-ear',    bucket:'b3', rupees:  1900000, units: 44 },
+  { cat:'gold-ear',    bucket:'b4', rupees:   780000, units: 18 },
+  { cat:'gold-ear',    bucket:'b5', rupees:  1200000, units: 26 },
+  { cat:'dia-ring',    bucket:'b1', rupees: 11800000, units: 64 },
+  { cat:'dia-ring',    bucket:'b2', rupees:  7600000, units: 38 },
+  { cat:'dia-ring',    bucket:'b3', rupees:  4200000, units: 22 },
+  { cat:'dia-ring',    bucket:'b4', rupees:  2800000, units: 14 },
+  { cat:'dia-ring',    bucket:'b5', rupees:   980000, units:  6 },
+  { cat:'dia-pend',    bucket:'b1', rupees:  6200000, units: 48 },
+  { cat:'dia-pend',    bucket:'b2', rupees:  3800000, units: 28 },
+  { cat:'dia-pend',    bucket:'b3', rupees:  1700000, units: 12 },
+  { cat:'dia-pend',    bucket:'b4', rupees:   620000, units:  4 },
+  { cat:'dia-pend',    bucket:'b5', rupees:   380000, units:  3 },
+  { cat:'bridal',      bucket:'b1', rupees: 14800000, units: 12 },
+  { cat:'bridal',      bucket:'b2', rupees: 22600000, units: 18 },
+  { cat:'bridal',      bucket:'b3', rupees: 18400000, units: 14 },
+  { cat:'bridal',      bucket:'b4', rupees: 14700000, units: 12 },
+  { cat:'bridal',      bucket:'b5', rupees:  6800000, units:  5 },
+  { cat:'solitaire',   bucket:'b1', rupees:  7400000, units: 11 },
+  { cat:'solitaire',   bucket:'b2', rupees:  9200000, units: 14 },
+  { cat:'solitaire',   bucket:'b3', rupees:  4600000, units:  6 },
+  { cat:'solitaire',   bucket:'b4', rupees:  2900000, units:  4 },
+  { cat:'solitaire',   bucket:'b5', rupees:   620000, units:  1 },
+  { cat:'silver',      bucket:'b1', rupees:  3600000, units:842 },
+  { cat:'silver',      bucket:'b2', rupees:  1400000, units:312 },
+  { cat:'silver',      bucket:'b3', rupees:   540000, units:118 },
+  { cat:'silver',      bucket:'b4', rupees:   180000, units: 38 },
+  { cat:'silver',      bucket:'b5', rupees:   720000, units:148 }
+];
+
+const karigarWIP = [
+  { id:'K-04', name:'Vipul Soni',     cluster:'Indore',  issued:4200, returned:3180, daysOut:47, lastDelivery:'Apr 12', riskBand:'CARO',  vouchers:['V-04-2024-038','V-04-2024-041','V-04-2024-044'] },
+  { id:'K-21', name:'Hemant Kothari', cluster:'Bhopal',  issued:2800, returned:2120, daysOut:38, lastDelivery:'Apr 18', riskBand:'CARO',  vouchers:['V-21-2024-019','V-21-2024-022'] },
+  { id:'K-28', name:'Ramesh Verma',   cluster:'Udaipur', issued:1980, returned:1440, daysOut:31, lastDelivery:'Apr 22', riskBand:'CARO',  vouchers:['V-28-2024-014'] },
+  { id:'K-01', name:'Rajesh Karigar', cluster:'Bhopal',  issued:3600, returned:3320, daysOut:12, lastDelivery:'Apr 28', riskBand:'clean', vouchers:['V-01-2024-051','V-01-2024-053'] },
+  { id:'K-08', name:'Mahesh Soni',    cluster:'Indore',  issued:2400, returned:2280, daysOut: 8, lastDelivery:'May 01', riskBand:'clean', vouchers:['V-08-2024-027'] },
+  { id:'K-12', name:'Sunil Mehta',    cluster:'Ratlam',  issued:1600, returned:1480, daysOut:15, lastDelivery:'Apr 25', riskBand:'watch', vouchers:['V-12-2024-018'] },
+  { id:'K-15', name:'Pradeep Jain',   cluster:'Ujjain',  issued:1200, returned:1140, daysOut: 6, lastDelivery:'May 02', riskBand:'clean', vouchers:['V-15-2024-009'] },
+  { id:'K-19', name:'Ashok Sancheti', cluster:'Bhopal',  issued: 980, returned: 920, daysOut:22, lastDelivery:'Apr 22', riskBand:'watch', vouchers:['V-19-2024-007'] },
+  { id:'K-32', name:'Dilip Bhandari', cluster:'Udaipur', issued: 720, returned: 680, daysOut: 4, lastDelivery:'May 02', riskBand:'clean', vouchers:['V-32-2024-005'] }
+];
+
+const memos = [
+  { id:'M-2024-118', customer:'Mrs. Banerjee', store:'Bhopal-flagship', pieces:1, kind:'1 bridal set',          value:1400000, daysOut:45, status:'overdue', recallDraft:true  },
+  { id:'M-2024-203', customer:'Mr. Singhvi',   store:'Udaipur-BB',      pieces:3, kind:'3 bridal sets',         value:3800000, daysOut: 9, status:'within',  recallDraft:false },
+  { id:'M-2024-211', customer:'Mr. Goel',      store:'Indore',          pieces:2, kind:'2 daily-wear chains',   value: 280000, daysOut: 5, status:'within',  recallDraft:false },
+  { id:'M-2024-186', customer:'Mrs. Arora',    store:'Bhopal-flagship', pieces:1, kind:'1 solitaire ring',      value: 480000, daysOut:38, status:'overdue', recallDraft:true  },
+  { id:'M-2024-220', customer:'Mr. Bansal',    store:'Indore',          pieces:1, kind:'1 diamond pendant',     value: 220000, daysOut: 3, status:'within',  recallDraft:false },
+  { id:'M-2024-194', customer:'Mrs. Saxena',   store:'Ratlam',          pieces:2, kind:'2 gold bangles',        value: 380000, daysOut:18, status:'stretch',recallDraft:false },
+  { id:'M-2024-225', customer:'Mr. Vyas',      store:'Ujjain',          pieces:1, kind:'1 antique kundan',      value: 180000, daysOut: 2, status:'within',  recallDraft:false },
+  { id:'M-2024-208', customer:'Mrs. Mehta',    store:'Bhilwara',        pieces:1, kind:'1 bridal earring set',  value: 320000, daysOut:14, status:'within',  recallDraft:false },
+  { id:'M-2024-217', customer:'Mr. Soni',      store:'Bhopal-flagship', pieces:3, kind:'3 light-weight chains', value: 180000, daysOut:11, status:'within',  recallDraft:false },
+  { id:'M-2024-201', customer:'Mrs. Sharma',   store:'Udaipur-BB',      pieces:1, kind:'1 polki necklace',      value: 760000, daysOut:24, status:'stretch',recallDraft:false },
+  { id:'M-2024-227', customer:'Mr. Kothari',   store:'Indore',          pieces:1, kind:"1 men's gold chain",    value: 140000, daysOut: 1, status:'within',  recallDraft:false },
+  { id:'M-2024-180', customer:'Mrs. Pareek',   store:'Bhopal-flagship', pieces:1, kind:'1 antique kada',        value: 240000, daysOut:42, status:'overdue', recallDraft:true  },
+  { id:'M-2024-216', customer:'Mr. Jain',      store:'Neemuch',         pieces:2, kind:'2 silver coin sets',    value:  84000, daysOut: 7, status:'within',  recallDraft:false },
+  { id:'M-2024-198', customer:'Mrs. Tiwari',   store:'Dhar',            pieces:1, kind:'1 diamond ring',        value: 280000, daysOut:21, status:'stretch',recallDraft:false }
+];
+
+const bisGaps = [
+  { store:'Indore',          category:'Gold-22k chains',   untagged:23, exposureValue:2280000, lastBatchDate:'Mar 28' },
+  { store:'Bhopal-flagship', category:'Gold-22k bangles',  untagged:18, exposureValue:1980000, lastBatchDate:'Mar 30' },
+  { store:'Udaipur-BB',      category:'Diamond rings',     untagged:11, exposureValue:1420000, lastBatchDate:'Apr 02' },
+  { store:'Ratlam',          category:'Gold-22k earrings', untagged:14, exposureValue: 680000, lastBatchDate:'Apr 04' },
+  { store:'Ujjain',          category:'Silver + coins',    untagged:42, exposureValue: 220000, lastBatchDate:'Apr 06' }
+];
+const bisSummary = { taggedPct: 97.4, untaggedTotal: 412, deadlineLabel: 'Akshaya in 9 days' };
+
+const capitalFlow = [
+  { label:'Vendor PO inflow',           direction:'in',   value: 12400000, deltaPct:  4.2 },
+  { label:'Karigar return inflow',      direction:'in',   value:  8600000, deltaPct: -2.8 },
+  { label:'Stock added (subtotal)',     direction:'sub',  value: 21000000, deltaPct:  1.6 },
+  { label:'Sold (out)',                 direction:'out',  value:-18400000, deltaPct:  6.4 },
+  { label:'Aged into 365+ (drift)',     direction:'risk', value: -2200000, deltaPct: 12.1 },
+  { label:'Melt cycle released',        direction:'in',   value:  3200000, deltaPct: 18.4 },
+  { label:'Net stock movement',         direction:'net',  value:  3600000, deltaPct:  0.8 }
+];
+
+const invStores = [
+  { key:'bhopal',     label:'Bhopal-flagship', tier:'t1' },
+  { key:'indore',     label:'Indore',          tier:'t1' },
+  { key:'udaipur-bb', label:'Udaipur-BB',      tier:'t1' },
+  { key:'udaipur-cc', label:'Udaipur-CC',      tier:'t2' },
+  { key:'ratlam',     label:'Ratlam',          tier:'t2' },
+  { key:'ujjain',     label:'Ujjain',          tier:'t2' },
+  { key:'bhilwara',   label:'Bhilwara',        tier:'t3' },
+  { key:'neemuch',    label:'Neemuch',         tier:'t3' },
+  { key:'dhar',       label:'Dhar',            tier:'t3' },
+  { key:'banswara',   label:'Banswara',        tier:'t3' }
+];
+
+const stockGrid = (function() {
+  const rows = [];
+  invStores.forEach((s, sIdx) => {
+    invCats.forEach((c, cIdx) => {
+      const seed = (s.key.charCodeAt(0) * 13 + c.key.charCodeAt(0) * 7 + sIdx * 3 + cIdx);
+      const tierMult = s.tier === 't1' ? 1.0 : s.tier === 't2' ? 0.62 : 0.34;
+      const baseUnits = c.group === 'silver' ? 240 : c.group === 'gold' ? 84 : c.group === 'bridal' ? 8 : 38;
+      const units = Math.max(2, Math.round(baseUnits * tierMult * (0.7 + (seed % 60) / 100)));
+      const avlUnits = Math.max(1, Math.round(units * (0.78 + (seed % 18) / 100)));
+      const avgUnitValue = c.group === 'bridal' ? 1200000 : c.group === 'gold' ? 92000 : c.group === 'diamond' ? 84000 : c.group === 'silver' ? 4200 : 60000;
+      const value = units * avgUnitValue;
+      rows.push({ store:s.key, cat:c.key, units, avlUnits, value, seed });
+    });
+  });
+  return rows;
+})();
+
+const goodsInTransit = [
+  { id:'GIT-001', channel:'vendor',      source:'Vendor SKM-2024-04-211', dest:'Bhopal-flagship', pieces:8,  value: 640000, eta:'May 5', etaDay:5, status:'on-time', owningAgent:'Aarav',   lateDays:0 },
+  { id:'GIT-002', channel:'vendor',      source:'Vendor MNK-2024-04-198', dest:'Indore',          pieces:14, value:1180000, eta:'May 5', etaDay:5, status:'on-time', owningAgent:'Aarav',   lateDays:0 },
+  { id:'GIT-003', channel:'karigar',     source:'Karigar K-01',           dest:'Indore',          pieces:18, value:1400000, eta:'May 6', etaDay:6, status:'on-time', owningAgent:'Neel',    lateDays:0 },
+  { id:'GIT-004', channel:'karigar',     source:'Karigar K-08',           dest:'Bhopal-flagship', pieces:12, value: 920000, eta:'May 4', etaDay:4, status:'on-time', owningAgent:'Neel',    lateDays:0 },
+  { id:'GIT-005', channel:'karigar',     source:'Karigar K-15',           dest:'Ujjain',          pieces:6,  value: 480000, eta:'May 3', etaDay:3, status:'on-time', owningAgent:'Neel',    lateDays:0 },
+  { id:'GIT-006', channel:'transfer',    source:'Bhopal-flagship',        dest:'Udaipur-BB',      pieces:12, value:4700000, eta:'May 4', etaDay:4, status:'on-time', owningAgent:'Megha',   lateDays:0 },
+  { id:'GIT-007', channel:'transfer',    source:'Indore',                 dest:'Bhilwara',        pieces:24, value: 360000, eta:'May 4', etaDay:4, status:'on-time', owningAgent:'Megha',   lateDays:0 },
+  { id:'GIT-008', channel:'transfer',    source:'Indore',                 dest:'Neemuch',         pieces:18, value: 280000, eta:'May 5', etaDay:5, status:'on-time', owningAgent:'Megha',   lateDays:0 },
+  { id:'GIT-009', channel:'transfer',    source:'Ratlam',                 dest:'Udaipur-BB',      pieces:8,  value:1840000, eta:'May 6', etaDay:6, status:'on-time', owningAgent:'Megha',   lateDays:0 },
+  { id:'GIT-010', channel:'memo-recall', source:'Mrs. Banerjee',          dest:'Bhopal-flagship', pieces:1,  value:1400000, eta:'May 2', etaDay:2, status:'overdue', owningAgent:'Lakshmi', lateDays:45 },
+  { id:'GIT-011', channel:'memo-recall', source:'Mrs. Arora',             dest:'Bhopal-flagship', pieces:1,  value: 480000, eta:'May 3', etaDay:3, status:'overdue', owningAgent:'Lakshmi', lateDays:38 },
+  { id:'GIT-012', channel:'memo-recall', source:'Mrs. Pareek',            dest:'Bhopal-flagship', pieces:1,  value: 240000, eta:'May 3', etaDay:3, status:'overdue', owningAgent:'Lakshmi', lateDays:42 }
+];
+
+const cycleCounts = [
+  { store:'Bhopal-flagship', lastCount:'Jan 30',  itemsAudited:1247, variancePct:0.18, dayssAgo:91, nextDue:'OVERDUE — May 5',  status:'overdue' },
+  { store:'Indore',          lastCount:'Mar 15',  itemsAudited: 982, variancePct:0.04, dayssAgo:47, nextDue:'due in 13d',       status:'due-soon'},
+  { store:'Udaipur-BB',      lastCount:'Apr 02',  itemsAudited:1104, variancePct:0.11, dayssAgo:30, nextDue:'clean',            status:'clean'   },
+  { store:'Udaipur-CC',      lastCount:'Mar 20',  itemsAudited: 712, variancePct:0.08, dayssAgo:42, nextDue:'due in 18d',       status:'due-soon'},
+  { store:'Ratlam',          lastCount:'Feb 18',  itemsAudited: 642, variancePct:0.62, dayssAgo:72, nextDue:'OVERDUE — May 8',  status:'overdue' },
+  { store:'Ujjain',          lastCount:'Apr 14',  itemsAudited: 588, variancePct:0.09, dayssAgo:18, nextDue:'clean',            status:'clean'   },
+  { store:'Bhilwara',        lastCount:'Mar 28',  itemsAudited: 412, variancePct:0.07, dayssAgo:34, nextDue:'due in 26d',       status:'due-soon'},
+  { store:'Neemuch',         lastCount:'Apr 06',  itemsAudited: 384, variancePct:0.05, dayssAgo:26, nextDue:'clean',            status:'clean'   },
+  { store:'Dhar',            lastCount:'Feb 24',  itemsAudited: 342, variancePct:0.71, dayssAgo:67, nextDue:'OVERDUE — May 7',  status:'overdue' },
+  { store:'Banswara',        lastCount:'Apr 12',  itemsAudited: 298, variancePct:0.06, dayssAgo:20, nextDue:'clean',            status:'clean'   }
+];
+
+let invAgingState = { metric:'rupees', tier:'all' };
+let invGridState  = { metric:'units',  tier:'all', catgrp:'all' };
+
+/* =================== /Inventory data =================== */
 
 function renderRplQueue() {
   const host = document.getElementById('rpl-queue-cluster');
@@ -5991,6 +6375,8 @@ document.addEventListener('click', e => {
   if (!pop || !pop.classList.contains('on')) return;
   if (pop.contains(e.target)) return;
   if (e.target.closest('.rpl-cell')) return;
+  if (e.target.closest('.inv-aging-cell')) return;
+  if (e.target.closest('.inv-stock-cell')) return;
   if (e.target.closest('tr[data-rpl-sku-id]')) return;
   closeRplPop();
 });
@@ -6560,6 +6946,617 @@ function renderRplXref() {
   `;
 }
 
+/* ----- Inventory workspace (Lakshmi) ----- */
+let invTab = 'asset';
+function switchInvTab(tab) {
+  document.querySelectorAll('[data-inv-tab]').forEach(b => b.classList.toggle('on', b.dataset.invTab === tab));
+  document.querySelectorAll('[data-inv-pane]').forEach(p => p.classList.toggle('hidden', p.dataset.invPane !== tab));
+  invTab = tab;
+  renderInvKpiStrip();
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-inv-tab]');
+  if (t) switchInvTab(t.dataset.invTab);
+});
+
+function fmtCr(rupees) {
+  if (rupees >= 10000000) return '₹' + (rupees / 10000000).toFixed(rupees >= 100000000 ? 0 : 1) + ' Cr';
+  if (rupees >= 100000)   return '₹' + (rupees / 100000).toFixed(rupees >= 1000000 ? 0 : 1) + ' L';
+  return '₹' + (rupees / 1000).toFixed(0) + 'K';
+}
+function fmtUnits(n) { return n.toLocaleString('en-IN'); }
+function invConfBand(c) { return c >= 90 ? 'high' : c >= 85 ? 'mid' : 'low'; }
+function invThresholdLabel(t) { return t === 'md' ? 'MD route (>₹50L)' : 'CFO auto'; }
+
+function renderInvKpiStrip() {
+  const totalStockRs = agingMatrix.reduce((a, m) => a + m.rupees, 0);
+  const aged365Rs    = agingMatrix.filter(m => m.bucket === 'b4').reduce((a, m) => a + m.rupees, 0);
+  const wipRs        = karigarWIP.reduce((a, k) => a + (k.issued - k.returned) * 6500, 0);
+  const memosOutRs   = memos.reduce((a, m) => a + m.value, 0);
+  const avlRs        = stockGrid.reduce((a, c) => a + (c.avlUnits / Math.max(1, c.units)) * c.value, 0);
+  const totalUnits   = stockGrid.reduce((a, c) => a + c.units, 0);
+  const avlUnits     = stockGrid.reduce((a, c) => a + c.avlUnits, 0);
+  const transitUnits = goodsInTransit.filter(g => g.channel !== 'memo-recall').reduce((a, g) => a + g.pieces, 0);
+  const wipUnits     = karigarWIP.reduce((a, k) => a + (k.issued - k.returned), 0);
+  const memosOutUnits= memos.reduce((a, m) => a + m.pieces, 0);
+  const overdueCount = cycleCounts.filter(c => c.status === 'overdue').length;
+  const doh          = (totalStockRs / (18400000 / 30)).toFixed(0);
+
+  const cards = invTab === 'asset'
+    ? [
+        { lbl:'Total stock',         val: fmtCr(totalStockRs),     sub: 'across 10 stores' },
+        { lbl:'DOH',                 val: doh + 'd',                sub: 'days of holding' },
+        { lbl:'Aged 365+',            val: fmtCr(aged365Rs),         sub: 'risk register' },
+        { lbl:'Karigar WIP',         val: fmtCr(wipRs),             sub: '3 CARO-flagged' },
+        { lbl:'Memos out',           val: fmtCr(memosOutRs),        sub: '3 overdue' },
+        { lbl:'BIS HUID',            val: bisSummary.taggedPct + '%', sub: bisSummary.untaggedTotal + ' piece gap' },
+        { lbl:'Available-to-sell',   val: fmtCr(avlRs),             sub: 'excl. memo + transit' }
+      ]
+    : [
+        { lbl:'Total units',         val: fmtUnits(totalUnits),     sub: 'across 10 stores' },
+        { lbl:'AVL units',           val: fmtUnits(avlUnits),       sub: 'sellable now' },
+        { lbl:'In-transit',          val: fmtUnits(transitUnits),   sub: 'vendor + karigar + transfer' },
+        { lbl:'Karigar WIP',         val: fmtUnits(wipUnits) + ' g', sub: 'gold on deposit' },
+        { lbl:'Memos out',           val: fmtUnits(memosOutUnits) + ' pcs', sub: 'at customer' },
+        { lbl:'BIS-tagged',          val: bisSummary.taggedPct + '%', sub: 'compliance' },
+        { lbl:'Cycle count due',     val: overdueCount + ' stores',  sub: 'overdue' }
+      ];
+
+  document.getElementById('inv-kpi-strip').innerHTML = cards.map(c =>
+    `<div class="kpi"><div class="lbl">${c.lbl}</div><div class="val">${c.val}</div><div class="sub muted">${c.sub}</div></div>`
+  ).join('');
+}
+
+function renderInvQueue() {
+  const html = inventoryActions.map(r => `
+    <div class="rpl-row" data-inv-id="${r.id}">
+      <div class="rpl-av av-lakshmi">L</div>
+      <div class="rpl-rowbody">
+        <div class="rpl-title">${r.title}<span class="rpl-conf rpl-conf-${invConfBand(r.confidence)}">Lakshmi · ${r.confidence}%</span></div>
+        <div class="rpl-why">${r.why}</div>
+        <div class="rpl-channel">→ <strong>${INV_TARGET_LABEL[r.target]}</strong>${r.extra ? ' · ' + r.extra : ''}<span class="rpl-sep">·</span><span class="muted">${invThresholdLabel(r.threshold)}</span></div>
+        <div class="rpl-row-meta">
+          <a onclick="invModify('${r.id}')">Modify</a>
+          <span class="rpl-sep">·</span>
+          <a onclick="invDefer('${r.id}')">Defer</a>
+          ${r.skuCount ? `<span class="rpl-sep">·</span><a onclick="invDrilldown('${r.id}')">⤵ ${r.skuCount} ${r.primary === 'cycle-schedule' ? 'pieces to count' : r.primary === 'audit-pack' ? 'items' : r.skuCount === 1 ? 'piece' : 'pieces'}</a>` : ''}
+        </div>
+      </div>
+      <div class="rpl-rowright">
+        <button class="rpl-btn go" onclick="invApprove('${r.id}')">Approve</button>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('inv-queue').innerHTML = html;
+}
+function invApprove(id)   { openInvApproveSlideOver(id, { modify:false }); }
+function invModify(id)    { openInvApproveSlideOver(id, { modify:true }); }
+function invDefer(id)     { console.log('inv defer', id); }
+function invDrilldown(id) { console.log('inv drilldown', id); }
+function openInvApproveSlideOver(id, opts) {
+  opts = opts || {};
+  const r = inventoryActions.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('over-head').innerHTML = `<span class="av av-lakshmi">L</span>Lakshmi · Inventory agent`;
+
+  let artefactHtml = '';
+  if (r.primary === 'caro-escalate') {
+    artefactHtml = `
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">Karigar gold-on-deposit ledger</div>
+        <div class="inv-slide-meta">K-04 (Vipul Soni, Indore cluster) · 1,020 g net outstanding · ₹64L value · 47 days · vouchers V-04-2024-038/041/044. Threshold: &gt;30d AND &gt;₹50L → MD route + Vidya disclosure pack.</div>
+      </div>`;
+  } else if (r.primary === 'memo-recall') {
+    artefactHtml = `
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">Recall letter draft (sample)</div>
+        <div class="inv-slide-meta">"Dear Mrs. Banerjee, our records indicate memo M-2024-118 dated 45 days ago for the bridal set valued at ₹14L. Per policy this exceeds our 30-day band; we kindly request return or sale conversion within 7 working days. — Megha Retail, Bhopal-flagship."</div>
+      </div>
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">Veda handoff note</div>
+        <div class="inv-slide-meta">Customer profile attached · last visit Apr 28 · suggested concierge call before formal recall. Veda has the brief.</div>
+      </div>`;
+  } else if (r.primary === 'bis-tag') {
+    artefactHtml = `
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">BIS HUID tagging session</div>
+        <div class="inv-slide-meta">Indore · 23 pieces · gold-22k chains category. Floor-staff slot reserved May 3 14:00–17:00. BIS auditor pre-notified. Self-executable within compliance band.</div>
+      </div>`;
+  } else if (r.primary === 'aged-handoff') {
+    artefactHtml = `
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">Aged stock parcel for Surya</div>
+        <div class="inv-slide-meta">12 heavyweight bridal pieces from Ratlam · ₹47L · 0 sales last 90 days · gold rate +0.4% w/w favorable for melt timing. Surya cycle slot M-198 open. Briefing pack auto-generated.</div>
+      </div>`;
+  } else if (r.primary === 'cycle-schedule') {
+    artefactHtml = `
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">Cycle count schedule</div>
+        <div class="inv-slide-meta">Bhopal-flagship · 1,247 items · last count 91d ago · industry standard 60d. Slot Apr 30 14:00. Akshaya footfall (May 9) ramps shrinkage risk — ahead-of-festival count protects audit position.</div>
+      </div>`;
+  } else if (r.primary === 'avl-shortfall') {
+    artefactHtml = `
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">Megha allocation handoff</div>
+        <div class="inv-slide-meta">28 daily-wear chains needed at Udaipur-BB (AVL 6 vs safety 34) · Indore has 47 idle units · 3-day inter-store transfer beats 7-day Karigar commission. Megha drafts the move on approval.</div>
+      </div>`;
+  } else if (r.primary === 'audit-pack') {
+    artefactHtml = `
+      <div class="inv-slide-section">
+        <div class="inv-slide-h">Q1 governance pack assembly</div>
+        <div class="inv-slide-meta">Vidya auto-aggregates: Karigar WIP ledger (₹140L · 3 CARO-flagged), Memos outstanding (₹38L · 3 overdue), BIS HUID gaps (412 pieces · 97.4% compliance), Cycle-count variances (3 overdue stores). Quarter close May 15. LODR Reg 30 + CARO 2020 Schedule III items pre-formatted for board.</div>
+      </div>`;
+  }
+
+  document.getElementById('over-body').innerHTML = `
+    <h2>${r.title}</h2>
+    <p class="muted">${r.why}</p>
+    <p>Confidence: <strong>Lakshmi · ${r.confidence}%</strong> · Target: <strong>${INV_TARGET_LABEL[r.target]}</strong>${r.extra ? ' · ' + r.extra : ''}</p>
+    <p>Approver: <strong>${invThresholdLabel(r.threshold)}</strong></p>
+    ${artefactHtml}
+    <div class="inv-slide-section">
+      <div class="inv-slide-h">Audit ledger</div>
+      <div class="inv-slide-meta">Action ref <code>inv-${r.id}</code> · timestamp on approval · identity-stamped (current user) · reasoning above persisted verbatim. Visible in Audit Trail · Board Pack workspace.</div>
+    </div>
+    ${opts.modify ? '<p class="muted"><em>Modify mode — fields editable in V2; for demo, approve writes the canonical version.</em></p>' : ''}
+    <div style="display:flex; gap:10px; margin-top:16px">
+      <button class="rpl-btn go" onclick="invConfirmApprove('${r.id}')">Confirm approve</button>
+      <button class="rpl-btn ghost" onclick="closeOver()">Cancel</button>
+    </div>
+  `;
+  document.getElementById('over').classList.add('open');
+}
+function invConfirmApprove(id) {
+  if (typeof closeOver === 'function') closeOver();
+  else document.getElementById('over').classList.remove('open');
+  const row = document.querySelector(`[data-inv-id="${id}"]`);
+  if (row) row.style.opacity = '0.4';
+}
+function renderAgingHeatmap() {
+  const totalRs = agingMatrix.reduce((a, m) => a + m.rupees, 0);
+  const aged365 = agingMatrix.filter(m => m.bucket === 'b4').reduce((a, m) => a + m.rupees, 0);
+  const inMotion= agingMatrix.filter(m => m.bucket === 'b5').reduce((a, m) => a + m.rupees, 0);
+
+  const headerHtml = `
+    <div class="rpl-hero-head">
+      <div class="rpl-hero-title">Aging × category · ₹ tied
+        <span class="rpl-hero-sub" id="inv-aging-sub">${fmtCr(totalRs)} total · ${fmtCr(aged365)} in 365+ · ${fmtCr(inMotion)} in motion</span>
+      </div>
+      <div class="rpl-hero-toolbar">
+        <div class="rpl-toolbar-grp">
+          <span class="rpl-toolbar-lbl">Metric</span>
+          <div class="rpl-seg" id="inv-aging-metric">
+            <button class="rpl-seg-btn ${invAgingState.metric==='rupees'?'on':''}"  data-aging-metric="rupees">₹ tied</button>
+            <button class="rpl-seg-btn ${invAgingState.metric==='units'?'on':''}"   data-aging-metric="units">units</button>
+            <button class="rpl-seg-btn ${invAgingState.metric==='pct'?'on':''}"     data-aging-metric="pct">% of cat</button>
+          </div>
+        </div>
+        <div class="rpl-toolbar-grp">
+          <span class="rpl-toolbar-lbl">Group</span>
+          <div class="rpl-seg" id="inv-aging-group">
+            <button class="rpl-seg-btn ${invAgingState.tier==='all'?'on':''}"     data-aging-group="all">all</button>
+            <button class="rpl-seg-btn ${invAgingState.tier==='gold'?'on':''}"    data-aging-group="gold">gold</button>
+            <button class="rpl-seg-btn ${invAgingState.tier==='diamond'?'on':''}" data-aging-group="diamond">diamond</button>
+            <button class="rpl-seg-btn ${invAgingState.tier==='bridal'?'on':''}"  data-aging-group="bridal">bridal</button>
+            <button class="rpl-seg-btn ${invAgingState.tier==='silver'?'on':''}"  data-aging-group="silver">silver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const cellRows = invCats.map(cat => {
+    const dim = invAgingState.tier !== 'all' && cat.group !== invAgingState.tier;
+    const catTotal = agingMatrix.filter(m => m.cat === cat.key).reduce((a, m) => a + m.rupees, 0);
+    const cells = invBuckets.map(b => {
+      const m = agingMatrix.find(x => x.cat === cat.key && x.bucket === b.key);
+      if (!m) return '<div></div>';
+      const valLabel = invAgingState.metric === 'rupees'
+        ? fmtCr(m.rupees)
+        : invAgingState.metric === 'units'
+          ? fmtUnits(m.units)
+          : ((m.rupees / catTotal) * 100).toFixed(0) + '%';
+      const subLabel = invAgingState.metric === 'rupees' ? `${fmtUnits(m.units)} pcs` : invAgingState.metric === 'units' ? fmtCr(m.rupees) : fmtCr(m.rupees);
+      return `<div class="inv-aging-cell b-${b.band} ${dim?'dim':''}" onclick="agingCellClick('${cat.key}','${b.key}', event)"><div class="v">${valLabel}</div><div class="u">${subLabel}</div></div>`;
+    }).join('');
+    return `<div class="rpl-cell-label">${cat.label}</div>${cells}`;
+  }).join('');
+
+  const headerCells = invBuckets.map(b => `<div class="rpl-cell-head">${b.label}</div>`).join('');
+
+  document.getElementById('inv-aging-section').innerHTML = `
+    ${headerHtml}
+    <div class="rpl-grid" style="grid-template-columns: 160px repeat(${invBuckets.length}, 1fr); gap:6px;">
+      <div></div>${headerCells}
+      ${cellRows}
+    </div>
+  `;
+
+  document.querySelectorAll('[data-aging-metric]').forEach(b => b.addEventListener('click', () => { invAgingState.metric = b.dataset.agingMetric; renderAgingHeatmap(); }));
+  document.querySelectorAll('[data-aging-group]').forEach(b => b.addEventListener('click', () => { invAgingState.tier = b.dataset.agingGroup; renderAgingHeatmap(); }));
+}
+
+function agingCellClick(catKey, bucketKey, ev) {
+  ev.stopPropagation();
+  const m = agingMatrix.find(x => x.cat === catKey && x.bucket === bucketKey);
+  const cat = invCats.find(c => c.key === catKey);
+  const bucket = invBuckets.find(b => b.key === bucketKey);
+  if (!m || !cat || !bucket) return;
+  const isAged = bucketKey === 'b4';
+  const isInMotion = bucketKey === 'b5';
+  const ctaHtml = isAged
+    ? `<button class="rpl-btn go" onclick="invSendToSurya('${catKey}','${bucketKey}')">Send to Surya for melt review</button>`
+    : isInMotion
+      ? `<button class="rpl-btn ghost" onclick="switchWorkspace('replenish')">Open Replenishment for in-motion detail</button>`
+      : `<button class="rpl-btn ghost" onclick="closeRplPop()">Close</button>`;
+  const pop = document.getElementById('rpl-pop');
+  pop.innerHTML = `
+    <div class="rpl-pop-h">${cat.label} · ${bucket.label}</div>
+    <div class="rpl-pop-body">
+      <div><strong>${fmtCr(m.rupees)}</strong> tied · <strong>${fmtUnits(m.units)} pieces</strong></div>
+      <div class="muted" style="margin-top:6px">Top SKUs in this bucket appear here in V2 (HUID-level explorer deferred). For now: ${m.units} pieces averaging ${fmtCr(Math.round(m.rupees / m.units))} per piece.</div>
+      <div style="margin-top:10px">${ctaHtml}</div>
+    </div>
+  `;
+  const rect = ev.target.closest('.inv-aging-cell').getBoundingClientRect();
+  pop.style.left = Math.min(window.innerWidth - 320, rect.left) + 'px';
+  pop.style.top  = (rect.bottom + 4) + 'px';
+  pop.classList.add('on');
+}
+function invSendToSurya(catKey, bucketKey) {
+  closeRplPop();
+  setTimeout(() => switchWorkspace('melt'), 300);
+}
+function renderKarigarExposure() {
+  const goldPerGram = 6500;
+  const sorted = [...karigarWIP].sort((a,b) => {
+    const aRs = (a.issued - a.returned) * goldPerGram * a.daysOut;
+    const bRs = (b.issued - b.returned) * goldPerGram * b.daysOut;
+    return bRs - aRs;
+  });
+  const rows = sorted.map(k => {
+    const net = k.issued - k.returned;
+    const rs = net * goldPerGram;
+    return `
+      <tr class="risk-${k.riskBand}" onclick="openWIPSlide('${k.id}')">
+        <td><strong>${k.id}</strong> <span class="muted">${k.name}</span><div class="muted" style="font-size:11px">${k.cluster}</div></td>
+        <td>${fmtUnits(k.issued)} g</td>
+        <td>${fmtUnits(k.returned)} g</td>
+        <td><strong>${fmtUnits(net)} g</strong></td>
+        <td><strong>${fmtCr(rs)}</strong></td>
+        <td><strong>${k.daysOut}</strong> d</td>
+        <td>${k.riskBand === 'CARO' ? '<span class="rpl-pill bad">CARO</span>' : k.riskBand === 'watch' ? '<span class="rpl-pill warn">watch</span>' : '<span class="rpl-pill ok">clean</span>'}</td>
+      </tr>
+    `;
+  }).join('');
+  document.getElementById('inv-karigar-section').innerHTML = `
+    <div class="inv-section-h">Karigar WIP exposure · stewardship lens</div>
+    <div class="inv-section-sub">Gold-on-deposit ledger · sorted by ₹ × days · 3 CARO-flagged. Distinct from Replenishment Karigar tab (capacity allocator) — same data, governance framing.</div>
+    <table class="inv-table">
+      <thead><tr><th>Karigar</th><th>Issued</th><th>Returned</th><th>Net outstanding</th><th>₹ value</th><th>Days out</th><th>Risk</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function openWIPSlide(id) {
+  const k = karigarWIP.find(x => x.id === id);
+  if (!k) return;
+  const net = k.issued - k.returned;
+  const rs = net * 6500;
+  document.getElementById('over-head').innerHTML = `<span class="av av-lakshmi">L</span>Karigar ${k.id} · ${k.name}`;
+  document.getElementById('over-body').innerHTML = `
+    <h2>${fmtCr(rs)} on deposit · ${k.daysOut} days outstanding</h2>
+    <p class="muted">Cluster: ${k.cluster} · Last delivery: ${k.lastDelivery} · Risk band: <strong>${k.riskBand}</strong></p>
+    <h3>Voucher trail</h3>
+    <ul>${k.vouchers.map(v => `<li><code>${v}</code></li>`).join('')}</ul>
+    <h3>Gold-deposit timeline</h3>
+    <p>${fmtUnits(k.issued)} g issued · ${fmtUnits(k.returned)} g returned · <strong>${fmtUnits(net)} g net outstanding</strong></p>
+    ${k.riskBand === 'CARO' ? '<p style="color:#ef4444;font-weight:600">CARO 2020 inventory verification clause applies — auto-included in Vidya quarterly disclosure pack.</p>' : ''}
+  `;
+  document.getElementById('over').classList.add('open');
+}
+
+function renderMemosLedger() {
+  const sorted = [...memos].sort((a,b) => b.daysOut - a.daysOut);
+  const rows = sorted.map(m => `
+    <tr class="status-${m.status}" onclick="openMemoSlide('${m.id}')">
+      <td><strong>${m.id}</strong></td>
+      <td>${m.customer}</td>
+      <td><span class="muted">${m.store}</span></td>
+      <td>${m.kind}</td>
+      <td><strong>${fmtCr(m.value)}</strong></td>
+      <td><strong>${m.daysOut}</strong> d</td>
+      <td>${m.status === 'overdue' ? '<span class="rpl-pill bad">OVERDUE — recall drafted</span>' : m.status === 'stretch' ? '<span class="rpl-pill warn">stretch</span>' : '<span class="rpl-pill ok">within band</span>'}</td>
+    </tr>
+  `).join('');
+  document.getElementById('inv-memos-section').innerHTML = `
+    <div class="inv-section-h">Memos outstanding · pieces lent for trial</div>
+    <div class="inv-section-sub">Industry standard 7–14 day band · over 30 days triggers auto-recall draft. ${memos.filter(m => m.status === 'overdue').length} overdue.</div>
+    <table class="inv-table">
+      <thead><tr><th>Memo ID</th><th>Customer</th><th>Store</th><th>Pieces</th><th>₹ value</th><th>Days out</th><th>Status</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function openMemoSlide(id) {
+  const m = memos.find(x => x.id === id);
+  if (!m) return;
+  document.getElementById('over-head').innerHTML = `<span class="av av-lakshmi">L</span>Memo ${m.id}`;
+  document.getElementById('over-body').innerHTML = `
+    <h2>${m.kind} · ${fmtCr(m.value)}</h2>
+    <p class="muted">Customer: <strong>${m.customer}</strong> · Store: ${m.store} · Days out: <strong>${m.daysOut}</strong></p>
+    <h3>Status</h3>
+    <p>${m.status === 'overdue' ? '<strong style="color:#ef4444">OVERDUE</strong> — beyond 30-day band. Recall letter drafted, awaiting CFO sign-off.' : m.status === 'stretch' ? '<strong>Stretched</strong> — above 14-day band but within 30 days. Lakshmi monitoring.' : '<strong>Within band</strong> — under 14 days, normal trial window.'}</p>
+    ${m.recallDraft ? `<h3>Recall letter draft</h3><p class="muted">"Dear ${m.customer.split(' ').pop()}, our records show memo ${m.id} dated ${m.daysOut} days ago for the ${m.kind} valued at ${fmtCr(m.value)}…" <em>[full template]</em></p>` : ''}
+    <p class="muted">BIS HUID exposure: piece(s) in customer possession remain unbilled. Any sale conversion still preserves HUID traceability.</p>
+  `;
+  document.getElementById('over').classList.add('open');
+}
+
+function renderBISGaps() {
+  const rows = bisGaps.map(g => `
+    <tr>
+      <td>${g.store}</td>
+      <td>${g.category}</td>
+      <td><strong>${g.untagged}</strong></td>
+      <td><strong>${fmtCr(g.exposureValue)}</strong></td>
+      <td class="muted">${g.lastBatchDate}</td>
+      <td><button class="rpl-btn ghost" onclick="invScheduleBISTagging('${g.store}')">Schedule tagging</button></td>
+    </tr>
+  `).join('');
+  document.getElementById('inv-bis-section').innerHTML = `
+    <div class="inv-section-h">BIS HUID compliance · ${bisSummary.taggedPct}% tagged · ${bisSummary.untaggedTotal} piece gap · <span style="color:#d97706">${bisSummary.deadlineLabel}</span></div>
+    <div class="inv-section-sub">Mandatory regulatory tagging since 2023 · pre-festival enforcement window active. Each row = a store-category cohort awaiting tag-out.</div>
+    <table class="inv-table">
+      <thead><tr><th>Store</th><th>Category</th><th>Untagged</th><th>₹ exposure</th><th>Last batch</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+function invScheduleBISTagging(store) {
+  alert(`Tagging session scheduled at ${store} · floor-staff slot reserved · BIS auditor notified. (Demo: would persist to Lakshmi audit ledger.)`);
+}
+
+function renderCapitalFlow() {
+  const maxAbs = Math.max(...capitalFlow.map(c => Math.abs(c.value)));
+  const rows = capitalFlow.map(c => {
+    const pct = Math.abs(c.value) / maxAbs * 100;
+    const dirClass = `dir-${c.direction}`;
+    const sign = c.value < 0 ? '−' : '+';
+    const deltaCls = c.deltaPct >= 0 ? 'up' : 'dn';
+    return `
+      <div class="inv-flow-row ${dirClass}">
+        <div>${c.label}</div>
+        <div><div class="inv-flow-bar" style="width:${pct.toFixed(1)}%"></div></div>
+        <div class="inv-flow-val">${sign}${fmtCr(Math.abs(c.value))}</div>
+        <div class="inv-flow-delta ${deltaCls}">${c.deltaPct >= 0 ? '▲' : '▼'} ${Math.abs(c.deltaPct).toFixed(1)}%</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('inv-flow-section').innerHTML = `
+    <div class="inv-section-h">30-day capital flow</div>
+    <div class="inv-section-sub">Where stock came from and where it went. Investor-deck flavor, lightweight bars.</div>
+    <div>${rows}</div>
+  `;
+}
+function stockBand(units, avlUnits) {
+  const ratio = avlUnits / Math.max(1, units);
+  if (avlUnits < 4) return 'red';
+  if (ratio < 0.55) return 'amber';
+  if (ratio < 0.85) return 'green';
+  return 'grey';
+}
+
+function renderStockGrid() {
+  const totalUnits = stockGrid.reduce((a, c) => a + c.units, 0);
+  const totalAvl   = stockGrid.reduce((a, c) => a + c.avlUnits, 0);
+  const totalValue = stockGrid.reduce((a, c) => a + c.value, 0);
+
+  const headerHtml = `
+    <div class="rpl-hero-head">
+      <div class="rpl-hero-title">Store × category · stock truth
+        <span class="rpl-hero-sub" id="inv-grid-sub">${fmtUnits(totalUnits)} units · ${fmtUnits(totalAvl)} AVL · ${fmtCr(totalValue)} value</span>
+      </div>
+      <div class="rpl-hero-toolbar">
+        <div class="rpl-toolbar-grp">
+          <span class="rpl-toolbar-lbl">Metric</span>
+          <div class="rpl-seg" id="inv-grid-metric">
+            <button class="rpl-seg-btn ${invGridState.metric==='units'?'on':''}"     data-grid-metric="units">Units</button>
+            <button class="rpl-seg-btn ${invGridState.metric==='avl'?'on':''}"       data-grid-metric="avl">AVL units</button>
+            <button class="rpl-seg-btn ${invGridState.metric==='value'?'on':''}"     data-grid-metric="value">₹ value</button>
+          </div>
+        </div>
+        <div class="rpl-toolbar-grp">
+          <span class="rpl-toolbar-lbl">Tier</span>
+          <div class="rpl-seg" id="inv-grid-tier">
+            <button class="rpl-seg-btn ${invGridState.tier==='all'?'on':''}" data-grid-tier="all">all</button>
+            <button class="rpl-seg-btn ${invGridState.tier==='t1'?'on':''}"  data-grid-tier="t1">T1</button>
+            <button class="rpl-seg-btn ${invGridState.tier==='t2'?'on':''}"  data-grid-tier="t2">T2</button>
+            <button class="rpl-seg-btn ${invGridState.tier==='t3'?'on':''}"  data-grid-tier="t3">T3</button>
+          </div>
+        </div>
+        <div class="rpl-toolbar-grp">
+          <span class="rpl-toolbar-lbl">Group</span>
+          <div class="rpl-seg" id="inv-grid-group">
+            <button class="rpl-seg-btn ${invGridState.catgrp==='all'?'on':''}"     data-grid-group="all">all</button>
+            <button class="rpl-seg-btn ${invGridState.catgrp==='gold'?'on':''}"    data-grid-group="gold">gold</button>
+            <button class="rpl-seg-btn ${invGridState.catgrp==='diamond'?'on':''}" data-grid-group="diamond">diamond</button>
+            <button class="rpl-seg-btn ${invGridState.catgrp==='bridal'?'on':''}"  data-grid-group="bridal">bridal</button>
+            <button class="rpl-seg-btn ${invGridState.catgrp==='silver'?'on':''}"  data-grid-group="silver">silver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const headerCells = invCats.map(c => `<div class="rpl-cell-head">${c.label}</div>`).join('');
+  const cellRows = invStores.map(s => {
+    const dimRow = invGridState.tier !== 'all' && s.tier !== invGridState.tier;
+    const cells = invCats.map(c => {
+      const dimCell = invGridState.catgrp !== 'all' && c.group !== invGridState.catgrp;
+      const dim = dimRow || dimCell;
+      const cell = stockGrid.find(x => x.store === s.key && x.cat === c.key);
+      if (!cell) return '<div></div>';
+      const band = stockBand(cell.units, cell.avlUnits);
+      const val = invGridState.metric === 'units' ? fmtUnits(cell.units)
+                : invGridState.metric === 'avl'   ? fmtUnits(cell.avlUnits)
+                                                  : fmtCr(cell.value);
+      const sub = invGridState.metric === 'units' ? `AVL ${fmtUnits(cell.avlUnits)}`
+                : invGridState.metric === 'avl'   ? `of ${fmtUnits(cell.units)}`
+                                                  : `${fmtUnits(cell.units)} pcs`;
+      return `<div class="inv-stock-cell s-${band} ${dim?'dim':''}" onclick="stockCellClick('${s.key}','${c.key}', event)"><div class="v">${val}</div><div class="u">${sub}</div></div>`;
+    }).join('');
+    return `<div class="rpl-cell-label"><strong>${s.label}</strong><div class="muted" style="font-size:11px">${s.tier.toUpperCase()}</div></div>${cells}`;
+  }).join('');
+
+  document.getElementById('inv-stock-section').innerHTML = `
+    ${headerHtml}
+    <div class="rpl-grid" style="grid-template-columns: 160px repeat(${invCats.length}, 1fr); gap:6px;">
+      <div></div>${headerCells}
+      ${cellRows}
+    </div>
+  `;
+
+  document.querySelectorAll('[data-grid-metric]').forEach(b => b.addEventListener('click', () => { invGridState.metric = b.dataset.gridMetric; renderStockGrid(); }));
+  document.querySelectorAll('[data-grid-tier]').forEach(b => b.addEventListener('click', () => { invGridState.tier = b.dataset.gridTier; renderStockGrid(); }));
+  document.querySelectorAll('[data-grid-group]').forEach(b => b.addEventListener('click', () => { invGridState.catgrp = b.dataset.gridGroup; renderStockGrid(); }));
+}
+
+function stockCellClick(storeKey, catKey, ev) {
+  ev.stopPropagation();
+  const cell = stockGrid.find(x => x.store === storeKey && x.cat === catKey);
+  const store = invStores.find(s => s.key === storeKey);
+  const cat = invCats.find(c => c.key === catKey);
+  if (!cell || !store || !cat) return;
+  const band = stockBand(cell.units, cell.avlUnits);
+  const lowAvl = cell.avlUnits < 8;
+  const ctaHtml = lowAvl
+    ? `<button class="rpl-btn go" onclick="invSendToMegha('${storeKey}','${catKey}')">Send to Megha for transfer</button>
+       <button class="rpl-btn ghost" onclick="invSendToTara('${storeKey}','${catKey}')">Send to Tara for replen</button>`
+    : `<button class="rpl-btn ghost" onclick="closeRplPop()">Close</button>`;
+  const pop = document.getElementById('rpl-pop');
+  pop.innerHTML = `
+    <div class="rpl-pop-h">${store.label} · ${cat.label}</div>
+    <div class="rpl-pop-body">
+      <div><strong>${fmtUnits(cell.units)}</strong> units · <strong>${fmtUnits(cell.avlUnits)} AVL</strong> · ${fmtCr(cell.value)}</div>
+      <div class="muted" style="margin-top:6px">Scarcity band: <strong>${band}</strong>. ${band === 'red' ? 'Below safety stock — replen or transfer urgent.' : band === 'amber' ? 'Tight — monitor; consider transfer if elsewhere has excess.' : band === 'green' ? 'Healthy stock position.' : 'Excess vs sales velocity — candidate for transfer out.'}</div>
+      <div style="margin-top:10px">${ctaHtml}</div>
+    </div>
+  `;
+  const rect = ev.target.closest('.inv-stock-cell').getBoundingClientRect();
+  pop.style.left = Math.min(window.innerWidth - 320, rect.left) + 'px';
+  pop.style.top  = (rect.bottom + 4) + 'px';
+  pop.classList.add('on');
+}
+function invSendToMegha(s, c) { closeRplPop(); setTimeout(() => switchWorkspace('allocation'), 300); }
+function invSendToTara(s, c)  { closeRplPop(); setTimeout(() => switchWorkspace('replenish'), 300); }
+function renderGoodsInTransit() {
+  const sorted = [...goodsInTransit].sort((a, b) => (b.lateDays - a.lateDays) || (a.etaDay - b.etaDay));
+  const maxDay = Math.max(...goodsInTransit.map(g => g.etaDay));
+  const lanes = sorted.map(g => {
+    const widthPct = Math.max(20, (g.etaDay / maxDay) * 100);
+    const lateClass = g.lateDays > 0 ? 'late' : '';
+    const statusHtml = g.lateDays > 0
+      ? `<span class="inv-transit-late">+${g.lateDays} late</span>`
+      : `<span class="inv-transit-ontime">on time</span>`;
+    return `
+      <div class="inv-transit-lane" onclick="openTransitSlide('${g.id}')">
+        <div><span class="inv-transit-pill ch-${g.channel}">${g.channel.replace('-', ' ')}</span></div>
+        <div>
+          <div><strong>${g.source}</strong> → ${g.dest}<span class="muted"> · ${g.pieces} pcs · ${fmtCr(g.value)}</span></div>
+          <div class="inv-transit-bar ${lateClass}" style="width:${widthPct}%"></div>
+        </div>
+        <div class="inv-transit-eta">ETA ${g.eta}</div>
+        <div>${statusHtml}</div>
+        <div class="muted" style="font-size:11px">${g.owningAgent}</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('inv-transit-section').innerHTML = `
+    <div class="inv-section-h">Goods in transit · ${goodsInTransit.length} active lots</div>
+    <div class="inv-section-sub">Vendor inbound, karigar inbound, inter-store transfers, memo recalls. ${goodsInTransit.filter(g => g.lateDays > 0).length} overdue.</div>
+    <div>${lanes}</div>
+  `;
+}
+function openTransitSlide(id) {
+  const g = goodsInTransit.find(x => x.id === id);
+  if (!g) return;
+  document.getElementById('over-head').innerHTML = `<span class="av av-lakshmi">L</span>Transit ${g.id}`;
+  document.getElementById('over-body').innerHTML = `
+    <h2>${g.source} → ${g.dest}</h2>
+    <p class="muted">Channel: <strong>${g.channel}</strong> · Pieces: <strong>${g.pieces}</strong> · ₹ value: <strong>${fmtCr(g.value)}</strong></p>
+    <p>ETA <strong>${g.eta}</strong> · ${g.lateDays > 0 ? `<span style="color:#ef4444"><strong>+${g.lateDays} days late</strong></span>` : '<span style="color:#10b981"><strong>on time</strong></span>'}</p>
+    <p class="muted">Owning agent: <strong>${g.owningAgent}</strong></p>
+    <h3>Audit ref</h3>
+    <p><code>git-${g.id}</code> · auto-logged when ETA breaches threshold.</p>
+  `;
+  document.getElementById('over').classList.add('open');
+}
+
+function renderCycleCounts() {
+  const rows = cycleCounts.map(c => {
+    const variancePill = c.variancePct > 0.5 ? `<span class="rpl-pill bad">${c.variancePct.toFixed(2)}%</span>`
+                        : c.variancePct > 0.15 ? `<span class="rpl-pill warn">${c.variancePct.toFixed(2)}%</span>`
+                        : `<span class="rpl-pill ok">${c.variancePct.toFixed(2)}%</span>`;
+    const statusPill = c.status === 'overdue' ? `<span class="rpl-pill bad">${c.nextDue}</span>`
+                     : c.status === 'due-soon' ? `<span class="rpl-pill warn">${c.nextDue}</span>`
+                     : `<span class="rpl-pill ok">${c.nextDue}</span>`;
+    return `
+      <tr class="status-${c.status}" onclick="openCycleSlide('${c.store}')">
+        <td><strong>${c.store}</strong></td>
+        <td class="muted">${c.lastCount}</td>
+        <td>${fmtUnits(c.itemsAudited)}</td>
+        <td>${variancePill}</td>
+        <td><strong>${c.dayssAgo}</strong> d ago</td>
+        <td>${statusPill}</td>
+      </tr>
+    `;
+  }).join('');
+  document.getElementById('inv-cycle-section').innerHTML = `
+    <div class="inv-section-h">Cycle-count reconciliation · ${cycleCounts.filter(c => c.status === 'overdue').length} overdue</div>
+    <div class="inv-section-sub">Industry standard 60-day cadence · variance &gt; 0.5% flagged as real shrinkage signal. Click row for audit log + Vidya handoff.</div>
+    <table class="inv-table">
+      <thead><tr><th>Store</th><th>Last count</th><th>Items audited</th><th>Variance</th><th>Days ago</th><th>Next due</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+function openCycleSlide(store) {
+  const c = cycleCounts.find(x => x.store === store);
+  if (!c) return;
+  document.getElementById('over-head').innerHTML = `<span class="av av-lakshmi">L</span>Cycle count · ${c.store}`;
+  document.getElementById('over-body').innerHTML = `
+    <h2>Last count: ${c.lastCount} · ${c.dayssAgo} days ago</h2>
+    <p class="muted">Items audited: <strong>${fmtUnits(c.itemsAudited)}</strong> · Variance: <strong>${c.variancePct.toFixed(2)}%</strong></p>
+    <h3>Status</h3>
+    <p><strong>${c.nextDue}</strong></p>
+    ${c.variancePct > 0.5 ? '<p style="color:#ef4444"><strong>Variance above 0.5% threshold — real shrinkage signal. Auto-routed to Vidya for audit pack.</strong></p>' : ''}
+    <h3>Audit log</h3>
+    <p class="muted">Each cycle count creates a timestamped, identity-stamped record with reconciliation deltas at HUID level. Variance trend feeds Board pack quarterly.</p>
+  `;
+  document.getElementById('over').classList.add('open');
+}
+function renderInvXref() {
+  const cards = [
+    { target:'replenish',  h:'→ Tara · Replenishment',  context:`AVL ₹2.84 Cr feeds Tara's DOC math · 12 stores below safety stock · 8 Tara replen actions tied to these gaps.` },
+    { target:'allocation', h:'→ Megha · Allocation',    context:`AVL gap = 47 SKUs across 4 stores · Megha drafted 4 transfer proposals · ₹1.21 Cr in motion.` },
+    { target:'melt',       h:'→ Surya · Melt & Remake', context:`₹47L aged 365+ flagged for melt review · Surya cycle slot M-198 open · 14 heavyweight bridal awaiting decision.` },
+    { target:'audit',      h:'→ Vidya · Audit Trail',   context:`Q1 governance pack: WIP ₹140L · memos ₹38L · BIS gap 412 pieces · assembles for May 15 quarter close.` }
+  ];
+  document.getElementById('inv-xref').innerHTML = `
+    <div class="inv-xref-h-row">Cross-workspace handoffs · Lakshmi sees stock truth, hands off to the right agent</div>
+    ${cards.map(c => `
+      <div class="inv-xref-card" onclick="switchWorkspace('${c.target}')">
+        <div class="inv-xref-h">${c.h}</div>
+        <div class="inv-xref-context">${c.context}</div>
+        <div class="inv-xref-arrow">Open ${c.target} →</div>
+      </div>
+    `).join('')}
+  `;
+}
+
 /* ----- boot ----- */
 renderRplQueue();
 renderVelocityGrid();
@@ -6567,6 +7564,17 @@ renderKarigarPane();
 renderVendorPOPane();
 renderSKUQueue();
 renderRplXref();
+renderInvKpiStrip();
+renderInvQueue();
+renderAgingHeatmap();
+renderKarigarExposure();
+renderMemosLedger();
+renderBISGaps();
+renderCapitalFlow();
+renderStockGrid();
+renderGoodsInTransit();
+renderCycleCounts();
+renderInvXref();
 </script>
 </body>
 </html>
